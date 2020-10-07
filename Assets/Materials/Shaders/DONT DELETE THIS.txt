@@ -1,0 +1,2 @@
+Unless this folder has other files in it
+Its a GIT thing
