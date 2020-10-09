@@ -28,12 +28,12 @@ public class Patrol : MonoBehaviour
 
         if (!Physics.Raycast(theRay, out groundInfo, maxRayDistance))
         {
-            Debug.DrawLine(theRay.origin, theRay.direction, Color.blue);
+            //Debug.DrawLine(theRay.origin, theRay.direction, Color.blue);
             movingRight = !movingRight;
         }
         else
         {
-            Debug.DrawLine(theRay.origin, theRay.direction, Color.red);
+            //Debug.DrawLine(theRay.origin, theRay.direction, Color.red);
         }
     }
 }
