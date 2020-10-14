@@ -11,12 +11,6 @@ public class AirPotion : MonoBehaviour
     public float explosionForce = 7.0f;
     float magnitude;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
