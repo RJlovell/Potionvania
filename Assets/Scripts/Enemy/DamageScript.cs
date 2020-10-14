@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class throw : MonoBehaviour
+public class DamageScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
