@@ -24,6 +24,16 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        
+    }
+    public static float GetMag(float first, float second)
+    {
+        float mag = Mathf.Sqrt(((first * first) + (second * second)));
+        return mag;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
         {
             Vector3 explosionPos = transform.position;
             Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);//check for colliders in explosion radius
