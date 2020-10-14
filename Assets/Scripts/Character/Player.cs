@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject potion;
     Rigidbody rb;
     public float impulseSpeed = 0.2f;
     public float maxSpeed = 5.0f;
     bool grounded;
-    public float jumpForce;
+    public float jumpForce = 1.0f;
     private float jumpCount;
-    public float jumpTime;
+    public float jumpTime =0.1f;
     bool jumping;
     Vector3 jumpVec;
     
@@ -24,10 +24,24 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            float potionXPos = transform.position.x + 1;
+            float potionYPos = transform.position.y + 1;
+            Vector3 potionPos = new Vector3(potionXPos, potionYPos, 0);
+            Instantiate(potion, potionPos, transform.rotation);
+        }
+
+
         //right movement using AddForce for smoother movement along X-axis
         if (Input.GetKey(KeyCode.D)) 
         {
-            //transform.position += Vector3.right * Time.deltaTime * maxSpeed;
+            /*gameObject.transform.eulerAngles = new Vector3(
+                gameObject.transform.eulerAngles.x,
+                gameObject.transform.eulerAngles.y + 180,
+                gameObject.transform.eulerAngles.z);*/
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+
             if (rb.velocity.x > maxSpeed)
             {
                 Vector3 xDir = new Vector3(1 * Time.deltaTime * impulseSpeed, 0, 0);
@@ -42,6 +56,7 @@ public class Player : MonoBehaviour
         //left movement using AddForce for smoother movement along X-axis
         if (Input.GetKey(KeyCode.A))
         {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
             //transform.position += Vector3.left * Time.deltaTime * maxSpeed;
             if (rb.velocity.x < -maxSpeed)
             { 

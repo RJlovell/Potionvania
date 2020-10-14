@@ -12,7 +12,8 @@ public class GoblinAttackScript : MonoBehaviour
     //Offset to the y-axis
     //public float throwOffset;
     //public float artificalGravity;
-    public float timer = 0;
+    //public float timer = 0;
+    bool hasThrown = false;
     public Transform projectile;
     private Transform myTransform;
     //Test variables
@@ -29,11 +30,13 @@ public class GoblinAttackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (throwingDelay == timer)
-        //{
-        //    SpawnPotion();
-        //    timer = 0;
-        //}
+        throwingDelay -= Time.deltaTime;
+        if (throwingDelay <= 0f && !hasThrown)
+        {
+
+            //SpawnPotion();
+            //timer = 0;
+        }
         ////Short delay beford the projectile is thrown
         ////Invoke("SpawnPotion", throwingDelay * Time.deltaTime);
         ////Vector3 direction = target.transform.position - myTransform.position;
