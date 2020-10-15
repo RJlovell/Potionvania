@@ -14,7 +14,14 @@ public class Player : MonoBehaviour
     public float jumpTime =0.1f;
     bool jumping;
     Vector3 jumpVec;
-    
+    Vector3 mousePos;
+    public float armLength = 1.0f;
+    public float height = 2.4f;
+    public Vector3 potionVel;
+    Vector3 potionPos;
+    float launchAngle;
+
+
 
     void Start()
     {
@@ -24,11 +31,46 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ///firing potion
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            float potionXPos = transform.position.x + 1;
-            float potionYPos = transform.position.y + 1;
-            Vector3 potionPos = new Vector3(potionXPos, potionYPos, 0);
+            Vector3 rawMousePos = Input.mousePosition;
+            rawMousePos.z = 12;
+            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+
+            launchAngle = Mathf.Rad2Deg * Mathf.Atan((mousePos.x - transform.position.x) / (mousePos.y - transform.position.y));
+            /*if (mousePos.y < transform.position.y && launchAngle > -15 && launchAngle < 15)
+            {
+                
+            }*/
+
+            potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - transform.position.y, 0);
+            
+            float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
+            potionPos.x /= mag;
+            potionPos.y /= mag;
+
+            ///Boundary setting for potion throwing
+            if (mousePos.y < transform.position.y)
+            {
+                if (potionPos.x < 0.7 && potionPos.x > 0)
+                    potionPos.x = 0.7f;
+                if (potionPos.x > -0.7 && potionPos.x < 0)
+                    potionPos.x = -0.7f;
+                if (potionPos.y < -0.7)
+                    potionPos.y = -0.7f;
+            }
+            potionVel = potionPos;
+
+            Debug.Log($"Normalised vec: {potionPos}");
+            Debug.Log($"Angle: {launchAngle}");
+            potionPos.x += transform.position.x;
+            potionPos.y += transform.position.y + (height/2);
+            potionPos.x *= armLength;
+            potionPos.y *= armLength;
+            
+            
+
             Instantiate(potion, potionPos, transform.rotation);
         }
 
@@ -107,7 +149,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             grounded = true;
-            Debug.Log("On the Ground");
+            //Debug.Log("On the Ground");
         }
     }
 
@@ -116,7 +158,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             grounded = false;
-            Debug.Log("In the air");
+            //Debug.Log("In the air");
         }
     }
 }
