@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     bool jumping;
     Vector3 jumpVec;
     
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();

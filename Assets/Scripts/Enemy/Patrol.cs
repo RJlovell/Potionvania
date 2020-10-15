@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Patrol : MonoBehaviour
 {
+    Player playerScript;
     OrcScript orcScript;
     public float speed;
     //The maximum distance of the ray from the raycast offset
@@ -11,10 +12,13 @@ public class Patrol : MonoBehaviour
     //causing the object to move back and forth for infinity.
     public float maxRayDistance;
 
+    public float xAxisForce;
+    public float yAxisForce;
     //Determines how far the ray cast should detect collisions from the object
     public float horizontalRayCastOffset;
     public float downwardsRayCastOffset;
-    
+
+    protected bool dealDamage = false;
     private bool movingRight = true;
 
     RaycastHit hitInfo;
@@ -22,27 +26,30 @@ public class Patrol : MonoBehaviour
     Ray groundDetectRay;
     private void Start()
     {
+        playerScript = GameObject.Find("Player").GetComponent<Player>();
         orcScript = GetComponent<OrcScript>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+
         /*Creates a ray cast using the position of the game object this script is attached to plus
         a ternary operator using the variable movingRight to determine the direction of the raycast while the
         raycastOffset determines how far the ray will be from the game objects position. 
         The ray will be in a downwards direction.
         */
         groundDetectRay = new Ray(transform.position + new Vector3(movingRight ? downwardsRayCastOffset : -downwardsRayCastOffset, 0, 0), Vector3.down);
-        
+
         if (movingRight)
         {
             //Similar to the groundDetectRay but the ray will be in a right direction
             horizontalDetectRay = new Ray(transform.position + new Vector3(movingRight ? horizontalRayCastOffset : -horizontalRayCastOffset, 0, 0), Vector3.right);
+            dealDamage = false;
+
             Debug.DrawRay(horizontalDetectRay.origin, Vector3.right * maxRayDistance, Color.red);
             Debug.DrawRay(groundDetectRay.origin, Vector3.down, Color.blue);
-            
+
             //The object is moving right
-            //transform.Translate(transform.right * speed * Time.deltaTime);
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
         else
@@ -51,10 +58,8 @@ public class Patrol : MonoBehaviour
             horizontalDetectRay = new Ray(transform.position + new Vector3(movingRight ? horizontalRayCastOffset : -horizontalRayCastOffset, 0, 0), Vector3.left);
             Debug.DrawRay(horizontalDetectRay.origin, Vector3.left * maxRayDistance, Color.red);
             Debug.DrawRay(groundDetectRay.origin, Vector3.down, Color.blue);
-            //Debug.DrawLine(transform.position, Vector3.right * maxRayDistance, Color.gray);
-            
+            dealDamage = false;
             //The object is moving left
-            //transform.Translate(-transform.right * speed * Time.deltaTime);
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
 
@@ -62,22 +67,34 @@ public class Patrol : MonoBehaviour
         //But if the raycast does return that the ground is being hit, it will do nothing.
         if (!Physics.Raycast(groundDetectRay, out hitInfo, maxRayDistance))
         {
-            
-            //Debug.DrawLine(groundDetectRay.origin, groundDetectRay.direction, Color.blue);
             movingRight = !movingRight;
         }
-        
+        ///A horizontal ray cast that detects if another object is blocking the game object this script is attached to.
+        ///If the game object is being blocked it will begin moving in the opposite direction.
+        ///If the game object collides with another object which has the "Player" tag, 
+        ///this game object will ignore all physics and pass through the "Player" object, 
+        ///dealing damage before continuing on the path.
         if (Physics.Raycast(horizontalDetectRay, out hitInfo, maxRayDistance))
         {
-            print("Collided with " + hitInfo.collider.gameObject.name);
-            if(hitInfo.collider.gameObject.tag == "Player")
+            if (hitInfo.collider.gameObject.CompareTag("Player"))
             {
-                hitInfo.collider.attachedRigidbody.AddForce(-10000,0,0);
-                //orcScript.orcDamage;
-                print("Orc dealt " + orcScript.orcDamage);
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
+                hitInfo.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+                if (!dealDamage)
+                {
+                    print("Collided with " + hitInfo.collider.gameObject.name);
+                    print("Orc dealt " + orcScript.orcDamage);
+                    dealDamage = true;
+                }
             }
-            movingRight = !movingRight;
+            else
+            {
+                movingRight = !movingRight;
+                dealDamage = false;
+            }
+            //if(hitInfo.collider.gameObject.tag != "Player")
+            //{
+            //}
         }
-        
     }
 }
