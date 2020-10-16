@@ -5,37 +5,49 @@ using UnityEngine;
 
 public class GoblinAttackScript : MonoBehaviour
 {
-    public Transform target;
+    public Transform targetPosition;
     //public float throwingAngle;
-    public float throwingDelay;
+    public float attackDelay;
     public float throwingForce;
+    public float attackCountdown;
     //Offset to the y-axis
     //public float throwOffset;
     //public float artificalGravity;
-    //public float timer = 0;
-    bool hasThrown = false;
-    public Transform projectile;
+    public bool hasThrown = false;
+    private Transform potionTransform;
     private Transform myTransform;
     //Test variables
     public GameObject potionPrefab;
+    GameObject potionSpawn;
+    public float potionSpawnXOffset;
+    public float potionSpawnYOffset;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         myTransform = transform;
-        //projectile = transform;
-        //projectile = myTransform;
+        attackCountdown = attackDelay;
+        potionTransform = potionPrefab.transform;
     }
-   
+
     // Update is called once per frame
     void Update()
     {
-        throwingDelay -= Time.deltaTime;
-        if (throwingDelay <= 0f && !hasThrown)
+        if(!hasThrown)
+        {
+            attackCountdown -= Time.deltaTime;
+        }
+        else
+        {
+            hasThrown = false;
+        }
+        //attackCountdown -= Time.deltaTime;
+        if (attackCountdown <= 0f && !hasThrown)
         {
 
-            //SpawnPotion();
-            //timer = 0;
+            SpawnPotion();
+            hasThrown = true;
+            attackCountdown = attackDelay;
         }
         ////Short delay beford the projectile is thrown
         ////Invoke("SpawnPotion", throwingDelay * Time.deltaTime);
@@ -57,15 +69,11 @@ public class GoblinAttackScript : MonoBehaviour
         //    Arrived();
         //}
     }
-
-    //void Arrived()
-    //{
-    //    Debug.Log("Damage happens");
-    //}
-    //void SpawnPotion()
-    //{
-    //    Debug.Log("Spawning the potion");
-    //    GameObject spawnPotion = Instantiate(potionPrefab);
-    //    spawnPotion.gameObject.transform.position = myTransform.position;
-    //}
+    void SpawnPotion()
+    {
+        Debug.Log("Spawning the potion");
+        potionSpawn = Instantiate(potionPrefab);
+        potionSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + potionSpawnXOffset, myTransform.position.y + potionSpawnYOffset, myTransform.position.z);
+        potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
+    }
 }

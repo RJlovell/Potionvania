@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,12 +16,6 @@ public class AirPotion : MonoBehaviour
     {
         
     }
-    public static float GetMag(float first, float second)
-    {
-        float mag = Mathf.Sqrt(((first * first) + (second * second)));
-        return mag;
-    }
-
     public static float GetMag(float first, float second)
     {
         float mag = Mathf.Sqrt(((first * first) + (second * second)));
@@ -56,4 +50,4 @@ public class AirPotion : MonoBehaviour
             }
         }
     }
-}*/
+}
