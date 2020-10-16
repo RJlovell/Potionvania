@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3843362038501380901}
   - component: {fileID: 3550247594459676082}
   - component: {fileID: 850762792040640423}
-  - component: {fileID: 7959263736433268195}
   - component: {fileID: 4383028693408676853}
   - component: {fileID: 2262451641943827806}
+  - component: {fileID: 7468913709396885358}
   m_Layer: 0
   m_Name: AirPotion
   m_TagString: Potion
@@ -96,20 +96,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7959263736433268195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5913655551553500157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a42024c0ac69849af4e53813d5e796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 2
-  explosionForce: 7
 --- !u!114 &4383028693408676853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +126,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &7468913709396885358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913655551553500157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a42024c0ac69849af4e53813d5e796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
+  explosionForce: 9
