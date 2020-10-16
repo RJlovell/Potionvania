@@ -124,5 +124,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: -927199367670048503, guid: 4b19ac99e695828458b82b550b984e4b, type: 3}
-  PotionDistance: 2
   throwForce: 6
