@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Patrol : MonoBehaviour
 {
-    Player playerScript;
+    PlayerHealth playerHPScript;
     OrcScript orcScript;
     public float speed;
     //The maximum distance of the ray from the raycast offset
@@ -26,7 +26,7 @@ public class Patrol : MonoBehaviour
     Ray groundDetectRay;
     private void Start()
     {
-        playerScript = GameObject.Find("Player").GetComponent<Player>();
+        playerHPScript = GameObject.Find("Player").GetComponent<PlayerHealth>();
         orcScript = GetComponent<OrcScript>();
     }
 
@@ -78,13 +78,19 @@ public class Patrol : MonoBehaviour
         {
             if (hitInfo.collider.gameObject.CompareTag("Player"))
             {
-                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
-                hitInfo.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
-                if (!dealDamage)
+                if (!playerHPScript.iSceneEnabled)
                 {
-                    print("Collided with " + hitInfo.collider.gameObject.name);
-                    print("Orc dealt " + orcScript.orcDamage);
-                    dealDamage = true;
+                    Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
+                    hitInfo.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+                    playerHPScript.iSceneEnabled = true;
+
+                    if (!dealDamage)
+                    {
+                        print("Collided with " + hitInfo.collider.gameObject.name);
+                        print("Orc dealt " + orcScript.orcDamage);
+                        playerHPScript.TakeDamage(orcScript.orcDamage);
+                        dealDamage = true;
+                    }
                 }
             }
             else
