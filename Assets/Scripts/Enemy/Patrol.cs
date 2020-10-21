@@ -26,7 +26,7 @@ public class Patrol : MonoBehaviour
     Ray groundDetectRay;
     private void Start()
     {
-        playerHPScript = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        playerHPScript = GameObject.Find("Bottlehead").GetComponent<PlayerHealth>();
         orcScript = GetComponent<OrcScript>();
     }
 
