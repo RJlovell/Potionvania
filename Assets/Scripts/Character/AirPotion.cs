@@ -22,8 +22,6 @@ public class AirPotion : MonoBehaviour
         return mag;
     }
 
-
-
     void OnCollisionEnter(Collision other)
     {
         {
