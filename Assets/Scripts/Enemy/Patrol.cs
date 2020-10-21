@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -81,8 +81,8 @@ public class Patrol : MonoBehaviour
             {
                 if (!playerHPScript.iSceneEnabled)
                 {
-                    Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
-                    hitInfo.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+                    //Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, false);
+                    //hitInfo.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
                     playerHPScript.iSceneEnabled = true;
 
                     if (!dealDamage)
@@ -99,9 +99,53 @@ public class Patrol : MonoBehaviour
                 movingRight = !movingRight;
                 dealDamage = false;
             }
-            //if(hitInfo.collider.gameObject.tag != "Player")
-            //{
-            //}
+        }
+        //if (hitInfo.collider.gameObject.CompareTag("Player"))
+        //{
+        //    if (playerHPScript.iSceneEnabled)
+        //    {
+        //        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
+        //    }
+        //    else
+        //    {
+        //        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, false);
+        //    }
+        //}
+        //if (playerHPScript.iSceneEnabled)
+        //{
+        //    Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
+        //}
+    }
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.collider.gameObject.CompareTag("Player"))
+        {
+            if (playerHPScript.iSceneEnabled)
+            {
+                Debug.Log("Collision has occured from the Orc Patrol script");
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), col.collider, true);
+                col.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+            }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            if(playerHPScript.iSceneEnabled)
+            {
+                Debug.Log("Trigger has occured from the Orc Patrol script");
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other.gameObject.GetComponent<Collider>(), true);
+                other.gameObject.GetComponent<Collider>().attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+                //col.collider.attachedRigidbody.AddForce(movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+            }
+        }
+    }
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.collider.gameObject.CompareTag("Player"))
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), col.collider, false);
         }
     }
 }

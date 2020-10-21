@@ -14,17 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         iSceneCountdown = iSceneDuration;
-        //invinciScript = GetComponent<ISceneScript>();
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.collider.gameObject.CompareTag("Orc"))
-    //    {
-    //        print("Invincible script enabled");
-    //        iSceneEnabled = true;
-    //    }
-    //}
-
     // Update is called once per frame
     void Update()
     {
