@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2401846076887935492}
   - component: {fileID: 1404367281364955076}
   - component: {fileID: 4937645653598220388}
+  - component: {fileID: -4405499543209502824}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Potion
@@ -125,3 +126,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: -927199367670048503, guid: 4b19ac99e695828458b82b550b984e4b, type: 3}
   throwForce: 6
+--- !u!114 &-4405499543209502824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920525300752898683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c9fba8c187aa14baa55af5c0ff4557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionDamage: 3

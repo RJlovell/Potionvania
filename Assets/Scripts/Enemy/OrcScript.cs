@@ -6,16 +6,7 @@ public class OrcScript : MonoBehaviour
 {
     public float orcHealth = 3;
     public float orcDamage = 10;
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //
-    //}
-    // Update is called once per frame
-    //void Update()
-    //{
-    //
-    //}
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
