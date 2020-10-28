@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public float throwDelay = 3;
     float timeSinceThrow = 0;
 
-
+    private bool potionCooldown;
 
     void Start()
     {
@@ -145,6 +145,19 @@ public class Player : MonoBehaviour
             potionPos.x /= mag;
             potionPos.y /= mag;
 
+<<<<<<< HEAD
+            ///Boundary setting for potion throwing
+           /* if (mousePos.y < transform.position.y)
+            {
+                if (potionPos.x < 0.7 && potionPos.x > 0)
+                    potionPos.x = 0.7f;
+                if (potionPos.x > -0.7 && potionPos.x < 0)
+                    potionPos.x = -0.7f;
+                if (potionPos.y < -0.7)
+                    potionPos.y = -0.7f;
+            }*/
+=======
+>>>>>>> RileysBranch
             potionVel = potionPos;
 
             //Debug.Log($"Normalised vec: {potionPos}");
@@ -186,7 +199,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.CompareTag("Ground"))
         {
             currentSpeed = 0;
             grounded = true;
@@ -196,7 +209,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.CompareTag("Ground"))
         {
             grounded = false;
             Debug.Log("In the Air");

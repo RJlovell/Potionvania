@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PotionThrowing : MonoBehaviour
 {
+    PotionEffect potionEffect;
     private Player playerScript;
     public GameObject player;
     Rigidbody rb;
@@ -18,6 +19,7 @@ public class PotionThrowing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        potionEffect = GameObject.FindGameObjectWithTag("Potion").GetComponent<PotionEffect>();
     }
 
     private void FixedUpdate()
@@ -41,7 +43,7 @@ public class PotionThrowing : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.CompareTag("Player"))
-            Destroy(gameObject);
+        Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage against " + other.gameObject.name);
+        Destroy(gameObject);
     }
 }
