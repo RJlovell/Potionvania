@@ -269,12 +269,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.67
+      value: -9.15
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.79
+      value: 5.09
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
@@ -572,14 +572,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73921ad73ab1b3419f4e8d409e0a240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 920525300752898683, guid: bd15a51c7071bd84e9fc4c4b244c5e55, type: 3}
-  impulseSpeed: 1
-  maxSpeed: 5
+  potion: {fileID: 5913655551553500157, guid: 9705ab2009487b6449eae2d79899478d, type: 3}
+  groundSpeed: 5
+  airSpeed: 2.5
+  rampSpeed: 2
   jumpForce: 5
   jumpTime: 0.2
-  armLength: 1
+  jumpVec: {x: 0, y: 0, z: 0}
   height: 2.4
-  potionPos: {x: 0, y: 0, z: 0}
+  potionVel: {x: 0, y: 0, z: 0}
 --- !u!54 &1367024786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -750,12 +751,12 @@ PrefabInstance:
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.7
+      value: -5.71
       objectReference: {fileID: 0}
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.66
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
@@ -805,7 +806,7 @@ PrefabInstance:
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 8.34
       objectReference: {fileID: 0}
     - target: {fileID: 9061024477390322537, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
