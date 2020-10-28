@@ -11,11 +11,6 @@ public class AirPotion : MonoBehaviour
     public float explosionForce = 7.0f;
     float magnitude;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public static float GetMag(float first, float second)
     {
         float mag = Mathf.Sqrt(((first * first) + (second * second)));
@@ -42,9 +37,8 @@ public class AirPotion : MonoBehaviour
 
                     //normalise vector
                     magnitude = GetMag(explosionVec.x, explosionVec.y);
-                    explosionVec.x = explosionVec.x / magnitude;
-                    explosionVec.y = explosionVec.y / magnitude;
-
+                    explosionVec.x /= magnitude;
+                    explosionVec.y /= magnitude;
                     //apply explosion force
                     explosionVec *= explosionForce;
                     explosionVec += rb.velocity;

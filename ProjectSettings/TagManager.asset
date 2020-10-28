@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Potion
   - Orc
+  - Goblin
   layers:
   - Default
   - TransparentFX
