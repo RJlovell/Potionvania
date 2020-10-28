@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.42
+      value: 7.18
       objectReference: {fileID: 0}
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
@@ -269,12 +269,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.15
+      value: -9.17
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.09
+      value: 0.102
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
@@ -364,12 +364,12 @@ PrefabInstance:
     - target: {fileID: 8593428321050592708, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.485
       objectReference: {fileID: 0}
     - target: {fileID: 8593428321050592708, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.862
       objectReference: {fileID: 0}
     - target: {fileID: 8593428321050592708, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
@@ -578,9 +578,8 @@ MonoBehaviour:
   rampSpeed: 2
   jumpForce: 5
   jumpTime: 0.2
-  jumpVec: {x: 0, y: 0, z: 0}
   height: 2.4
-  potionVel: {x: 0, y: 0, z: 0}
+  throwDelay: 3
 --- !u!54 &1367024786
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -751,7 +750,7 @@ PrefabInstance:
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.71
+      value: -5.87
       objectReference: {fileID: 0}
     - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
@@ -831,6 +830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246106796702745434, guid: 7f29a176ca840c84ba1878a5be30e928,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5891828399249848945, guid: 7f29a176ca840c84ba1878a5be30e928,
         type: 3}

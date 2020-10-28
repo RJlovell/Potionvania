@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -21,20 +22,24 @@ public class Player : MonoBehaviour
     private float jumpCount;
     public float jumpTime = 0.2f;
     bool jumping;
-    public Vector3 jumpVec;
+    Vector3 jumpVec;
 
-
+    [System.NonSerialized]
+    public Vector3 potionVel;
     Vector3 mousePos;
     public float height = 2.4f;
-    public Vector3 potionVel;
     Vector3 potionPos;
     float launchAngle;
+    bool canThrow = true;
+    public float throwDelay = 3;
+    float timeSinceThrow = 0;
 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
         rb.velocity = Vector3.zero;
     }
     private void FixedUpdate()
@@ -43,6 +48,7 @@ public class Player : MonoBehaviour
         //check if input moving, allows airPotion to move player along x axis where necessary
         if (!moving)
             currentSpeed = rb.velocity.x;
+
         rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         //Debug.Log(rb.velocity.x);
     }
@@ -50,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             moving = true;
             if (grounded)
@@ -98,6 +104,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.D))
             moving = false;
+        
 
 
         ///Halt player if no movement input detected or left and right input both read simultaniously
@@ -107,9 +114,21 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             //Debug.Log("HALT");
         }
-        ///firing potion
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+
+        if(!canThrow)
         {
+            if(timeSinceThrow < throwDelay)
+                timeSinceThrow += Time.deltaTime;
+            else
+            {
+                canThrow = true;
+                timeSinceThrow = 0;
+            }
+        }
+        ///firing potion
+        if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
+        {
+            canThrow = false;
             Vector3 rawMousePos = Input.mousePosition;
             rawMousePos.z = 12;
             mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
