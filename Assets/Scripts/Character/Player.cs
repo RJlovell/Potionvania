@@ -145,7 +145,10 @@ public class Player : MonoBehaviour
             potionPos.x /= mag;
             potionPos.y /= mag;
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             potionVel = potionPos;
 
             //Debug.Log($"Normalised vec: {potionPos}");
