@@ -14,8 +14,13 @@ GameObject:
   - component: {fileID: 2401846076887935492}
   - component: {fileID: 1404367281364955076}
   - component: {fileID: 4937645653598220388}
+<<<<<<< Updated upstream
   - component: {fileID: 7900558919416697918}
   - component: {fileID: 1406601233877346955}
+=======
+  - component: {fileID: -4405499543209502824}
+  - component: {fileID: 755183143611510103}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Potion
   m_TagString: Potion
@@ -153,4 +158,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c9fba8c187aa14baa55af5c0ff4557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   potionDamage: 0
+=======
+  potionDamage: 3
+--- !u!114 &755183143611510103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920525300752898683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a42024c0ac69849af4e53813d5e796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2
+  explosionForce: 7
+>>>>>>> Stashed changes

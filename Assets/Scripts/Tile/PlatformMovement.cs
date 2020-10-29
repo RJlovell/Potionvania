@@ -29,8 +29,9 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position != currentTarget)
+        if(transform.localPosition != currentTarget)
         {
+
             MovePlatform();
         }
         else
@@ -41,11 +42,11 @@ public class PlatformMovement : MonoBehaviour
 
     void MovePlatform()
     {
-        Vector3 movingDirection = currentTarget - transform.position;
-        transform.position += (movingDirection / movingDirection.magnitude) * speed * Time.deltaTime;
+        Vector3 movingDirection = currentTarget - transform.localPosition;
+        transform.localPosition += (movingDirection / movingDirection.magnitude) * speed * Time.deltaTime;
         if(movingDirection.magnitude < tolerance)
         {
-            transform.position = currentTarget;
+            transform.localPosition = currentTarget;
             delayStart = Time.time;
         }
     }
