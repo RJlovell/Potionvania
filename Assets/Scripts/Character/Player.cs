@@ -144,11 +144,6 @@ public class Player : MonoBehaviour
             float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
             potionPos.x /= mag;
             potionPos.y /= mag;
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
             potionVel = potionPos;
 
             //Debug.Log($"Normalised vec: {potionPos}");

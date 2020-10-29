@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441037068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 6.93, z: 0}
+  m_LocalPosition: {x: 2, y: 7, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &988201293
 AudioListener:
   m_ObjectHideFlags: 0
@@ -761,6 +761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lower_Tower_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2259684355541232718, guid: e361e1e8ba2332742b80fbafe958817c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2259684355541232719, guid: e361e1e8ba2332742b80fbafe958817c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -843,7 +848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1272847770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,7 +1751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946911728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.91, y: 8.03, z: 0}
+  m_LocalPosition: {x: -9.91, y: 8.5, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1767,6 +1772,7 @@ GameObject:
   - component: {fileID: 1957224090}
   - component: {fileID: 1957224092}
   - component: {fileID: 1957224093}
+  - component: {fileID: 1957224091}
   m_Layer: 0
   m_Name: BottleHead
   m_TagString: Player
@@ -1864,6 +1870,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &1957224091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957224085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c9fba8c187aa14baa55af5c0ff4557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionDamage: 3
 --- !u!114 &1957224092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1892,14 +1911,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73921ad73ab1b3419f4e8d409e0a240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 920525300752898683, guid: bd15a51c7071bd84e9fc4c4b244c5e55, type: 3}
-  groundSpeed: 5
+  potion: {fileID: 8835549057645362344, guid: 091ceb5364561b7418fcae7710e15084, type: 3}
+  groundSpeed: 10
   airSpeed: 2.5
-  rampSpeed: 2
+  rampSpeed: 50
   jumpForce: 1
   jumpTime: 0.1
   height: 2.4
-  throwDelay: 3
+  throwDelay: 1
 --- !u!1001 &2001525673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1930,7 +1949,7 @@ PrefabInstance:
     - target: {fileID: -5285648915632326278, guid: 7ad23b71bc4fec14c8b6bc24276fcea4,
         type: 3}
       propertyPath: points.Array.data[0].y
-      value: 6.93
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -5285648915632326278, guid: 7ad23b71bc4fec14c8b6bc24276fcea4,
         type: 3}
@@ -1975,7 +1994,7 @@ PrefabInstance:
     - target: {fileID: 4310751007097070988, guid: 7ad23b71bc4fec14c8b6bc24276fcea4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.08
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4310751007097070988, guid: 7ad23b71bc4fec14c8b6bc24276fcea4,
         type: 3}
@@ -2684,7 +2703,7 @@ PrefabInstance:
     - target: {fileID: 5886368281188701047, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5886368281188701047, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}

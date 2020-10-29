@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &920525300752898683
+--- !u!1 &8835549057645362344
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,19 +8,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7712803123694364978}
-  - component: {fileID: 1498592387976257590}
-  - component: {fileID: 7226048491429297043}
-  - component: {fileID: 2401846076887935492}
-  - component: {fileID: 1404367281364955076}
-  - component: {fileID: 4937645653598220388}
-<<<<<<< Updated upstream
-  - component: {fileID: 7900558919416697918}
-  - component: {fileID: 1406601233877346955}
-=======
-  - component: {fileID: -4405499543209502824}
-  - component: {fileID: 755183143611510103}
->>>>>>> Stashed changes
+  - component: {fileID: 5223765403273149852}
+  - component: {fileID: 3454140302497837924}
+  - component: {fileID: 6497397272087645280}
+  - component: {fileID: 4345646242194175877}
+  - component: {fileID: 2916061561386284200}
+  - component: {fileID: 7096357101625168827}
+  - component: {fileID: 448859923391639134}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Potion
@@ -28,35 +22,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7712803123694364978
+--- !u!4 &5223765403273149852
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.86, y: 4.22, z: -0.29595947}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -10.38, y: 18.67, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1498592387976257590
+--- !u!33 &3454140302497837924
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7226048491429297043
+--- !u!23 &6497397272087645280
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,26 +83,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2401846076887935492
+--- !u!135 &4345646242194175877
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1404367281364955076
+--- !u!114 &2916061561386284200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8835549057645362344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97aec79f004572249a6ae2713b4e5398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  throwForce: 3
+--- !u!54 &7096357101625168827
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -116,64 +124,18 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &4937645653598220388
+--- !u!114 &448859923391639134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97aec79f004572249a6ae2713b4e5398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: -927199367670048503, guid: 4b19ac99e695828458b82b550b984e4b, type: 3}
-  throwForce: 10
---- !u!114 &7900558919416697918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a42024c0ac69849af4e53813d5e796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 3
-  explosionForce: 10
---- !u!114 &1406601233877346955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
+  m_GameObject: {fileID: 8835549057645362344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c9fba8c187aa14baa55af5c0ff4557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  potionDamage: 0
-=======
   potionDamage: 3
---- !u!114 &755183143611510103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920525300752898683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a42024c0ac69849af4e53813d5e796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 2
-  explosionForce: 7
->>>>>>> Stashed changes

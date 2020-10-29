@@ -29,7 +29,6 @@ public class OrcPatrolSensor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
             if (!playerHPScript.iSceneEnabled)
             {
                 playerHPScript.iSceneEnabled = true;
@@ -37,17 +36,22 @@ public class OrcPatrolSensor : MonoBehaviour
                 Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
             }
         }
-        else
+        //else
+        //{
+        //    orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
+        //    //orcPatrol.movingRight = !orcPatrol.movingRight;
+        //    moveThrough = false;
+        //}
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
             //orcPatrol.movingRight = !orcPatrol.movingRight;
             moveThrough = false;
         }
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    moveThrough = false;
-    //}
 
     private void Update()
     {
