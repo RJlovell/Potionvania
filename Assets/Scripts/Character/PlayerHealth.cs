@@ -28,9 +28,24 @@ public class PlayerHealth : MonoBehaviour
             iSceneCountdown = iSceneDuration;
             print("iSceneCountdown is now reset & iScene is disabled");
         }
+        IsPlayerDead();
     }
     public void TakeDamage(float damage)
     {
         playerHealth -= damage;
+    }
+
+    public bool IsPlayerDead()
+    {
+        if(playerHealth <= 0)
+        {
+            //GameObject .setActive == false
+            //This means if player goes below 0 they will die
+            //Game Manager will change the scene to either the defeat screen or just restart the level
+            playerHealth = 0;
+            Debug.Log("The player has died");
+            return true;
+        }
+        return false;
     }
 }
