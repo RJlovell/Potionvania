@@ -145,19 +145,7 @@ public class Player : MonoBehaviour
             potionPos.x /= mag;
             potionPos.y /= mag;
 
-<<<<<<< HEAD
-            ///Boundary setting for potion throwing
-           /* if (mousePos.y < transform.position.y)
-            {
-                if (potionPos.x < 0.7 && potionPos.x > 0)
-                    potionPos.x = 0.7f;
-                if (potionPos.x > -0.7 && potionPos.x < 0)
-                    potionPos.x = -0.7f;
-                if (potionPos.y < -0.7)
-                    potionPos.y = -0.7f;
-            }*/
-=======
->>>>>>> RileysBranch
+
             potionVel = potionPos;
 
             //Debug.Log($"Normalised vec: {potionPos}");
