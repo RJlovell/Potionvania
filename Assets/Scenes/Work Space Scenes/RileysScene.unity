@@ -229,7 +229,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: -4770390735465466038, guid: 4b19ac99e695828458b82b550b984e4b,
+      objectReference: {fileID: -7805457775891230367, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
     - target: {fileID: -5483335277891627885, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
@@ -253,8 +253,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[7]
       value: 
-      objectReference: {fileID: -8406609975200484223, guid: 4b19ac99e695828458b82b550b984e4b,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: -5483335277891627885, guid: 4b19ac99e695828458b82b550b984e4b,
         type: 3}
       propertyPath: m_Materials.Array.data[8]
@@ -572,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73921ad73ab1b3419f4e8d409e0a240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 5913655551553500157, guid: 9705ab2009487b6449eae2d79899478d, type: 3}
+  potion: {fileID: 920525300752898683, guid: bd15a51c7071bd84e9fc4c4b244c5e55, type: 3}
   groundSpeed: 5
   airSpeed: 2.5
   rampSpeed: 2
