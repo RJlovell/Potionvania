@@ -13,6 +13,7 @@ public class OrcPatrolSensor : MonoBehaviour
     //bool movementRight;
     public bool moveThrough = false;
 
+    
     private void Start()
     {
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float playerHealth;
-
+    public float playerMaxHealth;
+    public float playerCurrentHealth;
+    
     public bool iSceneEnabled = false;
     public float iSceneDuration;
     public float iSceneCountdown;
@@ -13,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        playerCurrentHealth = playerMaxHealth;
         iSceneCountdown = iSceneDuration;
     }
     // Update is called once per frame
@@ -32,18 +34,19 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        playerHealth -= damage;
+        playerCurrentHealth -= damage;
     }
 
     public bool IsPlayerDead()
     {
-        if(playerHealth <= 0)
+        if(playerCurrentHealth <= 0)
         {
             //GameObject .setActive == false
             //This means if player goes below 0 they will die
             //Game Manager will change the scene to either the defeat screen or just restart the level
-            playerHealth = 0;
+            //gameObject.SetActive(false);
             Debug.Log("The player has died");
+            playerCurrentHealth = playerMaxHealth;
             return true;
         }
         return false;
