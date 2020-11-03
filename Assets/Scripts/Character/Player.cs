@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float rampSpeed = 2;
 
 
-
+    public float groundFriction = 0.6f;
     bool grounded;
     public float jumpForce = 1.0f;
     private float jumpCount;
@@ -144,11 +144,6 @@ public class Player : MonoBehaviour
             float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
             potionPos.x /= mag;
             potionPos.y /= mag;
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
             potionVel = potionPos;
 
             //Debug.Log($"Normalised vec: {potionPos}");
@@ -190,12 +185,33 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        //check that the player is on top of the platform
+        float blockHeight = other.transform.localScale.y;
+        float blockWidth = other.transform.localScale.x;
+        float blockPosY = other.transform.position.y;
+        float blockPosX = other.transform.position.x;
+
+        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2))
         {
             currentSpeed = 0;
             grounded = true;
             Debug.Log("On the Ground");
+            GetComponent<Collider>().material.dynamicFriction = groundFriction;
+            GetComponent<Collider>().material.staticFriction = groundFriction;
         }
+
+        //old code here//
+        /*if (other.gameObject.CompareTag("Ground"))
+        {
+            if (rb.position.y >= blockPosY + (blockHeight / 2))
+            {
+                Debug.Log("Height: " + blockHeight);
+                Debug.Log("Y pos: " + blockPosY);
+                currentSpeed = 0;
+                grounded = true;
+                Debug.Log("On the Ground");
+            }
+        }*/
     }
 
     void OnCollisionExit(Collision other)
@@ -204,6 +220,8 @@ public class Player : MonoBehaviour
         {
             grounded = false;
             Debug.Log("In the Air");
+            GetComponent<Collider>().material.dynamicFriction = 0;
+            GetComponent<Collider>().material.staticFriction = 0;
         }
     }
 }
