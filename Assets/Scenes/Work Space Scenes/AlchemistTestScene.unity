@@ -1895,7 +1895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1917e95f1727d4e920e43d40f6db9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 100
+  playerMaxHealth: 0
+  playerCurrentHealth: 0
   iSceneEnabled: 0
   iSceneDuration: 10
   iSceneCountdown: 0
