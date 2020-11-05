@@ -21,7 +21,7 @@ public class PotionThrowing : MonoBehaviour
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         potionEffect = GameObject.FindGameObjectWithTag("Potion").GetComponent<PotionEffect>();
     }
-
+    
     private void FixedUpdate()
     {
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), true);
@@ -43,7 +43,7 @@ public class PotionThrowing : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage against " + other.gameObject.name);
+        //Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage against " + other.gameObject.name);
         Destroy(gameObject);
     }
 }

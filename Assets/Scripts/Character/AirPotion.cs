@@ -10,7 +10,12 @@ public class AirPotion : MonoBehaviour
     Vector3 explosionVec;
     public float explosionForce = 7.0f;
     float magnitude;
+    private Player playerScript;
 
+    private void Start()
+    {
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
     public static float GetMag(float first, float second)
     {
         float mag = Mathf.Sqrt(((first * first) + (second * second)));
@@ -28,6 +33,7 @@ public class AirPotion : MonoBehaviour
                 {
                     continue;
                 }
+
 
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
 
