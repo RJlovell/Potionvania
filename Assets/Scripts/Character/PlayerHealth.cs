@@ -24,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerCurrentHealth > playerMaxHealth)
+        {
+            playerCurrentHealth = playerMaxHealth;
+        }
         if (iSceneEnabled)
         {
             iSceneCountdown -= Time.deltaTime;

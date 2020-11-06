@@ -34,12 +34,6 @@ public class OrcPatrolSensor : MonoBehaviour
                 Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
             }
         }
-        //else
-        //{
-        //    orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
-        //    //orcPatrol.movingRight = !orcPatrol.movingRight;
-        //    moveThrough = false;
-        //}
     }
     private void OnTriggerExit(Collider other)
     {
@@ -58,10 +52,6 @@ public class OrcPatrolSensor : MonoBehaviour
         {
             Debug.Log("Move through is true");
             Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
-
-            //playerColliderInfo.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? orcPatrolParent.xAxisForce : -orcPatrolParent.xAxisForce, orcPatrolParent.yAxisForce, 0);
-
-
         }
 
         if(!moveThrough)
