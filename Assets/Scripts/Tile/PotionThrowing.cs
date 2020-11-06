@@ -9,7 +9,7 @@ public class PotionThrowing : MonoBehaviour
     private Player playerScript;
     public GameObject player;
     Rigidbody rb;
-
+    //OrcScript orcScript;
 
 
     public float throwForce = 1.0f;
@@ -19,7 +19,8 @@ public class PotionThrowing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        potionEffect = GameObject.FindGameObjectWithTag("Potion").GetComponent<PotionEffect>();
+        //potionEffect = GameObject.FindGameObjectWithTag("Potion").GetComponent<PotionEffect>();
+        //orcScript = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcScript>();
     }
 
     private void FixedUpdate()
@@ -41,9 +42,21 @@ public class PotionThrowing : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage against " + other.gameObject.name);
-        Destroy(gameObject);
-    }
+    //void OnCollisionEnter(Collision other)
+    //{
+    //    //Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage //against " + other.gameObject.name);
+    //    if (other.collider.gameObject.CompareTag("Orc") || //other.collider.gameObject.CompareTag("Goblin"))
+    //    {
+    //        Debug.Log("Player has dealt " + potionEffect.potionDamage + " to the " /+ /other.gameObject.name);
+    //        if(CompareTag("Orc"))
+    //        {
+    //            //orcScript.TakeDamage(potionEffect.potionDamage);
+    //        }
+    //        if(CompareTag("Goblin"))
+    //        {
+    //
+    //        }
+    //    }
+    //    Destroy(gameObject);
+    //}
 }

@@ -15,6 +15,7 @@ public class PlatformMovement : MonoBehaviour
     private float delayStart;
 
     public bool automaticMovement;
+    //public bool manualMovement;
     private bool platformMoving;
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,10 @@ public class PlatformMovement : MonoBehaviour
                 NextPlatform();
             }
         }
+        //if(platformMoving)
+        //{
+        //
+        //}
     }
     public void NextPlatform()
     {
@@ -75,7 +80,10 @@ public class PlatformMovement : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Orc") || collision.gameObject.CompareTag("Goblin"))
         {
-            //platformMoving = true;
+            //if(manualMovement)
+            //{
+            //    platformMoving = true;
+            //}
             collision.collider.transform.SetParent(transform);
         }
     }

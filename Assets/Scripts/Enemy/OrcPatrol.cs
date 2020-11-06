@@ -81,7 +81,7 @@ public class OrcPatrol : MonoBehaviour
         {
             if (Physics.Raycast(horizontalDetectRay, out hitInfo, maxHorizontalRayDistance))
             {
-                if (hitInfo.collider.gameObject.CompareTag("Player"))
+                if (hitInfo.collider.gameObject.CompareTag("Player") || hitInfo.collider.gameObject.CompareTag("Potion"))
                 {
                     Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), hitInfo.collider, true);
                     if (!playerHPScript.iSceneEnabled)
