@@ -6177,7 +6177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1917e95f1727d4e920e43d40f6db9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 1
+  playerMaxHealth: 2
   playerCurrentHealth: 0
   iSceneEnabled: 0
   iSceneDuration: 10
@@ -7116,6 +7116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5886368281188701044, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
+        type: 3}
+      propertyPath: orcDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5886368281188701045, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
       propertyPath: horizontalRayCastOffset
@@ -7139,7 +7144,7 @@ PrefabInstance:
     - target: {fileID: 5886368281188701045, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
       propertyPath: UseRayCastDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5886368281188701045, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
@@ -7219,7 +7224,7 @@ PrefabInstance:
     - target: {fileID: 5886368282194069280, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5886368282194069294, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
         type: 3}
@@ -7235,6 +7240,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveThrough
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886368282194069295, guid: 6b4ea1989ec8a3047b3c5e5302c743cd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b4ea1989ec8a3047b3c5e5302c743cd, type: 3}
