@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class PlayerHealth : MonoBehaviour
     public bool iSceneEnabled = false;
     public float iSceneDuration;
     public float iSceneCountdown;
-    //ISceneScript invinciScript;
+
+    GameCondition gameCon;
 
     private void Start()
     {
         playerCurrentHealth = playerMaxHealth;
         iSceneCountdown = iSceneDuration;
+
+        gameCon = gameObject.GetComponent<GameCondition>();
     }
     // Update is called once per frame
     void Update()
@@ -47,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
             //gameObject.SetActive(false);
             Debug.Log("The player has died");
             playerCurrentHealth = playerMaxHealth;
+            SceneManager.LoadScene(gameCon.defeatSceneName);
             return true;
         }
         return false;
