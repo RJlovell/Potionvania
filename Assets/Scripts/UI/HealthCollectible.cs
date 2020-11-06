@@ -16,7 +16,7 @@ public class HealthCollectible : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            playerHP.playerHealth += healthRecovered;
+            playerHP.playerCurrentHealth += healthRecovered;
             Debug.Log("Health recovered by " + healthRecovered);
             gameObject.SetActive(false);
         }

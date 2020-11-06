@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     //Requires an external game object
-    public Transform projectileTargetPos;
+    Transform projectileTargetPos;
     //Determines the height of the arc being thrown
     public float arcHeight;
     //Speed of the projectile
@@ -45,5 +45,13 @@ public class Projectile : MonoBehaviour
     public void SetTarget(Transform targetPos)
     {
         projectileTargetPos = targetPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider)
+        {
+            Debug.Log("Bomb Explodes");
+        }
     }
 }

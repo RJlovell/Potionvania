@@ -49,25 +49,6 @@ public class GoblinAttackScript : MonoBehaviour
             hasThrown = true;
             attackCountdown = attackDelay;
         }
-        ////Short delay beford the projectile is thrown
-        ////Invoke("SpawnPotion", throwingDelay * Time.deltaTime);
-        ////Vector3 direction = target.transform.position - myTransform.position;
-        ////potionPrefab.GetComponent<Rigidbody>().AddForce(direction.normalized * throwingForce, ForceMode.Impulse);
-        //Vector3 nextPos = Vector3.MoveTowards(projectile.position, target.position, throwingForce * Time.deltaTime);
-        //projectile.rotation = Quaternion.LookRotation(nextPos - transform.position);
-        //projectile.position = nextPos;
-        //
-        //if (throwingDelay == timer)
-        //{
-        //    projectile.position = nextPos;
-        //    timer = 0;
-        //}
-        //timer++;
-        //
-        //if (nextPos == target.position)
-        //{
-        //    Arrived();
-        //}
     }
     void SpawnPotion()
     {
