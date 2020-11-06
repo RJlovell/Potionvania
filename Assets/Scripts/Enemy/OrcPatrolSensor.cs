@@ -5,21 +5,19 @@ using UnityEngine;
 public class OrcPatrolSensor : MonoBehaviour
 {
     PlayerHealth playerHPScript;
-    OrcPatrol orcPatrol;
+    //OrcPatrol orcPatrol;
     OrcPatrol orcPatrolParent;
     
     Collider orcColliderInfo;
     Collider playerColliderInfo;
-    bool movement;
-    bool movementRight;
+    //bool movementRight;
     public bool moveThrough = false;
 
+    
     private void Start()
     {
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        //xAxisForce = GetComponentInParent<OrcPatrol>().xAxisForce;
-        //yAxisForce = GetComponentInParent<OrcPatrol>().yAxisForce;
-        orcPatrol = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrol>();
+        //orcPatrol = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrol>();
         orcPatrolParent = GetComponentInParent<OrcPatrol>();
 
         orcColliderInfo = GameObject.FindGameObjectWithTag("Orc").gameObject.GetComponent<Collider>();
@@ -29,7 +27,6 @@ public class OrcPatrolSensor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
             if (!playerHPScript.iSceneEnabled)
             {
                 playerHPScript.iSceneEnabled = true;
@@ -37,17 +34,16 @@ public class OrcPatrolSensor : MonoBehaviour
                 Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
             }
         }
-        else
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
             //orcPatrol.movingRight = !orcPatrol.movingRight;
             moveThrough = false;
         }
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    moveThrough = false;
-    //}
 
     private void Update()
     {
@@ -56,10 +52,6 @@ public class OrcPatrolSensor : MonoBehaviour
         {
             Debug.Log("Move through is true");
             Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
-
-            //playerColliderInfo.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? orcPatrolParent.xAxisForce : -orcPatrolParent.xAxisForce, orcPatrolParent.yAxisForce, 0);
-
-
         }
 
         if(!moveThrough)
