@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
     public float airSpeed = 2.5f;
     public float rampSpeed = 2;
     float currentSpeed = 0;
-    float angleFacing = 0;
+    float angleFacing = 180;
     int moveDir = 0;
+    [System.NonSerialized]
+    public bool potionLaunch = false;
 
     
     public float groundFriction = 0.6f;
@@ -43,59 +45,63 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(moveDir == 1)
+        if (moveDir == 1)
         {
-            if (grounded)
-                currentSpeed = groundSpeed;
-            else
+            angleFacing = 90;
+            if (!potionLaunch)
             {
-                if (rb.velocity.x <= 0)
+                if (grounded)
+                    currentSpeed = groundSpeed;
+                else
                 {
-                    currentSpeed = airSpeed;
-                }
-                else if (rb.velocity.x > airSpeed)
-                {
-                    currentSpeed -= Time.deltaTime * rampSpeed;
-                }
-                else if (rb.velocity.x < airSpeed)
-                {
-                    currentSpeed += Time.deltaTime * rampSpeed;
+                    if (rb.velocity.x <= 0)
+                    {
+                        currentSpeed = airSpeed;
+                    }
+                    else if (rb.velocity.x > airSpeed)
+                    {
+                        currentSpeed -= Time.fixedDeltaTime * rampSpeed;
+                    }
+                    else if (rb.velocity.x < airSpeed)
+                    {
+                        currentSpeed += Time.fixedDeltaTime * rampSpeed;
+                    }
                 }
             }
-            angleFacing = 90;
+            
         }
         else if (moveDir == -1)
         {
-            
-            if (grounded)
-                currentSpeed = -groundSpeed;
-            else
+            angleFacing = -90;
+            if (!potionLaunch)
             {
-                if (rb.velocity.x >= 0)
+                if (grounded)
+                    currentSpeed = -groundSpeed;
+                else
                 {
-                    currentSpeed = -airSpeed;
-                }
-                else if (rb.velocity.x < -airSpeed)
-                {
-                    currentSpeed += Time.fixedDeltaTime * rampSpeed;
-                }
-                else if (rb.velocity.x > -airSpeed)
-                {
-                    currentSpeed -= Time.fixedDeltaTime * rampSpeed;
+                    if (rb.velocity.x >= 0)
+                    {
+                        currentSpeed = -airSpeed;
+                    }
+                    else if (rb.velocity.x < -airSpeed)
+                    {
+                        currentSpeed += Time.fixedDeltaTime * rampSpeed;
+                    }
+                    else if (rb.velocity.x > -airSpeed)
+                    {
+                        currentSpeed -= Time.fixedDeltaTime * rampSpeed;
+                    }
                 }
             }
-            angleFacing = -90;
         }
-        else if (moveDir == 0)
+        else if (moveDir == 0 || potionLaunch)
         {
             currentSpeed = rb.velocity.x;
         }
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-        rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
-        /*Debug.Log("X: " + rb.velocity.x); 
-        Debug.Log("Y: " + rb.velocity.y);*/
-        //moveDir = 0;
+        if(!potionLaunch)
+            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
     }
 
     // Update is called once per frame
@@ -113,6 +119,7 @@ public class Player : MonoBehaviour
         {
             moveDir = 0;
         }
+        
         ///Halt player if no movement input detected or left and right input both read simultaniously
         if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
         {
@@ -188,13 +195,14 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //check that the player is on top of the platform
+        potionLaunch = false;
+        //check that the player is on top of the platform that they're Entering
         float blockHeight = other.transform.localScale.y;
         float blockWidth = other.transform.localScale.x;
         float blockPosY = other.transform.position.y;
         float blockPosX = other.transform.position.x;
 
-        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2))
+        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
             currentSpeed = 0;
             grounded = true;
@@ -207,12 +215,12 @@ public class Player : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        //check that the player is on top of the platform
+        //check that the player is on top of the platform that they're Exiting
         float blockHeight = other.transform.localScale.y;
         float blockWidth = other.transform.localScale.x;
         float blockPosY = other.transform.position.y;
         float blockPosX = other.transform.position.x;
-        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2))
+        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
             grounded = false;
             Debug.Log("In the Air");

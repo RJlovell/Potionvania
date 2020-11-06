@@ -33,7 +33,10 @@ public class AirPotion : MonoBehaviour
                 {
                     continue;
                 }
-
+                if (hit.CompareTag("Player"))
+                {
+                    playerScript.potionLaunch = true;
+                }
 
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
 

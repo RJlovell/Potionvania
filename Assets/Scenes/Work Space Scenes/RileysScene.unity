@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6134074218423379405, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9061024477390322537, guid: 4fd8ac1264d4e75448c949a8ad5d5129,
         type: 3}
       propertyPath: m_Name
@@ -585,6 +590,7 @@ MonoBehaviour:
   groundSpeed: 5
   airSpeed: 2.5
   rampSpeed: 2
+  potionLaunch: 0
   groundFriction: 0.6
   jumpForce: 5
   jumpTime: 0.2
