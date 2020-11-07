@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        
         if (moveDir == 1)
         {
             angleFacing = 90;
@@ -102,11 +103,21 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
         if(!potionLaunch)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)
+        {
+            potionLaunch = false;
+        }
+        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded)
+        {
+            potionLaunch = false;
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
             moveDir = -1;
@@ -197,10 +208,14 @@ public class Player : MonoBehaviour
     {
         potionLaunch = false;
         //check that the player is on top of the platform that they're Entering
-        float blockHeight = other.transform.localScale.y;
-        float blockWidth = other.transform.localScale.x;
-        float blockPosY = other.transform.position.y;
-        float blockPosX = other.transform.position.x;
+        float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
+        float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
+        float blockPosY = other.collider.bounds.center.y;
+        float blockPosX = other.collider.bounds.center.x;
+        Debug.Log("BlockY: " + blockPosY);
+        Debug.Log("Block Height: " + blockHeight);
+        Debug.Log("BlockX: " + blockPosX);
+        Debug.Log("Block Width: " + blockWidth);
 
         if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
@@ -216,10 +231,10 @@ public class Player : MonoBehaviour
     void OnCollisionExit(Collision other)
     {
         //check that the player is on top of the platform that they're Exiting
-        float blockHeight = other.transform.localScale.y;
-        float blockWidth = other.transform.localScale.x;
-        float blockPosY = other.transform.position.y;
-        float blockPosX = other.transform.position.x;
+        float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
+        float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
+        float blockPosY = other.collider.bounds.center.y;
+        float blockPosX = other.collider.bounds.center.x;
         if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
             grounded = false;
