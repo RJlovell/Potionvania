@@ -11,6 +11,7 @@ public class AirPotion : MonoBehaviour
     public float explosionForce = 7.0f;
     float magnitude;
     private Player playerScript;
+    public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
 
     private void Start()
     {
@@ -42,7 +43,7 @@ public class AirPotion : MonoBehaviour
 
                 if (rb != null) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
                 {
-                    explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + 1) - explosionPos.y, 0);
+                    explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
 
                     //normalise vector
                     magnitude = GetMag(explosionVec.x, explosionVec.y);
