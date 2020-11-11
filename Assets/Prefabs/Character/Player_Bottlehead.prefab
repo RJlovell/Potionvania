@@ -50,15 +50,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potion: {fileID: 4713807131657300386, guid: 47386c88e2554024e8167516207a180c, type: 3}
   groundSpeed: 5
-  airSpeed: 2.5
+  airSpeed: 3
   rampSpeed: 2
   groundFriction: 0.6
-  jumpForce: 10
+  jumpForce: 4
   jumpTime: 0.2
   height: 2.4
-  throwDelay: 3
+  throwDelay: 1
   throwCharge: 0
-  chargeSpeed: 1
+  chargeSpeed: 5
   minThrowForce: 1
   maxThrowForce: 7
 --- !u!114 &196173480771105101

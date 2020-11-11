@@ -21,7 +21,11 @@ public class PotionThrowing : MonoBehaviour
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         potionEffect = GameObject.FindGameObjectWithTag("Potion").GetComponent<PotionEffect>();
     }
-    
+    private void OnDestroy()
+    {
+        playerScript.throwCharge = playerScript.minThrowForce;
+    }
+
     private void FixedUpdate()
     {
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), true);
@@ -32,7 +36,7 @@ public class PotionThrowing : MonoBehaviour
     {
         throwForce = playerScript.throwCharge;
         Vector3 throwVec = playerScript.potionVel * throwForce;
-        playerScript.throwCharge = playerScript.minThrowForce;
+        
 
        
         if (applyForce)
