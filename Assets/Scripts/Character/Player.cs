@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     float angleFacing = 180;
     int moveDir = 0;
     [System.NonSerialized]
-    public bool airLaunch = false;
+    public bool potionLaunch = false;
 
     
     public float groundFriction = 0.6f;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    bool grounded = true;
+    public bool grounded = true;
     
 
     [System.NonSerialized]
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         if (moveDir == 1)
         {
             angleFacing = 90;
-            if (!airLaunch)
+            if (!potionLaunch)
             {
                 if (grounded)
                     currentSpeed = groundSpeed;
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         else if (moveDir == -1)
         {
             angleFacing = -90;
-            if (!airLaunch)
+            if (!potionLaunch)
             {
                 if (grounded)
                     currentSpeed = -groundSpeed;
@@ -99,13 +99,13 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == 0 || airLaunch)
+        else if (moveDir == 0 || potionLaunch)
         {
             currentSpeed = rb.velocity.x;
         }
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-        if(!airLaunch)
+        if(!potionLaunch)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         
     }
@@ -113,13 +113,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && airLaunch && !grounded)
+        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)
         {
-            airLaunch = false;
+            potionLaunch = false;
         }
-        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && airLaunch && !grounded)
+        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded)
         {
-            airLaunch = false;
+            potionLaunch = false;
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
         {
             throwCharge += Time.deltaTime * chargeSpeed;
+            Debug.Log("We Chargin'");
         }
         ///throwing potion
         if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
@@ -224,7 +225,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        airLaunch = false;
+        potionLaunch = false;
         //check that the player is on top of the platform that they're Entering
         float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
         float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
