@@ -12,7 +12,7 @@ public class PotionThrowing : MonoBehaviour
 
 
 
-    public float throwForce = 1.0f;
+    public float throwForce;
     bool applyForce = true;
 
     void Start()
@@ -30,7 +30,9 @@ public class PotionThrowing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        throwForce = playerScript.throwCharge;
         Vector3 throwVec = playerScript.potionVel * throwForce;
+        playerScript.throwCharge = playerScript.minThrowForce;
 
        
         if (applyForce)
