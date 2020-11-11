@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    bool grounded = true;
+    public bool grounded = true;
     
 
     [System.NonSerialized]
@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
         {
             throwCharge += Time.deltaTime * chargeSpeed;
+            Debug.Log("We Chargin'");
         }
         ///throwing potion
         if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
