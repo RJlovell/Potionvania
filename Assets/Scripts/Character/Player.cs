@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    bool grounded;
+    bool grounded = true;
     
 
     [System.NonSerialized]
@@ -121,14 +121,23 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             moveDir = -1;
+            GetComponent<Collider>().material.dynamicFriction = 0; //changes to friction based on movement allows character to jump when walking into a wall
+            GetComponent<Collider>().material.staticFriction = 0;
         }
         if (Input.GetKey(KeyCode.D))
         {
             moveDir = 1;
+            GetComponent<Collider>().material.dynamicFriction = 0;
+            GetComponent<Collider>().material.staticFriction = 0;
         }
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             moveDir = 0;
+            if (grounded)
+            {
+                GetComponent<Collider>().material.dynamicFriction = groundFriction;
+                GetComponent<Collider>().material.staticFriction = groundFriction;
+            }
         }
         
         ///Halt player if no movement input detected or left and right input both read simultaniously
