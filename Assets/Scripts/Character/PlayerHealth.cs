@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float playerMaxHealth;
-    public float playerCurrentHealth;
+    public int  playerMaxHealth;
+    public int playerCurrentHealth;
     
     public bool iSceneEnabled = false;
     public float iSceneDuration;
@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
         }
         IsPlayerDead();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         playerCurrentHealth -= damage;
     }

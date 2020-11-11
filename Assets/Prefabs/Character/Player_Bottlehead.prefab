@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7092822938316120271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2245051240509770931}
+  - component: {fileID: 5332009214434758281}
+  - component: {fileID: 196173480771105101}
+  - component: {fileID: 8838758507198842834}
+  m_Layer: 0
+  m_Name: Player_Bottlehead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2245051240509770931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092822938316120271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3325215736864467496}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5332009214434758281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092822938316120271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f73921ad73ab1b3419f4e8d409e0a240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potion: {fileID: 0}
+  groundSpeed: 5
+  airSpeed: 2.5
+  rampSpeed: 2
+  groundFriction: 0.6
+  jumpForce: 1
+  jumpTime: 0.2
+  height: 2.4
+  throwDelay: 3
+--- !u!114 &196173480771105101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092822938316120271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1917e95f1727d4e920e43d40f6db9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 0
+  playerCurrentHealth: 0
+  iSceneEnabled: 0
+  iSceneDuration: 0
+  iSceneCountdown: 0
+--- !u!114 &8838758507198842834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7092822938316120271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68717796cc73efa48b0aa51a12c30b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  victorySceneName: VictoryScene
+  defeatSceneName: DefeatScene
+  retryGameName: 
+  mainMenuName: 
+--- !u!1001 &7736971777124974898
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2245051240509770931}
+    m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.911
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.16870253
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ad95f09e17e24c944841ea7bd982e472,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_Bottlehead_Mesh_001
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad95f09e17e24c944841ea7bd982e472, type: 3}
+--- !u!4 &3325215736864467496 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ad95f09e17e24c944841ea7bd982e472,
+    type: 3}
+  m_PrefabInstance: {fileID: 7736971777124974898}
+  m_PrefabAsset: {fileID: 0}

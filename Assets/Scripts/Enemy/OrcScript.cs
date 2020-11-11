@@ -4,7 +4,7 @@ public class OrcScript : MonoBehaviour
 {
     //protected float orcCurrentHealth;
     //public float orcMaxHealth = 3;
-    public float orcDamage = 10;
+    public int orcDamage;
 
     //private void Start()
     //{
