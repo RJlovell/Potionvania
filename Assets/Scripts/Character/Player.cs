@@ -33,8 +33,12 @@ public class Player : MonoBehaviour
     public float height = 2.4f;
     Vector3 potionPos;
     bool canThrow = true;
-    public float throwDelay = 3;
+    public float throwDelay = 1;
     float timeSinceThrow = 0;
+    public float throwCharge = 0;
+    public float chargeSpeed = 1;
+    public float minThrowForce = 1;
+    public float maxThrowForce = 7;
 
 
     void Start()
@@ -158,7 +162,12 @@ public class Player : MonoBehaviour
                 timeSinceThrow = 0;
             }
         }
-        ///firing potion
+        ///charging potion throw
+        if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
+        {
+            throwCharge += Time.deltaTime * chargeSpeed;
+        }
+        ///throwing potion
         if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
         {
             canThrow = false;
@@ -166,7 +175,6 @@ public class Player : MonoBehaviour
             rawMousePos.z = 12;
             mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
 
-            //launchAngle = Mathf.Rad2Deg * Mathf.Atan((mousePos.x - transform.position.x) / (mousePos.y - transform.position.y));
 
             //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
             float yPos = transform.position.y + (height / 2);
@@ -182,6 +190,7 @@ public class Player : MonoBehaviour
             potionPos.y += transform.position.y + (height / 2);
 
             Instantiate(potion, potionPos, transform.rotation);
+            //throwCharge = minThrowForce;
         }
 
 
