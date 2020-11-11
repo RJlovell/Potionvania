@@ -30,7 +30,7 @@ public class AirPotion : MonoBehaviour
             Collider[] colliderList = Physics.OverlapSphere(explosionPos, radius);//check for colliders in explosion radius
             foreach (Collider hit in colliderList)
             {
-                if (hit.CompareTag("Potion"))
+                if (hit.CompareTag("Potion") || hit.CompareTag("Orc"))
                 {
                     continue;
                 }
