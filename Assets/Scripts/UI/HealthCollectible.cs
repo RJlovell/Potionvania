@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthCollectible : MonoBehaviour
 {
     public float spinSpeed;
-    public float healthRecovered;
+    public int healthRecovered;
     PlayerHealth playerHP;
     public void Start()
     {

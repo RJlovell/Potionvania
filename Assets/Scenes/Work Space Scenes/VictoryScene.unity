@@ -330,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victorySceneName: 
   defeatSceneName: 
-  retryGameName: AlchemistTestScene
+  retryGameName: Main Scene
   mainMenuName: MainMenu
 --- !u!114 &370181528
 MonoBehaviour:
