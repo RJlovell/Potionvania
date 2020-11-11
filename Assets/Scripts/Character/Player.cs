@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     float angleFacing = 180;
     int moveDir = 0;
     [System.NonSerialized]
-    public bool potionLaunch = false;
+    public bool airLaunch = false;
 
     
     public float groundFriction = 0.6f;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         if (moveDir == 1)
         {
             angleFacing = 90;
-            if (!potionLaunch)
+            if (!airLaunch)
             {
                 if (grounded)
                     currentSpeed = groundSpeed;
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         else if (moveDir == -1)
         {
             angleFacing = -90;
-            if (!potionLaunch)
+            if (!airLaunch)
             {
                 if (grounded)
                     currentSpeed = -groundSpeed;
@@ -99,13 +99,13 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == 0 || potionLaunch)
+        else if (moveDir == 0 || airLaunch)
         {
             currentSpeed = rb.velocity.x;
         }
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-        if(!potionLaunch)
+        if(!airLaunch)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         
     }
@@ -113,13 +113,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)
+        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && airLaunch && !grounded)
         {
-            potionLaunch = false;
+            airLaunch = false;
         }
-        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded)
+        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && airLaunch && !grounded)
         {
-            potionLaunch = false;
+            airLaunch = false;
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -224,7 +224,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        potionLaunch = false;
+        airLaunch = false;
         //check that the player is on top of the platform that they're Entering
         float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
         float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
