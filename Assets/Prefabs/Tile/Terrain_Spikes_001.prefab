@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5098085540453354554}
   - component: {fileID: 1658783471605386466}
+  - component: {fileID: 3833111045282713627}
   m_Layer: 0
   m_Name: Terrain_Spikes_001
   m_TagString: Untagged
@@ -44,8 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13730c86c106f0444b017addfdf1d15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xAxisPushBackForce: 0
-  yAxisPushBackForce: 0
+  xAxisPushBackForce: 1
+  yAxisPushBackForce: 1
+--- !u!65 &3833111045282713627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699633229601092189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.811605, z: 1}
+  m_Center: {x: -1, y: 0.4058025, z: 0.5}
 --- !u!1001 &3723312526816273854
 PrefabInstance:
   m_ObjectHideFlags: 0
