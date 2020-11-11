@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
     int moveDir = 0;
     [System.NonSerialized]
     public bool potionLaunch = false;
+    public float maxVelocityX = 5;
 
-    
+    [System.NonSerialized]
     public float groundFriction = 0.6f;
     public float jumpForce = 1.0f;
     public float jumpTime = 0.2f;
@@ -49,7 +50,14 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
+        if (rb.velocity.x > 0 && rb.velocity.x > maxVelocityX)
+        {
+            rb.velocity = new Vector3(maxVelocityX, rb.velocity.y, 0);
+        }
+        if (rb.velocity.x < 0 && rb.velocity.x < -maxVelocityX)
+        {
+            rb.velocity = new Vector3(-maxVelocityX, rb.velocity.y, 0);
+        }
         if (moveDir == 1)
         {
             angleFacing = 90;
@@ -113,11 +121,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)
-        {
-            potionLaunch = false;
-        }
-        if (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded)
+        
+        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)|| (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
         {
             potionLaunch = false;
         }
@@ -231,10 +236,10 @@ public class Player : MonoBehaviour
         float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
         float blockPosY = other.collider.bounds.center.y;
         float blockPosX = other.collider.bounds.center.x;
-        Debug.Log("BlockY: " + blockPosY);
+        /*Debug.Log("BlockY: " + blockPosY);
         Debug.Log("Block Height: " + blockHeight);
         Debug.Log("BlockX: " + blockPosX);
-        Debug.Log("Block Width: " + blockWidth);
+        Debug.Log("Block Width: " + blockWidth);*/
 
         if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
