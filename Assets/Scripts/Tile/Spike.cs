@@ -8,6 +8,7 @@ public class Spike : MonoBehaviour
 
     public float xAxisPushBackForce;
     public float yAxisPushBackForce;
+    public int spikeDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class Spike : MonoBehaviour
             if(!playerHPScript.iSceneEnabled)
             {
                 Debug.Log("Player has taken damage from the spike");
-                playerHPScript.playerCurrentHealth -= 1;
+                playerHPScript.playerCurrentHealth -= spikeDamage;
                 playerHPScript.iSceneEnabled = true;
             }
             Vector3 newVelocity = other.attachedRigidbody.velocity;
