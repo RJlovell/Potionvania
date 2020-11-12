@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthUI : MonoBehaviour
 {
     PlayerHealth playerHealth;
-    protected int health;
+    [SerializeField] private int health;
     public int numberOfHearts;
     
     //public int testHealth;

@@ -17,26 +17,4 @@ public class OrcScript : MonoBehaviour
             print("Colliding with the player without triggering the ray casting");
         }
     }
-
-    //private void Update()
-    //{
-    //    IsOrcDead();
-    //}
-
-    //public void TakeDamage(float damage)
-    //{
-    //    orcCurrentHealth -= damage;
-    //}
-
-    //public bool IsOrcDead()
-    //{
-    //    if(orcCurrentHealth <= 0)
-    //    {
-    //        Debug.Log("The orc has died");
-    //        orcCurrentHealth = orcMaxHealth;
-    //        gameObject.SetActive(false);
-    //        return true;
-    //    }
-    //    return false;
-    //}
 }
