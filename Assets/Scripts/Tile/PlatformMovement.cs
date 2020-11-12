@@ -4,14 +4,15 @@ using UnityEngine;
 public class PlatformMovement : MonoBehaviour
 {
     public Vector3[] points;
-    public int pointNumber;
     //public float pointNumber;
     private Vector3 currentTarget;
 
-    public float tolerance;
+    //These two variables are not required to be altered
+    [SerializeField] private int pointNumber;
+    [SerializeField] private float tolerance;
     public float speed;
-    public float delayTime;
 
+    public float delayTime;
     private float delayStart;
 
     public bool automaticMovement;

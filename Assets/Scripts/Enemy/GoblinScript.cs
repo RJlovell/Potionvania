@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GoblinScript : MonoBehaviour
 {
-    public bool onFloor = false;
-    public bool deathTriggered = false;
-    public bool offGround = false;
+    
+    [SerializeField] private bool onFloor = false;
+    [SerializeField] private bool deathTriggered = false;
+    [SerializeField] private bool offGround = false;
+    public int goblinDamage = 1;
 
     //Rigidbody rb;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.gameObject.activeInHierarchy)
@@ -16,7 +19,7 @@ public class GoblinScript : MonoBehaviour
             onFloor = true;
             if (offGround)
             {
-                Debug.Log("This is triggered");
+                //Debug.Log("This is triggered");
                 deathTriggered = true;
                 offGround = false;
             }
@@ -37,19 +40,20 @@ public class GoblinScript : MonoBehaviour
     //}
     private void Update()
     {
+        Physics.IgnoreCollision(GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>()); //allows player to move through goblin
         //if(rb.velocity.x != 0 || rb.velocity.y != 0)
         //{
         //    offGround = true;
         //}
-        GoblinDeath();
+        if (deathTriggered)
+            GoblinDeath();
+        
+        
     }
 
     private void GoblinDeath()
     {
-        if (deathTriggered)
-        {
-            Debug.Log("The goblin has died");
-            gameObject.SetActive(false);
-        }
+        Debug.Log("The goblin has died");
+        gameObject.SetActive(false);
     }
 }

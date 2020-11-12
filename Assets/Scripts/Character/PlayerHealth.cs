@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public int  playerMaxHealth;
-    public int playerCurrentHealth;
+    [System.NonSerialized]public int playerCurrentHealth;
     
-    public bool iSceneEnabled = false;
+    [System.NonSerialized]public bool iSceneEnabled = false;
     public float iSceneDuration;
-    public float iSceneCountdown;
+    private float iSceneCountdown;
 
     GameCondition gameCon;
 
