@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public GameObject potion;
     Rigidbody rb;
+    AirPotion airPotion;
     public float groundSpeed = 5.0f;
     public float airSpeed = 2.5f;
     public float rampSpeed = 2;
@@ -25,11 +26,12 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    public bool grounded = true;
+    public bool grounded = false;
     
 
     [System.NonSerialized]
     public Vector3 potionVel;
+    public bool potionExists;
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
@@ -41,23 +43,17 @@ public class Player : MonoBehaviour
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
 
-
+    //float largest = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         rb.velocity = Vector3.zero;
+
+        airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
     }
     private void FixedUpdate()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x > maxVelocityX)
-        {
-            rb.velocity = new Vector3(maxVelocityX, rb.velocity.y, 0);
-        }
-        if (rb.velocity.x < 0 && rb.velocity.x < -maxVelocityX)
-        {
-            rb.velocity = new Vector3(-maxVelocityX, rb.velocity.y, 0);
-        }
         if (moveDir == 1)
         {
             angleFacing = 90;
@@ -121,7 +117,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)|| (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
+        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded) || (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
         {
             potionLaunch = false;
         }
@@ -172,7 +168,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
         {
             throwCharge += Time.deltaTime * chargeSpeed;
-            Debug.Log("We Chargin'");
+            //Debug.Log("We Chargin'");
         }
         ///throwing potion
         if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
@@ -231,42 +227,14 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        potionLaunch = false;
+        if (potionLaunch)
+        {
+            potionLaunch = false;
+            moveDir = 0;
+        }
         if(grounded)
         {
             currentSpeed = 0;
         }
-        /*//check that the player is on top of the platform that they're Entering
-        float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
-        float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
-        float blockPosY = other.collider.bounds.center.y;
-        float blockPosX = other.collider.bounds.center.x;
-
-
-        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
-        {
-            currentSpeed = 0;
-            //grounded = true;
-            Debug.Log("On the Ground");
-            GetComponent<Collider>().material.dynamicFriction = groundFriction;
-            GetComponent<Collider>().material.staticFriction = groundFriction;
-        }*/
-
     }
-
-    /*void OnCollisionExit(Collision other)
-    {
-        //check that the player is on top of the platform that they're Exiting
-        float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
-        float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
-        float blockPosY = other.collider.bounds.center.y;
-        float blockPosX = other.collider.bounds.center.x;
-        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
-        {
-            grounded = false;
-            Debug.Log("In the Air");
-            GetComponent<Collider>().material.dynamicFriction = 0;
-            GetComponent<Collider>().material.staticFriction = 0;
-        }
-    }*/
 }

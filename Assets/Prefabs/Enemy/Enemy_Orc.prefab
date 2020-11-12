@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveThrough: 0
+  xAxisForce: 2
+  yAxisForce: 2
 --- !u!1 &5435136611014279735
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,15 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6660a7fbf43b2f94f9b12375d0b6bd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  maxHorizontalRayDistance: 0
-  maxDownwardsRayDistance: 0
-  xAxisForce: 0
-  yAxisForce: 0
-  horizontalRayCastOffset: 0
-  downwardsRayCastOffset: 0
-  movingRight: 1
-  UseRayCastDetection: 0
+  speed: 1
 --- !u!114 &7588040558381765609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,4 +430,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe911c27b2fb914f952171b6e1f0945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orcDamage: 0
+  orcDamage: 1
