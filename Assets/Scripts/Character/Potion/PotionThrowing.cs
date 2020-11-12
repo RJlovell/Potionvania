@@ -7,8 +7,10 @@ public class PotionThrowing : MonoBehaviour
 {
     PotionEffect potionEffect;
     private Player playerScript;
-    public GameObject player;
     Rigidbody rb;
+    float tempAngle = 0;
+    float potionAngle;
+    public float spinSpeed = 5;
 
 
 
@@ -36,15 +38,17 @@ public class PotionThrowing : MonoBehaviour
     {
         throwForce = playerScript.throwCharge;
         Vector3 throwVec = playerScript.potionVel * throwForce;
-        
-
-       
         if (applyForce)
         {
             //Debug.Log(launchAngle);
-            rb.AddForce(throwVec, ForceMode.Impulse);
+            rb.AddForce(throwVec, ForceMode.VelocityChange);
             applyForce = false;
         }
+
+        tempAngle += spinSpeed * throwForce;
+        //potionAngle += 20;
+        potionAngle = (rb.velocity.x >= 0 ? tempAngle * -1 : tempAngle);
+        transform.rotation = Quaternion.Euler(0, 0, potionAngle);
     }
 
     void OnCollisionEnter(Collision other)

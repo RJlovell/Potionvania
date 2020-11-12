@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    PlayerHealth playerHPScript;
+    GoblinScript goblin;
     //Requires an external game object
     Transform projectileTargetPos;
     //Determines the height of the arc being thrown
@@ -18,6 +20,8 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
+        playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        goblin = GameObject.FindGameObjectWithTag("Goblin").GetComponent<GoblinScript>();
     }
 
     // Update is called once per frame
@@ -49,9 +53,15 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider)
+        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
-            Debug.Log("Bomb Explodes");
+            playerHPScript.iSceneEnabled = true;
+
+            Debug.Log("Trigger has occured from the Goblin's Projectile Sensor script");
+            playerHPScript.TakeDamage(goblin.goblinDamage);
         }
+        
     }
+    
 }
