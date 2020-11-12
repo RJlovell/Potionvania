@@ -8,13 +8,7 @@ public class DestroyScript : MonoBehaviour
     public float timeLimit;
     
     // Update is called once per frame
-    void Update()
-    {
-        DestroyGameObject();
-    }
 
-    void DestroyGameObject()
-    {
-        Destroy(gameObject, timeLimit);
-    }
+    
+
 }
