@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13730c86c106f0444b017addfdf1d15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xAxisPushBackForce: 1
-  yAxisPushBackForce: 1
+  xAxisPushBackForce: 3
+  yAxisPushBackForce: 3
+  spikeDamage: 1
 --- !u!65 &3833111045282713627
 BoxCollider:
   m_ObjectHideFlags: 0
