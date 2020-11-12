@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GoblinScript : MonoBehaviour
 {
-    public bool onFloor = false;
-    public bool deathTriggered = false;
-    public bool offGround = false;
+    [SerializeField] private bool onFloor = false;
+    [SerializeField] private bool deathTriggered = false;
+    [SerializeField] private bool offGround = false;
 
     //Rigidbody rb;
     private void OnCollisionEnter(Collision collision)
