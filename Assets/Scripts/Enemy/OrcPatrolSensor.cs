@@ -6,6 +6,7 @@ public class OrcPatrolSensor : MonoBehaviour
 {
     PlayerHealth playerHPScript;
     OrcPatrol orcPatrolParent;
+    OrcScript orc;
     Player player;
     
     Collider orcColliderInfo;
@@ -14,15 +15,14 @@ public class OrcPatrolSensor : MonoBehaviour
 
     public float xAxisForce;
     public float yAxisForce;
-    Rigidbody rb;
 
-    
     private void Start()
     {
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         orcPatrolParent = GetComponentInParent<OrcPatrol>();
+        orc = GetComponentInParent<OrcScript>();
 
         orcColliderInfo = GameObject.FindGameObjectWithTag("Orc").gameObject.GetComponent<Collider>();
         playerColliderInfo = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Collider>();
@@ -44,6 +44,13 @@ public class OrcPatrolSensor : MonoBehaviour
                 playerHPScript.iSceneEnabled = true;
     
                 Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
+                if (!orcPatrolParent.dealDamage)
+                        {
+                            print("Collided with " + other.gameObject.name);
+                            print("Orc dealt " + orc.orcDamage);
+                            playerHPScript.TakeDamage(orc.orcDamage);
+                            orcPatrolParent.dealDamage = true;
+                        }
             }
         }
         else
