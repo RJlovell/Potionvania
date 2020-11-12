@@ -51,13 +51,9 @@ public class AirPotion : MonoBehaviour
                     explosionVec.y /= magnitude;
                     //apply explosion force
                     explosionVec *= explosionForce;
-                    explosionVec += rb.velocity;
-
-                    //add force to rigid body
-                    Vector3 newVelocity = rb.velocity;
-                    newVelocity.y = 0;
-                    rb.velocity = newVelocity;
-                    rb.AddForce(explosionVec, ForceMode.Impulse);
+                    //zero velocity then add force to rigid body
+                    rb.velocity = Vector3.zero;
+                    rb.AddForce(explosionVec, ForceMode.VelocityChange);
                 }
             }
         }

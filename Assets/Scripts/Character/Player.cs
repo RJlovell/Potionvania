@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    public bool grounded = true;
+    public bool grounded = false;
     
 
     [System.NonSerialized]
@@ -50,14 +50,6 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x > maxVelocityX)
-        {
-            rb.velocity = new Vector3(maxVelocityX, rb.velocity.y, 0);
-        }
-        if (rb.velocity.x < 0 && rb.velocity.x < -maxVelocityX)
-        {
-            rb.velocity = new Vector3(-maxVelocityX, rb.velocity.y, 0);
-        }
         if (moveDir == 1)
         {
             angleFacing = 90;
