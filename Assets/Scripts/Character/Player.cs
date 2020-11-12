@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)|| (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
+        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded) || (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
         {
             potionLaunch = false;
         }
@@ -223,27 +223,15 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        potionLaunch = false;
+        if (potionLaunch)
+        {
+            potionLaunch = false;
+            moveDir = 0;
+        }
         if(grounded)
         {
             currentSpeed = 0;
         }
-        /*//check that the player is on top of the platform that they're Entering
-        float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
-        float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
-        float blockPosY = other.collider.bounds.center.y;
-        float blockPosX = other.collider.bounds.center.x;
-
-
-        if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
-        {
-            currentSpeed = 0;
-            //grounded = true;
-            Debug.Log("On the Ground");
-            GetComponent<Collider>().material.dynamicFriction = groundFriction;
-            GetComponent<Collider>().material.staticFriction = groundFriction;
-        }*/
-
     }
 
     /*void OnCollisionExit(Collision other)
