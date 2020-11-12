@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
-    public bool grounded = true;
+    public bool grounded = false;
     
 
     [System.NonSerialized]
@@ -50,14 +50,6 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (rb.velocity.x > 0 && rb.velocity.x > maxVelocityX)
-        {
-            rb.velocity = new Vector3(maxVelocityX, rb.velocity.y, 0);
-        }
-        if (rb.velocity.x < 0 && rb.velocity.x < -maxVelocityX)
-        {
-            rb.velocity = new Vector3(-maxVelocityX, rb.velocity.y, 0);
-        }
         if (moveDir == 1)
         {
             angleFacing = 90;
@@ -121,7 +113,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded)|| (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
         {
             potionLaunch = false;
@@ -142,10 +133,12 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             moveDir = 0;
+            GetComponent<Collider>().material.dynamicFriction = 0.6f;
+            GetComponent<Collider>().material.staticFriction = 0.6f;
             if (grounded)
             {
-                GetComponent<Collider>().material.dynamicFriction = groundFriction;
-                GetComponent<Collider>().material.staticFriction = groundFriction;
+                GetComponent<Collider>().material.dynamicFriction = 0.6f;
+                GetComponent<Collider>().material.staticFriction = 0.6f;
             }
         }
         
@@ -231,28 +224,29 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         potionLaunch = false;
-        //check that the player is on top of the platform that they're Entering
+        if(grounded)
+        {
+            currentSpeed = 0;
+        }
+        /*//check that the player is on top of the platform that they're Entering
         float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
         float blockWidth = other.collider.bounds.max.x - other.collider.bounds.min.x;
         float blockPosY = other.collider.bounds.center.y;
         float blockPosX = other.collider.bounds.center.x;
-        /*Debug.Log("BlockY: " + blockPosY);
-        Debug.Log("Block Height: " + blockHeight);
-        Debug.Log("BlockX: " + blockPosX);
-        Debug.Log("Block Width: " + blockWidth);*/
+
 
         if ((rb.position.y >= (blockPosY + (blockHeight / 4))) && (rb.position.x > blockPosX - blockWidth / 2) && (rb.position.x < blockPosX + blockWidth / 2)) //if on top
         {
             currentSpeed = 0;
-            grounded = true;
+            //grounded = true;
             Debug.Log("On the Ground");
             GetComponent<Collider>().material.dynamicFriction = groundFriction;
             GetComponent<Collider>().material.staticFriction = groundFriction;
-        }
+        }*/
 
     }
 
-    void OnCollisionExit(Collision other)
+    /*void OnCollisionExit(Collision other)
     {
         //check that the player is on top of the platform that they're Exiting
         float blockHeight = other.collider.bounds.max.y - other.collider.bounds.min.y;
@@ -266,5 +260,5 @@ public class Player : MonoBehaviour
             GetComponent<Collider>().material.dynamicFriction = 0;
             GetComponent<Collider>().material.staticFriction = 0;
         }
-    }
+    }*/
 }

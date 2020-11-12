@@ -248,10 +248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1112,6 +1112,11 @@ PrefabInstance:
       propertyPath: iSceneDuration
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1875520775454383277, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1220,7 +1225,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 358592132}
   m_Material: {fileID: 13400000, guid: 9da779267f3346a4aae0cc9410c301b8, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1.8
   m_Direction: 1
@@ -2863,8 +2868,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -745.212, y: -432.25888}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -663.8, y: -432.25888}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933041596
 MonoBehaviour:
@@ -3378,7 +3383,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -821.1132, y: -432.25888}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018753149
 MonoBehaviour:
@@ -6408,8 +6413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHealth: 2
-  playerCurrentHealth: 0
-  iSceneEnabled: 0
   iSceneDuration: 10
   iSceneCountdown: 0
 --- !u!114 &1957224093
@@ -6428,9 +6431,10 @@ MonoBehaviour:
   groundSpeed: 10
   airSpeed: 2.5
   rampSpeed: 50
-  groundFriction: 0.6
+  maxVelocityX: 5
   jumpForce: 1
   jumpTime: 0.1
+  grounded: 1
   height: 2.4
   throwDelay: 1
   throwCharge: 0
@@ -6487,8 +6491,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -895.1632, y: -432.25888}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -976.6, y: -432.25888}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2000582760
 MonoBehaviour:
@@ -7198,7 +7202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112882517}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 122.2, y: 2.6, z: -463.42896}
+  m_LocalPosition: {x: -278.8, y: -292.7, z: -463.42896}
   m_LocalScale: {x: 0.54017556, y: 0.54017556, z: 0.54017556}
   m_Children:
   - {fileID: 2000582759}
@@ -7219,6 +7223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6608eb378a0aa459f11be87f40a931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   numberOfHearts: 3
   hearts:
   - {fileID: 2000582760}
@@ -7274,10 +7279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
