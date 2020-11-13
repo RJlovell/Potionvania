@@ -223,12 +223,12 @@ PrefabInstance:
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27
+      value: 60.25
       objectReference: {fileID: 0}
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.25
+      value: 18.25
       objectReference: {fileID: 0}
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 2140567668}
-  cameraSpeed: 1
+  cameraSpeed: 5
 --- !u!1 &2140567668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7092822938316120271, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
