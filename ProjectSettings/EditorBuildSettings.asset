@@ -12,15 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/First Playable.unity
     guid: c9310db6b4df1cf45ad9b8e35da8a42b
   - enabled: 1
-    path: Assets/Scenes/Main Scene.unity
-    guid: 602ba0add4cedc74fa7198020620f412
-  - enabled: 1
     path: Assets/Scenes/Work Space Scenes/MainMenu.unity
     guid: e75f400f32392fa418558cfe85ab3645
   - enabled: 1
+    path: Assets/Scenes/Main Scene.unity
+    guid: 602ba0add4cedc74fa7198020620f412
+  - enabled: 1
     path: Assets/Scenes/Work Space Scenes/Settings.unity
     guid: 83c2cbee56b083d40a061d40147744a1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Work Space Scenes/AlchemistTestScene.unity
     guid: 6c821fdd99050044f8b60d3fa2c61f50
   - enabled: 1
