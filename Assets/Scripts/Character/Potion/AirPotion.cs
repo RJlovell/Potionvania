@@ -59,13 +59,7 @@ public class AirPotion : MonoBehaviour
                 //apply explosion force
                 explosionVec *= explosionForce;
                 //zero velocity then add force to rigid body
-/*                float vel = Mathf.Sqrt(explosionVec.x * explosionVec.x + explosionVec.y * explosionVec.y);
-                while (vel > explosionForce)
-                {
-                    explosionVec.x -= 0.1f;
-                    explosionVec.y -= 0.1f;
-                    vel = Mathf.Sqrt(explosionVec.x * explosionVec.x + explosionVec.y * explosionVec.y);
-                }*/
+
                 rb.AddForce(explosionVec, ForceMode.VelocityChange);
             }
         }
