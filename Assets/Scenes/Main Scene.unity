@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -798,7 +798,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-196272
+  m_Name: pb_Mesh-35154
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3875,7 +3875,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-205670
+  m_Name: pb_Mesh-44528
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4319,7 +4319,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-203570
+  m_Name: pb_Mesh-42486
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5260,7 +5260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866408580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -278.8, y: -292.7, z: -463.42896}
+  m_LocalPosition: {x: -278.8, y: -271.1, z: -463.42896}
   m_LocalScale: {x: 0.54017556, y: 0.54017556, z: 0.54017556}
   m_Children:
   - {fileID: 592891541}
@@ -5982,12 +5982,12 @@ PrefabInstance:
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.25
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 25.1
       objectReference: {fileID: 0}
     - target: {fileID: 2245051240509770931, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
@@ -6034,6 +6034,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3325215736864467496, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3325215736864467496, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3325215736864467496, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5332009214434758281, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: minThrowForce
@@ -6073,6 +6088,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 264146723}
+    - target: {fileID: 1980754880705552982, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: automaticMovement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1995157433668465081, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: xAxisPushBackForce
@@ -6098,11 +6118,21 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4162525318240939401, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: pointNumber
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411729743641082463, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1580826689}
+    - target: {fileID: 4645905934842047658, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: automaticMovement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5059049135784555270, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_RootOrder
@@ -6152,6 +6182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: yAxisPushBackForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715270337851876740, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: automaticMovement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5882616542174657301, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
