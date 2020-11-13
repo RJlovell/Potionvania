@@ -77,23 +77,19 @@ public class PlatformMovement : MonoBehaviour
         currentTarget = points[pointNumber];
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Orc") || collision.gameObject.CompareTag("Goblin"))
+        if(other.CompareTag("Player") || other.CompareTag("Orc") || other.CompareTag("Goblin"))
         {
-            //if(manualMovement)
-            //{
-            //    platformMoving = true;
-            //}
-            collision.collider.transform.SetParent(transform);
+            other.transform.SetParent(transform);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Orc") || collision.gameObject.CompareTag("Goblin"))
+        if(other.CompareTag("Player") || other.CompareTag("Orc") || other.CompareTag("Goblin"))
         {
-            collision.collider.transform.SetParent(null);
+            other.transform.SetParent(null);
         }
     }
 }
