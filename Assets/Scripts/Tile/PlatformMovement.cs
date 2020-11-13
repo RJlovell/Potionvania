@@ -8,8 +8,8 @@ public class PlatformMovement : MonoBehaviour
     private Vector3 currentTarget;
 
     //These two variables are not required to be altered
-    [SerializeField] private int pointNumber;
-    [SerializeField] private float tolerance;
+    private int pointNumber;
+    private float tolerance;
     public float speed;
 
     public float delayTime;
