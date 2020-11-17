@@ -3529,6 +3529,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039381692}
   m_CullTransparentMesh: 0
+--- !u!4 &1044354264 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8209032144221669688, guid: 20d31ead9acced74f89119298a83089e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586085929570505084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1111470285
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,6 +3608,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111470285}
   m_CullTransparentMesh: 0
+--- !u!4 &1116134327 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8639623062822010277, guid: 20d31ead9acced74f89119298a83089e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586085929570505084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126126858
 GameObject:
   m_ObjectHideFlags: 0
@@ -3701,6 +3713,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1192891845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1626127929408592417, guid: 20d31ead9acced74f89119298a83089e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586085929570505084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1211820056
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,6 +4464,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1452260687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6018716004253272443, guid: 20d31ead9acced74f89119298a83089e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586085929570505084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1469918650
 GameObject:
   m_ObjectHideFlags: 0
@@ -5908,6 +5932,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796756845}
   m_CullTransparentMesh: 0
+--- !u!4 &1843282894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2506549044294817256, guid: 20d31ead9acced74f89119298a83089e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8586085929570505084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1866408580
 GameObject:
   m_ObjectHideFlags: 0
@@ -6527,7 +6557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993042538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 4.19, y: 25.87, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6902,6 +6932,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 264146723}
+    - target: {fileID: 988725780846419531, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1192891845}
     - target: {fileID: 1104222843077826378, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_Mesh
@@ -6947,6 +6982,11 @@ PrefabInstance:
       propertyPath: pointNumber
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4170490986837512578, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1843282894}
     - target: {fileID: 4411729743641082463, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_Mesh
@@ -7007,6 +7047,11 @@ PrefabInstance:
       propertyPath: yAxisPushBackForce
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5237479893483851025, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1452260687}
     - target: {fileID: 5715270337851876740, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: automaticMovement
@@ -7087,6 +7132,16 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7693790122805431634, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1044354264}
+    - target: {fileID: 7840653706401266127, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: targetPosition
+      value: 
+      objectReference: {fileID: 1116134327}
     - target: {fileID: 8101416877452789607, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_TagString
