@@ -9,10 +9,15 @@ public class AirPotion : MonoBehaviour
     public float radius = 2.0f;
     Vector3 explosionVec;
     public float explosionForce = 7.0f;
+    public float minExplosionForce = 4.0f;
     float magnitude;
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
+
+    Ray blockCheck;
+    RaycastHit hitInfo;
+    bool blocked = false;
 
     private void Start()
     {
@@ -34,6 +39,7 @@ public class AirPotion : MonoBehaviour
         Collider[] colliderList = Physics.OverlapSphere(explosionPos, radius);//check for colliders in explosion radius
         foreach (Collider hit in colliderList)
         {
+            blocked = false;
             if (hit.CompareTag("Player") && appliedToPlayer)
                 continue;
             if (hit.CompareTag("Potion") || hit.CompareTag("Orc"))
@@ -43,14 +49,32 @@ public class AirPotion : MonoBehaviour
                 playerScript.potionLaunch = true;
                 appliedToPlayer = true;
             }
+            if(hit.CompareTag("Goblin"))
+            {
+                blockCheck = new Ray(explosionPos, hit.transform.position);
+                if(Physics.Raycast(blockCheck, out hitInfo))
+                {
+                    if (hitInfo.collider.CompareTag("Untagged"))
+                        continue;
+                }
+            }
 
 
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            if (rb != null) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
+            if (rb != null && !blocked) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
             {
                 rb.velocity = Vector3.zero;
                 explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
+                double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
+                if (distance >= 1)
+                {
+                    distance = radius - distance;
+                    distance /= radius;
+                    explosionForce *= (float)distance;
+                }
+                if (explosionForce < minExplosionForce)
+                    explosionForce = minExplosionForce;
 
                 //normalise vector
                 magnitude = GetMag(explosionVec.x, explosionVec.y);
