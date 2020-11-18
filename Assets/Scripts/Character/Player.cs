@@ -164,38 +164,41 @@ public class Player : MonoBehaviour
                 timeSinceThrow = 0;
             }
         }
-        ///charging potion throw
-        if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
+        ///Linked this with the isPause bool, so the player will not spawn a potion when the game is meant to be paused
+        if (!PauseMenu.isPaused)
         {
-            throwCharge += Time.deltaTime * chargeSpeed;
-            //Debug.Log("We Chargin'");
+            ///charging potion throw
+            if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
+            {
+                throwCharge += Time.deltaTime * chargeSpeed;
+                //Debug.Log("We Chargin'");
+            }
+            ///throwing potion
+            if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
+            {
+                canThrow = false;
+                Vector3 rawMousePos = Input.mousePosition;
+                rawMousePos.z = 12;
+                mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+
+
+                //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
+                float yPos = transform.position.y + (height / 2);
+
+                potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
+
+                float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
+                potionPos.x /= mag;
+                potionPos.y /= mag;
+                potionVel = potionPos;
+
+                potionPos.x += transform.position.x;
+                potionPos.y += transform.position.y + (height / 2);
+
+                Instantiate(potion, potionPos, transform.rotation);
+                //throwCharge = minThrowForce;
+            }
         }
-        ///throwing potion
-        if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
-        {
-            canThrow = false;
-            Vector3 rawMousePos = Input.mousePosition;
-            rawMousePos.z = 12;
-            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
-
-
-            //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
-            float yPos = transform.position.y + (height / 2);
-
-            potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
-
-            float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
-            potionPos.x /= mag;
-            potionPos.y /= mag;
-            potionVel = potionPos;
-
-            potionPos.x += transform.position.x;
-            potionPos.y += transform.position.y + (height / 2);
-
-            Instantiate(potion, potionPos, transform.rotation);
-            //throwCharge = minThrowForce;
-        }
-
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
