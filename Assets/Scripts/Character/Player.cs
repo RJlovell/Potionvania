@@ -35,9 +35,9 @@ public class Player : MonoBehaviour
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
-    bool canThrow = true;
+    public bool canThrow = true;
     public float throwDelay = 1;
-    float timeSinceThrow = 0;
+    public float timeSinceThrow = 0;
     public float throwCharge = 0;
     public float chargeSpeed = 1;
     public float minThrowForce = 1;
@@ -164,8 +164,8 @@ public class Player : MonoBehaviour
                 timeSinceThrow = 0;
             }
         }
-        ///Linked this with the isPause bool, so the player will not spawn a potion when the game is meant to be paused
-        if (!PauseMenu.isPaused)
+        ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
+        if (!PauseMenu.gameIsPaused)
         {
             ///charging potion throw
             if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
