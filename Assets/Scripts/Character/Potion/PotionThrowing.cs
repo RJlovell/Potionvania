@@ -31,6 +31,10 @@ public class PotionThrowing : MonoBehaviour
     private void FixedUpdate()
     {
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), true);
+        tempAngle += spinSpeed * throwForce;
+        //potionAngle += 20;
+        potionAngle = (rb.velocity.x >= 0 ? tempAngle * -1 : tempAngle);
+        transform.rotation = Quaternion.Euler(0, 0, potionAngle);
     }
 
     // Update is called once per frame
@@ -45,10 +49,7 @@ public class PotionThrowing : MonoBehaviour
             applyForce = false;
         }
 
-        tempAngle += spinSpeed * throwForce;
-        //potionAngle += 20;
-        potionAngle = (rb.velocity.x >= 0 ? tempAngle * -1 : tempAngle);
-        transform.rotation = Quaternion.Euler(0, 0, potionAngle);
+        
     }
 
     void OnCollisionEnter(Collision other)
