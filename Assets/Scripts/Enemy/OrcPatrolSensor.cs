@@ -33,10 +33,6 @@ public class OrcPatrolSensor : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Potion"))
         {
             moveThrough = true;
-            //Vector3 newVelocity = other.attachedRigidbody.velocity;
-            //newVelocity.y = 0;
-            //newVelocity.x = 0;
-            //other.attachedRigidbody.velocity = newVelocity;
             player.potionLaunch = true;
             other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
             if (!playerHPScript.iSceneEnabled)
