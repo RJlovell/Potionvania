@@ -39,12 +39,15 @@ public class Player : MonoBehaviour
     public float height = 2.4f;
     Vector3 potionPos;
     
-    public float throwDelay = 1;
+    public float throwDelay = 0.5f;
     float timeSinceThrow = 0;
     public float throwCharge = 0;
     public float chargeSpeed = 1;
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
+    float timeSinceMove = 0;
+    float stunDelay = 0.2f;
+
 
 
 
@@ -116,13 +119,21 @@ public class Player : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
         if(!potionLaunch)
-            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
-        
+            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);  
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
+        {
+            timeSinceMove += Time.deltaTime;
+        }
+        if(timeSinceMove >= stunDelay)
+        {
+            potionLaunch = false;
+            timeSinceMove = 0;
+        }
         if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded) || (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
         {
             potionLaunch = false;
