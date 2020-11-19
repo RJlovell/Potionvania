@@ -46,9 +46,7 @@ public class Player : MonoBehaviour
     public float maxThrowForce = 7;
     float timeSinceMove = 0;
     float stunDelay = 0.2f;
-
-
-
+    public Vector3 velocityChange;
 
     //float largest = 0;
     void Start()
@@ -59,6 +57,7 @@ public class Player : MonoBehaviour
 
         airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
 
+        velocityChange = rb.velocity;
     }
     private void FixedUpdate()
     {
@@ -119,6 +118,7 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
         if (!potionLaunch)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
+        velocityChange = rb.velocity;
     }
 
     // Update is called once per frame

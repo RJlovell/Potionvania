@@ -11,7 +11,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
     Collider orcColliderInfo;
     Collider playerColliderInfo;
-    public bool moveThrough;
+    public bool moveThrough = true;
 
     public float xAxisForce;
     public float yAxisForce;
@@ -20,6 +20,7 @@ public class OrcPatrolSensor : MonoBehaviour
     public float maxRayDistance;
     RaycastHit hitInfo;
     public Ray groundDetectRay;
+
 
     private void Start()
     {
@@ -39,6 +40,10 @@ public class OrcPatrolSensor : MonoBehaviour
         {
             moveThrough = true;
             player.potionLaunch = true;
+            Vector3 newVelocity = other.attachedRigidbody.velocity;
+            newVelocity.x = 0;
+            newVelocity.y = 0;
+            other.attachedRigidbody.velocity = newVelocity;
             other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
             if (!playerHPScript.iSceneEnabled)
             {
@@ -49,7 +54,7 @@ public class OrcPatrolSensor : MonoBehaviour
                 {
                     print("Collided with " + other.gameObject.name);
                     print("Orc dealt " + orc.orcDamage);
-                    playerHPScript.TakeDamage(orc.orcDamage);
+                    //playerHPScript.TakeDamage(orc.orcDamage);
                     orcPatrolParent.dealDamage = true;
                 }
             }
@@ -68,7 +73,7 @@ public class OrcPatrolSensor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            moveThrough = false;
+            //moveThrough = false;
             Debug.Log("Trigger exit has occured from the Orc Patrol Sensor Script");
         }
     }
