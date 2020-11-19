@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
-    //public bool canThrow = true;
     public float throwDelay = 1;
     public float timeSinceThrow = 0;
     public float throwCharge = 0;

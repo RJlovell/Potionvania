@@ -23,6 +23,19 @@ public class PauseMenu : MonoBehaviour
         {
             PauseGame();
         }
+        if (!player.canThrow && !gameIsPaused && !player.potionExists)
+        {
+            if (timer < timeLimit)
+            {
+                timer += Time.deltaTime;
+
+            }
+            if (timer >= timeLimit)
+            {
+                timer = 0;
+                player.canThrow = true;
+            }
+        }
     }
 
     public void PauseGame()
@@ -37,28 +50,16 @@ public class PauseMenu : MonoBehaviour
             pauseMenuUI.SetActive(false);
             ///This line is coded to ensure that when the player selects the resume button, 
             ///it will not spawn a potion at the position of the mouses click.
-            if (player.canThrow)
-            {
-                timer = 0;
-                //player.canThrow = false;
-            }
-            else
-            {
-                if(timer < timeLimit)
-                {
-                    timer += Time.deltaTime;
-
-                }
-                if(timer == timeLimit)
-                {
-                    player.canThrow = true;
-                }
-            }
         }
         else
         {
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0;
+            if (player.canThrow)
+            {
+                player.canThrow = false;
+                timer = 0;
+            }
             //Pauses the music in the scene in the pause menu is enabled.
             //AudioListener.pause = true;
         }
