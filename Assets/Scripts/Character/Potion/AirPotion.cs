@@ -58,9 +58,20 @@ public class AirPotion : MonoBehaviour
                         continue;
                 }
             }
-
-
+            ///radius drawing
+            float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
             Rigidbody rb = hit.GetComponent<Rigidbody>();
+            Debug.DrawLine(explosionPos, explosionPos + Vector3.up * radius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.right) * diagRadius, Color.yellow, 1.0f, false);
+
+            Debug.DrawLine(explosionPos, explosionPos + Vector3.down * radius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.right) * diagRadius, Color.yellow, 1.0f, false);
+
+            Debug.DrawLine(explosionPos, explosionPos + Vector3.left * radius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
+
+            Debug.DrawLine(explosionPos, explosionPos + Vector3.right * radius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
 
             if (rb != null && !blocked) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
             {

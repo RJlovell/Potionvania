@@ -54,7 +54,7 @@ public class PotionThrowing : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //Debug.Log("The potion dealt " + potionEffect.potionDamage + " damage against " + other.gameObject.name);
+        playerScript.canThrow = true;
         Destroy(gameObject);
     }
 }
