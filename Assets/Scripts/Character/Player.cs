@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
 
+
+
     //float largest = 0;
     void Start()
     {
@@ -51,6 +53,7 @@ public class Player : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
+
     }
     private void FixedUpdate()
     {
