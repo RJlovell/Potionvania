@@ -33,12 +33,12 @@ public class Player : MonoBehaviour
     public Vector3 potionVel;
     [System.NonSerialized]
     public bool canThrow = true;
-    
+
     public bool potionExists;
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
-    public bool canThrow = true;
+    //public bool canThrow = true;
     public float throwDelay = 1;
     public float timeSinceThrow = 0;
     public float throwCharge = 0;
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-            
+
         }
         else if (moveDir == -1)
         {
@@ -118,18 +118,18 @@ public class Player : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-        if(!potionLaunch)
-            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);  
+        if (!potionLaunch)
+            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
+        if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
         }
-        if(timeSinceMove >= stunDelay)
+        if (timeSinceMove >= stunDelay)
         {
             potionLaunch = false;
             timeSinceMove = 0;
@@ -162,24 +162,13 @@ public class Player : MonoBehaviour
                 GetComponent<Collider>().material.staticFriction = 0.6f;
             }
         }
-        
+
         ///Halt player if no movement input detected or left and right input both read simultaniously
         if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
         {
             moveDir = 3;//Halt player until input read or force applied
             currentSpeed = 0;
             //Debug.Log("HALT");
-        }
-
-        /*if (!canThrow)
-        {
-            if (timeSinceThrow < throwDelay)
-                timeSinceThrow += Time.deltaTime;
-            else
-            {
-                canThrow = true;
-                timeSinceThrow = 0;
-            }
         }
         ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
         if (!PauseMenu.gameIsPaused)

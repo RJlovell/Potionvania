@@ -8,13 +8,18 @@ public class OrcPatrolSensor : MonoBehaviour
     OrcPatrol orcPatrolParent;
     OrcScript orc;
     Player player;
-    
+
     Collider orcColliderInfo;
     Collider playerColliderInfo;
-    public bool moveThrough = false;
+    public bool moveThrough;
 
     public float xAxisForce;
     public float yAxisForce;
+
+    public float rayCastOffset;
+    public float maxRayDistance;
+    RaycastHit hitInfo;
+    public Ray groundDetectRay;
 
     private void Start()
     {
@@ -30,7 +35,7 @@ public class OrcPatrolSensor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Potion"))
+        if (other.CompareTag("Player"))
         {
             moveThrough = true;
             player.potionLaunch = true;
@@ -38,16 +43,21 @@ public class OrcPatrolSensor : MonoBehaviour
             if (!playerHPScript.iSceneEnabled)
             {
                 playerHPScript.iSceneEnabled = true;
-    
+
                 Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
                 if (!orcPatrolParent.dealDamage)
-                        {
-                            print("Collided with " + other.gameObject.name);
-                            print("Orc dealt " + orc.orcDamage);
-                            playerHPScript.TakeDamage(orc.orcDamage);
-                            orcPatrolParent.dealDamage = true;
-                        }
+                {
+                    print("Collided with " + other.gameObject.name);
+                    print("Orc dealt " + orc.orcDamage);
+                    playerHPScript.TakeDamage(orc.orcDamage);
+                    orcPatrolParent.dealDamage = true;
+                }
             }
+        }
+        else if(other.CompareTag("Potion"))
+        {
+            moveThrough = true;
+            player.potionLaunch = true;
         }
         else
         {
@@ -65,10 +75,18 @@ public class OrcPatrolSensor : MonoBehaviour
 
     private void Update()
     {
+        groundDetectRay = new Ray(transform.position + new Vector3(orcPatrolParent.movingRight ? rayCastOffset : -rayCastOffset, 0, 0), Vector3.down);
+
+        if (!Physics.Raycast(groundDetectRay, out hitInfo, maxRayDistance))
+        {
+            orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
+        }
+
         if (moveThrough)
         {
             Debug.Log("Move through is true");
             Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
+            //Physics.IgnoreCollision(orcTestingCollision, playerColliderInfo, true);
         }
 
         if(!moveThrough)

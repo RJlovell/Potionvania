@@ -7,9 +7,10 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     Player player;
-    public static bool isPaused = false;
     public string mainMenuSceneName, settingsSceneName;
     public static bool gameIsPaused = false;
+    public float timer = 0.0f;
+    public float timeLimit = 0.5f;
 
     private void Start()
     {
@@ -20,43 +21,53 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            gameIsPaused = !gameIsPaused;
             PauseGame();
         }
     }
 
     public void PauseGame()
     {
-        if(isPaused)
+        gameIsPaused = !gameIsPaused;
+        if (!gameIsPaused)
         {
-            gameIsPaused = false;
             Time.timeScale = 1;
             //For when the player or the camera listens out for the audio in the scene
             //Plays the music in the scene when the pause menu is deactivated
             //AudioListener.pause = false;
             pauseMenuUI.SetActive(false);
-            isPaused = false;
             ///This line is coded to ensure that when the player selects the resume button, 
             ///it will not spawn a potion at the position of the mouses click.
-            if(player.canThrow)
+            if (player.canThrow)
             {
-                player.canThrow = false;
-                player.timeSinceThrow = player.throwDelay - 0.1f;
+                timer = 0;
+                //player.canThrow = false;
+            }
+            else
+            {
+                if(timer < timeLimit)
+                {
+                    timer += Time.deltaTime;
+
+                }
+                if(timer == timeLimit)
+                {
+                    player.canThrow = true;
+                }
             }
         }
         else
         {
-            gameIsPaused = true;
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0;
             //Pauses the music in the scene in the pause menu is enabled.
             //AudioListener.pause = true;
-            isPaused = true;
         }
     }
 
     public void LoadMainMenu()
     {
+        gameIsPaused = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
