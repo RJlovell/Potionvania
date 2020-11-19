@@ -27,15 +27,18 @@ public class Player : MonoBehaviour
     private float jumpCount;
     bool jumping;
     public bool grounded = false;
-    
+
 
     [System.NonSerialized]
     public Vector3 potionVel;
+    [System.NonSerialized]
+    public bool canThrow = true;
+    
     public bool potionExists;
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
-    bool canThrow = true;
+    
     public float throwDelay = 1;
     float timeSinceThrow = 0;
     public float throwCharge = 0;
@@ -157,7 +160,7 @@ public class Player : MonoBehaviour
             //Debug.Log("HALT");
         }
 
-        if (!canThrow)
+        /*if (!canThrow)
         {
             if (timeSinceThrow < throwDelay)
                 timeSinceThrow += Time.deltaTime;
@@ -166,7 +169,7 @@ public class Player : MonoBehaviour
                 canThrow = true;
                 timeSinceThrow = 0;
             }
-        }
+        }*/
         ///charging potion throw
         if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
         {
