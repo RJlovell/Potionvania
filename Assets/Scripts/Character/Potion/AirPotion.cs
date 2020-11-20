@@ -59,9 +59,12 @@ public class AirPotion : MonoBehaviour
                         continue;
                 }
             }
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+
             ///radius drawing
             float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            
             Debug.DrawLine(explosionPos, explosionPos + Vector3.up * radius, Color.yellow, 1.0f, false);
             Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.right) * diagRadius, Color.yellow, 1.0f, false);
 
@@ -74,10 +77,15 @@ public class AirPotion : MonoBehaviour
             Debug.DrawLine(explosionPos, explosionPos + Vector3.right * radius, Color.yellow, 1.0f, false);
             Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
 
+           
+            
+            
+            
             if (rb != null && !blocked) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
             {
                 rb.velocity = Vector3.zero;
                 explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
+                
                 double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
                 if (distance >= 1)
                 {
@@ -94,8 +102,7 @@ public class AirPotion : MonoBehaviour
                 explosionVec.y /= magnitude;
                 //apply explosion force
                 explosionVec *= explosionForce;
-                //zero velocity then add force to rigid body
-
+                //add force to rigid body
                 rb.AddForce(explosionVec, ForceMode.VelocityChange);
             }
         }
