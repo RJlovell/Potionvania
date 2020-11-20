@@ -51,11 +51,15 @@ public class AirPotion : MonoBehaviour
             }
             if(hit.CompareTag("Goblin"))
             {
-                blockCheck = new Ray(explosionPos, hit.transform.position);
-                Debug.DrawRay(explosionPos, hit.transform.position, Color.blue, 2);
+                Vector3 dir = new Vector3(hit.transform.position.x - explosionPos.x, (hit.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
+                magnitude = GetMag(dir.x, dir.y);
+                dir.x /= magnitude;
+                dir.y /= magnitude;
+                blockCheck = new Ray(explosionPos, dir);
+                Debug.DrawRay(blockCheck.origin, blockCheck.direction, Color.blue, 2);
                 if(Physics.Raycast(blockCheck, out hitInfo))
                 {
-                    if (hitInfo.collider.CompareTag("Untagged"))
+                    if (!hitInfo.rigidbody)
                         continue;
                 }
             }
