@@ -22,7 +22,7 @@ public class Spike : MonoBehaviour
             if(!playerHPScript.iSceneEnabled)
             {
                 Debug.Log("Player has taken damage from the spike");
-                playerHPScript.playerCurrentHealth -= spikeDamage;
+                playerHPScript.TakeDamage(spikeDamage);
                 playerHPScript.iSceneEnabled = true;
             }
             Vector3 newVelocity = other.attachedRigidbody.velocity;
