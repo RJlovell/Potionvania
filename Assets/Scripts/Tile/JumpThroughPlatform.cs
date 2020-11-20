@@ -26,7 +26,7 @@ public class JumpThroughPlatform : MonoBehaviour
             passThrough = true;
             Physics.IgnoreCollision(playerCollider, platformCollider, true);
         }
-        if(player.transform.position.y >= (transform.position.y + transform.localScale.y / 2.8))
+        if(player.transform.position.y >= (transform.position.y + transform.localScale.y / 3))
         {
             passThrough = false;
             Physics.IgnoreCollision(playerCollider, platformCollider, false);
