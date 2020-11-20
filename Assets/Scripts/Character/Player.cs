@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
+    [System.NonSerialized]
+    public bool landed;
     public bool grounded = false;
 
 
@@ -49,9 +51,11 @@ public class Player : MonoBehaviour
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
 
-    //float largest = 0;
+
     void Start()
     {
+        throwCharge = minThrowForce;
+
         rb = GetComponent<Rigidbody>();
 
         rb.velocity = Vector3.zero;

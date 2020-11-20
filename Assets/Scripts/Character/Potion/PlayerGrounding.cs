@@ -9,6 +9,8 @@ public class PlayerGrounding : MonoBehaviour
     Player playerScript;
     public float maxRayDist = 1;
     Vector3 rayCastHeight;
+    float timeSinceLanding = 0;
+    float landedTime = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +21,19 @@ public class PlayerGrounding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerScript.landed)
+        {
+            if (timeSinceLanding < landedTime)
+                timeSinceLanding += Time.deltaTime;
+            else
+                playerScript.landed = false;
+        }
         groundDetectRay = new Ray(transform.position + rayCastHeight, Vector3.down);
 
         if (Physics.Raycast(groundDetectRay, out hitInfo, maxRayDist))
         {
             playerScript.grounded = true;
+            playerScript.landed = true;
         }
         else
         {
