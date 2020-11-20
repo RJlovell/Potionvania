@@ -225,11 +225,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Space) && grounded)
+        if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
         {
             jumping = true;
         }
-        if(jumpCount >= jumpWaitTime)
+        if(jumpCount >= jumpWaitTime && jumping == true)
         {
             jumping = false;
             jumpCount = 0;
