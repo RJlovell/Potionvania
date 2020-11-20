@@ -23,9 +23,9 @@ public class Player : MonoBehaviour
     [System.NonSerialized]
     public float groundFriction = 0.6f;
     public float jumpForce = 1.0f;
-    public float jumpTime = 0.2f;
+    public float jumpWaitTime = 0.25f;
+    float jumpCount = 0;
     Vector3 jumpVec;
-    private float jumpCount;
     bool jumping;
     [System.NonSerialized]
     public bool landed;
@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        transform.rotation = Quaternion.Euler(0, angleFacing, 0);
+
         if (moveDir == 1)
         {
             angleFacing = 90;
@@ -122,7 +124,6 @@ public class Player : MonoBehaviour
             currentSpeed = rb.velocity.x;
         }
 
-        transform.rotation = Quaternion.Euler(0, angleFacing, 0);
         if (!potionLaunch)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         velocityChange = rb.velocity;
@@ -131,6 +132,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 rawMousePos = Input.mousePosition;
+        rawMousePos.z = 12;
+        mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+
+        if(jumping && jumpCount < jumpWaitTime)
+        {
+            jumpCount += Time.deltaTime;
+        }
+
         if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
@@ -179,6 +189,13 @@ public class Player : MonoBehaviour
         ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
         if (!PauseMenu.gameIsPaused)
         {
+            if(Input.GetKey(KeyCode.Mouse0))
+            {
+                if (mousePos.x < transform.position.x)
+                    angleFacing = -90;
+                if (mousePos.x > transform.position.x)
+                    angleFacing = 90;
+            }
             ///charging potion throw
             if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
             {
@@ -189,10 +206,6 @@ public class Player : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
             {
                 canThrow = false;
-                Vector3 rawMousePos = Input.mousePosition;
-                rawMousePos.z = 12;
-                mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
-
 
                 //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
                 float yPos = transform.position.y + (height / 2);
@@ -212,25 +225,17 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded)
+        if (Input.GetKey(KeyCode.Space) && grounded)
         {
             jumping = true;
-            jumpCount = jumpTime;
+        }
+        if(jumpCount >= jumpWaitTime)
+        {
+            jumping = false;
+            jumpCount = 0;
             Jump();
         }
-        if (Input.GetKey(KeyCode.Space) && jumping)
-        {
-            if (jumpCount > 0)
-            {
-                Jump();
-                jumpCount -= Time.deltaTime;
-            }
-            else
-                jumping = false;
 
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-            jumping = false;
 
     }
 

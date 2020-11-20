@@ -13,7 +13,6 @@ public class PlayerHealth : MonoBehaviour
     private float iSceneCountdown;
 
     public bool damageTaken = false;
-    float timeSinceDamageTaken = 0;
 
     GameCondition gameCon;
 
@@ -27,14 +26,6 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(damageTaken && timeSinceDamageTaken < iSceneDuration)
-        {
-            timeSinceDamageTaken += Time.deltaTime;
-        }
-        else
-        {
-            damageTaken = false;
-        }
         if(playerCurrentHealth > playerMaxHealth)
         {
             playerCurrentHealth = playerMaxHealth;
@@ -45,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (iSceneCountdown <= 0f && iSceneEnabled)
         {
+            damageTaken = false;
             iSceneEnabled = false;
             iSceneCountdown = iSceneDuration;
             print("iSceneCountdown is now reset & iScene is disabled");
