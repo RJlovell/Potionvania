@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviour
     public float iSceneDuration;
     private float iSceneCountdown;
 
+    public bool damageTaken = false;
+    float timeSinceDamageTaken = 0;
+
     GameCondition gameCon;
 
     private void Start()
@@ -24,6 +27,14 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(damageTaken && timeSinceDamageTaken < iSceneDuration)
+        {
+            timeSinceDamageTaken += Time.deltaTime;
+        }
+        else
+        {
+            damageTaken = false;
+        }
         if(playerCurrentHealth > playerMaxHealth)
         {
             playerCurrentHealth = playerMaxHealth;
@@ -43,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerCurrentHealth -= damage;
+        damageTaken = true;
     }
 
     public bool IsPlayerDead()

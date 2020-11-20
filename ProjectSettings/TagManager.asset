@@ -9,6 +9,7 @@ TagManager:
   - Potion
   - Orc
   - Goblin
+  - Platform
   layers:
   - Default
   - TransparentFX

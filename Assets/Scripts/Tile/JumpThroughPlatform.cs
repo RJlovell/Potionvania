@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpThroughPlatform : MonoBehaviour
 {
+    Player player;
     Transform platformTransform;
     public bool passThrough = false;
     Collider platformCollider;
@@ -12,18 +13,22 @@ public class JumpThroughPlatform : MonoBehaviour
     private void Start()
     {
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
-        platformCollider = GetComponentInParent<Collider>();
+        //platformCollider = GetComponentInParent<BoxCollider>();
+        platformCollider = gameObject.GetComponent<Collider>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //Physics.IgnoreCollision(playerCollider, platformCollider, true);
     }
 
     private void Update()
     {
-
-        if(passThrough)
+        if(player.transform.position.y <= (transform.position.y + transform.localScale.y / 2))
         {
+            passThrough = true;
             Physics.IgnoreCollision(playerCollider, platformCollider, true);
         }
-        if(!passThrough)
+        if(player.transform.position.y >= (transform.position.y + transform.localScale.y / 2.8))
         {
+            passThrough = false;
             Physics.IgnoreCollision(playerCollider, platformCollider, false);
         }
     }
@@ -37,10 +42,10 @@ public class JumpThroughPlatform : MonoBehaviour
             //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformTransform.GetComponent<Collider>(), true);
             //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformCollider, true);
         }*/
-        if(other.CompareTag("Player"))
+        /*if(other.CompareTag("Player"))
         {
             passThrough = true;
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
@@ -48,10 +53,10 @@ public class JumpThroughPlatform : MonoBehaviour
         //passThrough = false;
         //platformTransform = transform.parent;
         //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformTransform.GetComponent<Collider>(), false);
-        if(other.CompareTag("Player"))
+        /*if(other.CompareTag("Player"))
         {
             passThrough = false;
-        }
+        }*/
     }
 
 }
