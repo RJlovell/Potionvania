@@ -40,20 +40,24 @@ public class Player : MonoBehaviour
     Vector3 potionPos;
     
     public float throwDelay = 0.5f;
-    float timeSinceThrow = 0;
-    public float throwCharge = 0;
+    //float timeSinceThrow = 0;
+    public float throwCharge;
     public float chargeSpeed = 1;
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
     float timeSinceMove = 0;
     float stunDelay = 0.2f;
 
+    Collider platformCollider;
+    Collider playerCollider;
+    public bool ignorePlatform;
 
-
-
-    //float largest = 0;
     void Start()
     {
+        throwCharge = minThrowForce;
+        playerCollider = gameObject.GetComponent<Collider>();
+        platformCollider = GameObject.FindGameObjectWithTag("Platform").gameObject.GetComponent<Collider>();
+
         rb = GetComponent<Rigidbody>();
 
         rb.velocity = Vector3.zero;
@@ -125,7 +129,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
+        if(ignorePlatform)
+            Physics.IgnoreCollision(playerCollider, platformCollider, true);
+
+        if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
         }
@@ -244,6 +251,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if(other.gameObject.CompareTag("Platform"))
+        {
+            ignorePlatform = true;
+        }
         if (potionLaunch)
         {
             potionLaunch = false;
@@ -252,6 +263,13 @@ public class Player : MonoBehaviour
         if(grounded)
         {
             currentSpeed = 0;
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            ignorePlatform = false;
         }
     }
 }
