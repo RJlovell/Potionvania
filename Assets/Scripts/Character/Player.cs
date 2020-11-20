@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    OrcPatrolSensor orcSensor;
     public GameObject potion;
     Rigidbody rb;
     AirPotion airPotion;
@@ -33,25 +34,22 @@ public class Player : MonoBehaviour
     public Vector3 potionVel;
     [System.NonSerialized]
     public bool canThrow = true;
-    
+
     public bool potionExists;
     Vector3 mousePos;
     public float height = 2.4f;
     Vector3 potionPos;
-    
-    public float throwDelay = 0.5f;
-    //float timeSinceThrow = 0;
-    public float throwCharge;
+    public float throwDelay = 1;
+    public float timeSinceThrow = 0;
+    public float throwCharge = 0;
     public float chargeSpeed = 1;
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
     float timeSinceMove = 0;
     float stunDelay = 0.2f;
+    public Vector3 velocityChange;
 
-    Collider platformCollider;
-    Collider playerCollider;
-    public bool ignorePlatform;
-
+    //float largest = 0;
     void Start()
     {
         throwCharge = minThrowForce;
@@ -64,13 +62,16 @@ public class Player : MonoBehaviour
 
         airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
 
+        velocityChange = rb.velocity;
+
+        orcSensor = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrolSensor>();
     }
     private void FixedUpdate()
     {
         if (moveDir == 1)
         {
             angleFacing = 90;
-            if (!potionLaunch)
+            if (!potionLaunch || !orcSensor.orcPushBack)
             {
                 if (grounded)
                     currentSpeed = groundSpeed;
@@ -90,12 +91,12 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-            
+
         }
         else if (moveDir == -1)
         {
             angleFacing = -90;
-            if (!potionLaunch)
+            if (!potionLaunch || !orcSensor.orcPushBack)
             {
                 if (grounded)
                     currentSpeed = -groundSpeed;
@@ -122,21 +123,19 @@ public class Player : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-        if(!potionLaunch)
-            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);  
+        if (!potionLaunch)
+            rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
+        velocityChange = rb.velocity;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(ignorePlatform)
-            Physics.IgnoreCollision(playerCollider, platformCollider, true);
-
         if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
         }
-        if(timeSinceMove >= stunDelay)
+        if (timeSinceMove >= stunDelay)
         {
             potionLaunch = false;
             timeSinceMove = 0;
@@ -169,7 +168,7 @@ public class Player : MonoBehaviour
                 GetComponent<Collider>().material.staticFriction = 0.6f;
             }
         }
-        
+
         ///Halt player if no movement input detected or left and right input both read simultaniously
         if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
         {
@@ -177,49 +176,41 @@ public class Player : MonoBehaviour
             currentSpeed = 0;
             //Debug.Log("HALT");
         }
-
-        /*if (!canThrow)
+        ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
+        if (!PauseMenu.gameIsPaused)
         {
-            if (timeSinceThrow < throwDelay)
-                timeSinceThrow += Time.deltaTime;
-            else
+            ///charging potion throw
+            if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
             {
-                canThrow = true;
-                timeSinceThrow = 0;
+                throwCharge += Time.deltaTime * chargeSpeed;
+                //Debug.Log("We Chargin'");
             }
-        }*/
-        ///charging potion throw
-        if(Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
-        {
-            throwCharge += Time.deltaTime * chargeSpeed;
-            //Debug.Log("We Chargin'");
+            ///throwing potion
+            if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
+            {
+                canThrow = false;
+                Vector3 rawMousePos = Input.mousePosition;
+                rawMousePos.z = 12;
+                mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+
+
+                //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
+                float yPos = transform.position.y + (height / 2);
+
+                potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
+
+                float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
+                potionPos.x /= mag;
+                potionPos.y /= mag;
+                potionVel = potionPos;
+
+                potionPos.x += transform.position.x;
+                potionPos.y += transform.position.y + (height / 2);
+
+                Instantiate(potion, potionPos, transform.rotation);
+                //throwCharge = minThrowForce;
+            }
         }
-        ///throwing potion
-        if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
-        {
-            canThrow = false;
-            Vector3 rawMousePos = Input.mousePosition;
-            rawMousePos.z = 12;
-            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
-
-
-            //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
-            float yPos = transform.position.y + (height / 2);
-
-            potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
-
-            float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
-            potionPos.x /= mag;
-            potionPos.y /= mag;
-            potionVel = potionPos;
-
-            potionPos.x += transform.position.x;
-            potionPos.y += transform.position.y + (height / 2);
-
-            Instantiate(potion, potionPos, transform.rotation);
-            //throwCharge = minThrowForce;
-        }
-
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
