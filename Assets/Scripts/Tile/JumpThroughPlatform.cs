@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpThroughPlatform : MonoBehaviour
 {
+    Player player;
     Transform platformTransform;
     public bool passThrough = false;
     Collider platformCollider;
@@ -14,6 +15,7 @@ public class JumpThroughPlatform : MonoBehaviour
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
         //platformCollider = GetComponentInParent<BoxCollider>();
         platformCollider = GameObject.FindGameObjectWithTag("Plat").GetComponent<Collider>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void Update()
