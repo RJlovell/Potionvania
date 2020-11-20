@@ -3529,7 +3529,7 @@ PrefabInstance:
     - target: {fileID: 3532598860385531747, guid: 7ff79391a1a8e794ba775c0c87b1900d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.25
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3532598860385531747, guid: 7ff79391a1a8e794ba775c0c87b1900d,
         type: 3}
@@ -4894,6 +4894,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8354201838947881484, guid: 7ff79391a1a8e794ba775c0c87b1900d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354201838947881484, guid: 7ff79391a1a8e794ba775c0c87b1900d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354201838947881484, guid: 7ff79391a1a8e794ba775c0c87b1900d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.29803923
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff79391a1a8e794ba775c0c87b1900d, type: 3}
 --- !u!1 &956327656
@@ -5390,6 +5405,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1921987225}
     m_Modifications:
+    - target: {fileID: 1283792285440331186, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670090652794697679, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: potionSpawnXOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670090652794697679, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: potionSpawnYOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4478710166426596261, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5408,12 +5438,12 @@ PrefabInstance:
     - target: {fileID: 8780205692396682770, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.5
+      value: 28.75
       objectReference: {fileID: 0}
     - target: {fileID: 8780205692396682770, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 77.5
+      value: 77.75
       objectReference: {fileID: 0}
     - target: {fileID: 8780205692396682770, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
@@ -6307,7 +6337,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.71809363, g: 0.7483153, b: 0.9339623, a: 1}
+  m_Color: {r: 0.3991753, g: 0.39466894, b: 0.46226418, a: 1}
   m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
@@ -10259,6 +10289,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 264146723}
+    - target: {fileID: 1800468992755055505, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1884355327697587089, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: m_CookingOptions
@@ -10398,6 +10433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 210
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487720283154669521, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4645905934842047658, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
@@ -10574,6 +10614,11 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 1116134327}
+    - target: {fileID: 8008706712630711184, guid: 20d31ead9acced74f89119298a83089e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8093517508202066166, guid: 20d31ead9acced74f89119298a83089e,
         type: 3}
       propertyPath: potionSpawnXOffset
