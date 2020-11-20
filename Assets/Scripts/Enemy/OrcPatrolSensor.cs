@@ -12,6 +12,7 @@ public class OrcPatrolSensor : MonoBehaviour
     Collider orcColliderInfo;
     Collider playerColliderInfo;
     public bool moveThrough = true;
+    public bool orcPushBack = false;
 
     public float xAxisForce;
     public float yAxisForce;
@@ -20,6 +21,13 @@ public class OrcPatrolSensor : MonoBehaviour
     public float maxRayDistance;
     RaycastHit hitInfo;
     public Ray groundDetectRay;
+
+    Vector3 explosionVec;
+    public float explosionForce = 7.0f;
+    public float minExplosionForce = 4.0f;
+    float magnitude;
+    Vector3 explosionPos;
+    public float potionLaunchEffectHeight = 1;
 
 
     private void Start()
@@ -32,19 +40,36 @@ public class OrcPatrolSensor : MonoBehaviour
 
         orcColliderInfo = GameObject.FindGameObjectWithTag("Orc").gameObject.GetComponent<Collider>();
         playerColliderInfo = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Collider>();
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             moveThrough = true;
-            player.potionLaunch = true;
-            Vector3 newVelocity = other.attachedRigidbody.velocity;
-            newVelocity.x = 0;
-            newVelocity.y = 0;
-            other.attachedRigidbody.velocity = newVelocity;
-            other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? xAxisForce : -xAxisForce, yAxisForce, 0);
+            //player.potionLaunch = true;
+            orcPushBack = true;
+            //Vector3 newVelocity = other.attachedRigidbody.velocity;
+            //newVelocity.x = 0;
+            //newVelocity.y = 0;
+            //other.attachedRigidbody.velocity = newVelocity;
+            //other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? -xAxisForce : xAxisForce, yAxisForce, 0);
+            explosionPos = transform.position;
+
+            explosionVec = new Vector3(other.attachedRigidbody.transform.position.x - explosionPos.x, (other.attachedRigidbody.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
+            if (explosionForce < minExplosionForce)
+                explosionForce = minExplosionForce;
+
+            //normalise vector
+            magnitude = AirPotion.GetMag(explosionVec.x, explosionVec.y);
+            explosionVec.x /= magnitude;
+            explosionVec.y /= magnitude;
+            //apply explosion force
+            explosionVec *= explosionForce;
+            //zero velocity then add force to rigid body
+
+            other.attachedRigidbody.AddForce(explosionVec, ForceMode.VelocityChange);
+
             if (!playerHPScript.iSceneEnabled)
             {
                 playerHPScript.iSceneEnabled = true;

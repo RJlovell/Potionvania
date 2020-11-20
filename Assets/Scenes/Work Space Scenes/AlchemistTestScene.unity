@@ -2786,6 +2786,11 @@ PrefabInstance:
       propertyPath: xAxisForce
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 5302359775942186301, guid: 4c75712bc7397314bb0f8ef533a47de5,
+        type: 3}
+      propertyPath: potionLaunchEffectHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5513072747221902229, guid: 4c75712bc7397314bb0f8ef533a47de5,
         type: 3}
       propertyPath: m_Name

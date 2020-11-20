@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    OrcPatrolSensor orcSensor;
     public GameObject potion;
     Rigidbody rb;
     AirPotion airPotion;
@@ -58,13 +59,15 @@ public class Player : MonoBehaviour
         airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
 
         velocityChange = rb.velocity;
+
+        orcSensor = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrolSensor>();
     }
     private void FixedUpdate()
     {
         if (moveDir == 1)
         {
             angleFacing = 90;
-            if (!potionLaunch)
+            if (!potionLaunch || !orcSensor.orcPushBack)
             {
                 if (grounded)
                     currentSpeed = groundSpeed;
@@ -89,7 +92,7 @@ public class Player : MonoBehaviour
         else if (moveDir == -1)
         {
             angleFacing = -90;
-            if (!potionLaunch)
+            if (!potionLaunch || !orcSensor.orcPushBack)
             {
                 if (grounded)
                     currentSpeed = -groundSpeed;
