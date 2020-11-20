@@ -52,6 +52,7 @@ public class AirPotion : MonoBehaviour
             if(hit.CompareTag("Goblin"))
             {
                 blockCheck = new Ray(explosionPos, hit.transform.position);
+                Debug.DrawRay(explosionPos, hit.transform.position, Color.blue, 2);
                 if(Physics.Raycast(blockCheck, out hitInfo))
                 {
                     if (hitInfo.collider.CompareTag("Untagged"))
