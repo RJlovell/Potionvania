@@ -14,18 +14,21 @@ public class JumpThroughPlatform : MonoBehaviour
     {
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
         //platformCollider = GetComponentInParent<BoxCollider>();
-        platformCollider = GameObject.FindGameObjectWithTag("Plat").GetComponent<Collider>();
+        platformCollider = gameObject.GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //Physics.IgnoreCollision(playerCollider, platformCollider, true);
     }
 
     private void Update()
     {
-        if(passThrough)
+        if(player.transform.position.y < (transform.position.y + transform.localScale.y / 2.8))
         {
+            passThrough = true;
             Physics.IgnoreCollision(playerCollider, platformCollider, true);
         }
-        if(!passThrough)
+        if(player.transform.position.y >= (transform.position.y + transform.localScale.y / 2.8))
         {
+            passThrough = false;
             Physics.IgnoreCollision(playerCollider, platformCollider, false);
         }
     }
