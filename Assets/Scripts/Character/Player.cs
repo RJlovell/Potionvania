@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     Vector3 jumpVec;
     private float jumpCount;
     bool jumping;
+    [System.NonSerialized]
+    public bool landed;
     public bool grounded = false;
 
 
@@ -49,12 +51,10 @@ public class Player : MonoBehaviour
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
 
-    //float largest = 0;
+
     void Start()
     {
         throwCharge = minThrowForce;
-        playerCollider = gameObject.GetComponent<Collider>();
-        platformCollider = GameObject.FindGameObjectWithTag("Platform").gameObject.GetComponent<Collider>();
 
         rb = GetComponent<Rigidbody>();
 
@@ -242,10 +242,6 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Platform"))
-        {
-            ignorePlatform = true;
-        }
         if (potionLaunch)
         {
             potionLaunch = false;
@@ -254,13 +250,6 @@ public class Player : MonoBehaviour
         if(grounded)
         {
             currentSpeed = 0;
-        }
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("Platform"))
-        {
-            ignorePlatform = false;
         }
     }
 }
