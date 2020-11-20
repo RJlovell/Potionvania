@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpThroughPlatform : MonoBehaviour
 {
+    Player player;
     Transform platformTransform;
     public bool passThrough = false;
     Collider platformCollider;
@@ -12,12 +13,13 @@ public class JumpThroughPlatform : MonoBehaviour
     private void Start()
     {
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
-        platformCollider = GetComponentInParent<Collider>();
+        //platformCollider = GetComponentInParent<BoxCollider>();
+        platformCollider = GameObject.FindGameObjectWithTag("Plat").GetComponent<Collider>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void Update()
     {
-
         if(passThrough)
         {
             Physics.IgnoreCollision(playerCollider, platformCollider, true);
@@ -37,10 +39,10 @@ public class JumpThroughPlatform : MonoBehaviour
             //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformTransform.GetComponent<Collider>(), true);
             //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformCollider, true);
         }*/
-        if(other.CompareTag("Player"))
+        /*if(other.CompareTag("Player"))
         {
             passThrough = true;
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
@@ -48,10 +50,10 @@ public class JumpThroughPlatform : MonoBehaviour
         //passThrough = false;
         //platformTransform = transform.parent;
         //Physics.IgnoreCollision(other.GetComponent<Collider>(), platformTransform.GetComponent<Collider>(), false);
-        if(other.CompareTag("Player"))
+        /*if(other.CompareTag("Player"))
         {
             passThrough = false;
-        }
+        }*/
     }
 
 }
