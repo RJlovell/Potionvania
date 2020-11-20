@@ -6,45 +6,69 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    public static bool isPaused = false;
+    Player player;
     public string mainMenuSceneName, settingsSceneName;
+    public static bool gameIsPaused = false;
+    public float timer = 0.0f;
+    public float timeLimit = 0.5f;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            PauseGame();
+        }
+        if (!player.canThrow && !gameIsPaused && !player.potionExists)
+        {
+            if (timer < timeLimit)
             {
-                DeactivateMenu();
+                timer += Time.deltaTime;
+
             }
-            else
+            if (timer >= timeLimit)
             {
-                ActivateMenu();
+                timer = 0;
+                player.canThrow = true;
             }
         }
     }
 
-    public void ActivateMenu()
+    public void PauseGame()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
-        //Pauses the music in the scene in the pause menu is enabled.
-        //AudioListener.pause = true;
-        isPaused = true;
-    }
-    public void DeactivateMenu()
-    {
-        Time.timeScale = 1;
-        //For when the player or the camera listens out for the audio in the scene
-        //Plays the music in the scene when the pause menu is deactivated
-        //AudioListener.pause = false;
-        pauseMenuUI.SetActive(false);
-        isPaused = false;
+        gameIsPaused = !gameIsPaused;
+        if (!gameIsPaused)
+        {
+            Time.timeScale = 1;
+            //For when the player or the camera listens out for the audio in the scene
+            //Plays the music in the scene when the pause menu is deactivated
+            //AudioListener.pause = false;
+            pauseMenuUI.SetActive(false);
+            ///This line is coded to ensure that when the player selects the resume button, 
+            ///it will not spawn a potion at the position of the mouses click.
+        }
+        else
+        {
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0;
+            if (player.canThrow)
+            {
+                player.canThrow = false;
+                timer = 0;
+            }
+            //Pauses the music in the scene in the pause menu is enabled.
+            //AudioListener.pause = true;
+        }
     }
 
     public void LoadMainMenu()
     {
+        gameIsPaused = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
