@@ -15,6 +15,7 @@ public class AnimationController : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetBool("isDead", false);
         anim.SetBool("midAir", false);
+        anim.SetBool("jumpEnd", false);
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -34,13 +35,17 @@ public class AnimationController : MonoBehaviour
         {
             anim.SetBool("isDead", true);
         }
- 
+        if (health.damageTaken == true )
+        {
+            anim.SetBool("takeDamage", true);
+        }
         if (Input.GetKeyUp(KeyCode.Space))
-            anim.SetTrigger("jumpStart");
+            anim.SetTrigger("jumpStart"); anim.SetBool("jumpEnd", false);
+
         if ((playerScript.grounded == false) && (playerScript.potionLaunch == false))
             anim.SetBool("midAir", true);
-        if ((playerScript.grounded == true) && (playerScript.potionLaunch == false))
-            anim.SetTrigger("jumpEnd");
+        if (playerScript.grounded == true && playerScript.potionLaunch == false)
+            anim.SetBool("jumpEnd",true);
         if (playerScript.potionLaunch == true)
             anim.SetTrigger("potionLaunched");
         if (playerScript.potionLaunch == false)

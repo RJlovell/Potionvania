@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8715429561056790048}
   - component: {fileID: 1283792285440331186}
   - component: {fileID: 2457486502379460075}
+  - component: {fileID: 4086983021403962138}
+  - component: {fileID: 8185567005135729233}
   m_Layer: 0
   m_Name: Enemy_Goblin
   m_TagString: Goblin
@@ -87,7 +89,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &2457486502379460075
 BoxCollider:
@@ -102,6 +104,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.4586134, z: 1}
   m_Center: {x: 0, y: 0.7706933, z: 0}
+--- !u!114 &4086983021403962138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115723604514426764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e29be40cd0032499ea556dd7344555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &8185567005135729233
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115723604514426764}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 08c46d817872e8d4baafd375af36250e, type: 3}
+  m_Controller: {fileID: 9100000, guid: 96348203702fa2547a1530453e055b09, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8467002897121119890
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +172,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8780205692396682770}
     m_Modifications:
+    - target: {fileID: -6057140222963153312, guid: 08c46d817872e8d4baafd375af36250e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 96348203702fa2547a1530453e055b09, type: 2}
     - target: {fileID: -4216859302048453862, guid: 08c46d817872e8d4baafd375af36250e,
         type: 3}
       propertyPath: m_LocalPosition.x

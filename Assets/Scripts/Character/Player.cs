@@ -23,9 +23,9 @@ public class Player : MonoBehaviour
     [System.NonSerialized]
     public float groundFriction = 0.6f;
     public float jumpForce = 1.0f;
-    public float jumpTime = 0.2f;
+    public float jumpWaitTime = 0.25f;
+    float jumpCount = 0;
     Vector3 jumpVec;
-    private float jumpCount;
     bool jumping;
     [System.NonSerialized]
     public bool landed;
@@ -135,6 +135,12 @@ public class Player : MonoBehaviour
         Vector3 rawMousePos = Input.mousePosition;
         rawMousePos.z = 12;
         mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+
+        if(jumping && jumpCount < jumpWaitTime)
+        {
+            jumpCount += Time.deltaTime;
+        }
+
         if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
@@ -219,25 +225,17 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded)
+        if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
         {
             jumping = true;
-            jumpCount = jumpTime;
+        }
+        if(jumpCount >= jumpWaitTime && jumping == true)
+        {
+            jumping = false;
+            jumpCount = 0;
             Jump();
         }
-        if (Input.GetKey(KeyCode.Space) && jumping)
-        {
-            if (jumpCount > 0)
-            {
-                Jump();
-                jumpCount -= Time.deltaTime;
-            }
-            else
-                jumping = false;
 
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-            jumping = false;
 
     }
 
