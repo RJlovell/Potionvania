@@ -58,14 +58,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveThrough: 0
-  xAxisForce: 2
-  yAxisForce: 2
+  xAxisForce: 2000
+  yAxisForce: 2000
   rayCastOffset: 0.6
   maxRayDistance: 1.2
-  knockBackForce: 7
-  minExplosionForce: 4
+  knockBackForce: 70
   potionLaunchEffectHeight: 1
-  testOrcPushBackForce: 0
 --- !u!1 &5513072747221902229
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,10 +74,10 @@ MonoBehaviour:
   throwingForce: 1
   attackCountdown: 0
   hasThrown: 0
-  potionPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,
+  bombPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,
     type: 3}
-  potionSpawnXOffset: 1
-  potionSpawnYOffset: 1
+  bombSpawnXOffset: 0
+  bombSpawnYOffset: 0
 --- !u!114 &8715429561056790048
 MonoBehaviour:
   m_ObjectHideFlags: 0
