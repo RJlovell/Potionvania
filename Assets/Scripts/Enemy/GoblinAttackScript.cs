@@ -17,10 +17,10 @@ public class GoblinAttackScript : MonoBehaviour
     private Transform potionTransform;
     private Transform myTransform;
     //Test variables
-    public GameObject potionPrefab;
-    GameObject potionSpawn;
-    public float potionSpawnXOffset;
-    public float potionSpawnYOffset;
+    public GameObject bombPrefab;
+    GameObject bombSpawn;
+    public float bombSpawnXOffset;
+    public float bombSpawnYOffset;
     Animator anim;
 
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class GoblinAttackScript : MonoBehaviour
         anim = GetComponent<Animator>();
         myTransform = transform;
         attackCountdown = attackDelay;
-        potionTransform = potionPrefab.transform;
+        potionTransform = bombPrefab.transform;
     }
 
     // Update is called once per frame
@@ -57,13 +57,13 @@ public class GoblinAttackScript : MonoBehaviour
     {
         
         Debug.Log("Spawning the potion");
-        potionSpawn = Instantiate(potionPrefab);
-        potionSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + potionSpawnXOffset, myTransform.position.y + potionSpawnYOffset, myTransform.position.z);
-        potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
+        bombSpawn = Instantiate(bombPrefab);
+        bombSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
+        bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
         
     }
     private void OnDestroy()
     {
-        Destroy(potionPrefab);
+        Destroy(bombPrefab);
     }
 }
