@@ -88,7 +88,7 @@ public class OrcPatrolSensor : MonoBehaviour
                 {
                     print("Collided with " + other.gameObject.name);
                     print("Orc dealt " + orc.orcDamage);
-                    //playerHPScript.TakeDamage(orc.orcDamage);
+                    playerHPScript.TakeDamage(orc.orcDamage);
                     orcPatrolParent.dealDamage = true;
                 }
             }
