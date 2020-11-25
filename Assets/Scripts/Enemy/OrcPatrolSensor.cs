@@ -12,7 +12,7 @@ public class OrcPatrolSensor : MonoBehaviour
     Collider orcColliderInfo;
     Collider playerColliderInfo;
     public bool moveThrough = true;
-    //public bool orcPushBack = false;
+
 
     public float xAxisForce;
     public float yAxisForce;
@@ -54,7 +54,8 @@ public class OrcPatrolSensor : MonoBehaviour
     {
         ///If the colliding object is the Player and they are not invincible this function will set the players velocity to 0
         ///and the potion launch variable to true so they player can get properly knocked back/up when the add force is called.
-        ///
+        ///When the player triggers/(collides with) the orc the iSceneEnabled becomes true and applys damage to the player.
+        ///This is needed so the player is not constantly dealt damage before the invincibility
         if (other.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
             other.attachedRigidbody.velocity = Vector3.zero;
@@ -76,11 +77,8 @@ public class OrcPatrolSensor : MonoBehaviour
 
             playerHPScript.iSceneEnabled = true;
 
-            Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
             if (!orcPatrolParent.dealDamage)
             {
-                print("Collided with " + other.gameObject.name);
-                print("Orc dealt " + orc.orcDamage);
                 playerHPScript.TakeDamage(orc.orcDamage);
                 orcPatrolParent.dealDamage = true;
             }
