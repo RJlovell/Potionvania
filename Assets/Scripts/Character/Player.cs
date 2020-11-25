@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-
         }
         else if (moveDir == -1)
         {

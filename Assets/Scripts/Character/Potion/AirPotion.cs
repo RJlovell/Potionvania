@@ -90,7 +90,7 @@ public class AirPotion : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
                 
-                double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
+               /* double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
                 if (distance >= 1)
                 {
                     distance = radius - distance;
@@ -98,7 +98,7 @@ public class AirPotion : MonoBehaviour
                     explosionForce *= (float)distance;
                 }
                 if (explosionForce < minExplosionForce)
-                    explosionForce = minExplosionForce;
+                    explosionForce = minExplosionForce;*/
 
                 //normalise vector
                 magnitude = GetMag(explosionVec.x, explosionVec.y);

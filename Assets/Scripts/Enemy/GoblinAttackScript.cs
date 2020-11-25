@@ -57,4 +57,8 @@ public class GoblinAttackScript : MonoBehaviour
         potionSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + potionSpawnXOffset, myTransform.position.y + potionSpawnYOffset, myTransform.position.z);
         potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
     }
+    private void OnDestroy()
+    {
+        Destroy(potionPrefab);
+    }
 }
