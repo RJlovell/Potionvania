@@ -18,6 +18,7 @@ public class AirPotion : MonoBehaviour
     Ray blockCheck;
     RaycastHit hitInfo;
     bool blocked = false;
+    bool directHit = false; //checks if goblin is hit directly due to direct collision proving difficult for the engine to calculate normally
 
     private void Start()
     {
@@ -35,6 +36,23 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        
+        if(other.gameObject.CompareTag("Goblin"))
+        {
+            directHit = true;
+            if(transform.position.x < other.transform.position.x)
+            {
+                explosionVec = Vector3.up + Vector3.right;
+                explosionVec *= explosionForce;
+                other.gameObject.GetComponent<Rigidbody>().AddForce(explosionVec, ForceMode.VelocityChange);
+            }
+            else
+            {
+                explosionVec = Vector3.up + Vector3.left;
+                explosionVec *= explosionForce;
+                other.gameObject.GetComponent<Rigidbody>().AddForce(explosionVec, ForceMode.VelocityChange);
+            }
+        }
         Vector3 explosionPos = transform.position;
         Collider[] colliderList = Physics.OverlapSphere(explosionPos, radius);//check for colliders in explosion radius
         foreach (Collider hit in colliderList)
@@ -51,6 +69,8 @@ public class AirPotion : MonoBehaviour
             }
             if(hit.CompareTag("Goblin"))
             {
+                if (directHit)
+                    continue;
                 Vector3 dir = new Vector3(hit.transform.position.x - explosionPos.x, (hit.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
                 magnitude = GetMag(dir.x, dir.y);
                 dir.x /= magnitude;

@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public Vector3 potionVel;
     [System.NonSerialized]
     public bool canThrow = true;
+    public float throwXPos = 0;
+    public float throwYPos = 0;
 
     public bool potionExists;
     Vector3 mousePos;
@@ -215,9 +217,11 @@ public class Player : MonoBehaviour
                 potionPos.x /= mag;
                 potionPos.y /= mag;
                 potionVel = potionPos;
-
-                potionPos.x += transform.position.x;
-                potionPos.y += transform.position.y + (height / 2);
+                if(transform.position.x < mousePos.x)
+                    potionPos.x+= transform.position.x - throwXPos;
+                else
+                    potionPos.x = transform.position.x + throwXPos;
+                potionPos.y = transform.position.y + throwYPos;
 
                 Instantiate(potion, potionPos, transform.rotation);
                 //throwCharge = minThrowForce;
@@ -227,14 +231,8 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
         {
             Jump();
-            //jumping = true;
+            jumping = true;
         }
-        /*if(jumpCount >= jumpWaitTime && jumping == true)
-        {
-            jumping = false;
-            jumpCount = 0;
-            Jump();
-        }*/
     }
 
     public void Jump()
@@ -245,6 +243,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        jumping = false;
         if (potionLaunch)
         {
             potionLaunch = false;
