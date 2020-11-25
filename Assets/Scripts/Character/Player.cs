@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         if (moveDir == 1)
         {
             angleFacing = 90;
-            if (!potionLaunch || !orcSensor.orcPushBack)
+            if (!potionLaunch)
             {
                 if (grounded)
                     currentSpeed = groundSpeed;
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         else if (moveDir == -1)
         {
             angleFacing = -90;
-            if (!potionLaunch || !orcSensor.orcPushBack)
+            if (!potionLaunch)
             {
                 if (grounded)
                     currentSpeed = -groundSpeed;
