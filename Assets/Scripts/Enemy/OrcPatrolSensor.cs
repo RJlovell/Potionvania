@@ -12,7 +12,7 @@ public class OrcPatrolSensor : MonoBehaviour
     Collider orcColliderInfo;
     Collider playerColliderInfo;
     public bool moveThrough = true;
-    public bool orcPushBack = false;
+    //public bool orcPushBack = false;
 
     public float xAxisForce;
     public float yAxisForce;
@@ -22,100 +22,89 @@ public class OrcPatrolSensor : MonoBehaviour
     RaycastHit hitInfo;
     public Ray groundDetectRay;
 
-    Vector3 explosionVec;
-    public float explosionForce = 7.0f;
+    Vector3 orcKnockBackVelocity;
+    public float knockBackForce = 7.0f;
     public float minExplosionForce = 4.0f;
     float magnitude;
-    Vector3 explosionPos;
+    Vector3 orcPosition;
     public float potionLaunchEffectHeight = 1;
     public float testOrcPushBackForce;
 
 
     private void Start()
     {
+        ///Finds all the game objects with the tags to get the components required to complete the script.
+        ///
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         orcPatrolParent = GetComponentInParent<OrcPatrol>();
         orc = GetComponentInParent<OrcScript>();
 
+        ///Stores the Information of the these gameobjects colliders
         orcColliderInfo = GameObject.FindGameObjectWithTag("Orc").gameObject.GetComponent<Collider>();
         playerColliderInfo = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Collider>();
+        //potionColliderInfo = GameObject.FindGameObjectWithTag("Potion").gameObject.GetComponent<Collider>();
+
+        ///Always ignore collision between the Orc and Player.
+        Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        ///If the colliding object is the Player and they are not invincible this function will set the players velocity to 0
+        ///and the potion launch variable to true so they player can get properly knocked back/up when the add force is called.
+        ///
+        if (other.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
-            moveThrough = true;
-            //player.potionLaunch = true;
-            orcPushBack = true;
-            //Vector3 newVelocity = other.attachedRigidbody.velocity;
-            //newVelocity.x = 0;
-            //newVelocity.y = 0;
-            //other.attachedRigidbody.velocity = newVelocity;
-            //other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? -xAxisForce : xAxisForce, yAxisForce, 0);
+            other.attachedRigidbody.velocity = Vector3.zero;
+            player.potionLaunch = true;
 
-            /*explosionPos = transform.position;
-            explosionVec = new Vector3((other.attachedRigidbody.transform.position.x + xAxisForce) - explosionPos.x, (other.attachedRigidbody.transform.position.y + yAxisForce) - explosionPos.y, 0);
+            orcPosition = transform.position;
+            orcKnockBackVelocity = new Vector3((other.attachedRigidbody.transform.position.x) - orcPosition.x, (other.attachedRigidbody.transform.position.y + potionLaunchEffectHeight) - orcPosition.y, 0);
 
             //normalise vector
-            magnitude = AirPotion.GetMag(explosionVec.x, explosionVec.y);
-            explosionVec.x /= magnitude;
-            explosionVec.y /= magnitude;
+            magnitude = AirPotion.GetMag(orcKnockBackVelocity.x, orcKnockBackVelocity.y);
+            orcKnockBackVelocity.x /= magnitude;
+            orcKnockBackVelocity.y /= magnitude;
 
-            //explosionVec.Normalize();
             //apply explosion force
-            explosionVec *= explosionForce;
+            orcKnockBackVelocity *= knockBackForce;
             //zero velocity then add force to rigid body
 
-            other.attachedRigidbody.AddForce(explosionVec, ForceMode.Impulse);*/
-            Vector3 testPushBackForce = new Vector3(xAxisForce, yAxisForce, 0);
-            //Vector3 dir = transform.position - other.transform.position;
-            //dir.Normalize();
-            Vector3 direction = other.ClosestPointOnBounds(other.transform.position) - transform.position;
-            direction.Normalize();
-            other.gameObject.GetComponent<Rigidbody>().AddForce(direction * testOrcPushBackForce);
+            other.attachedRigidbody.AddForce(orcKnockBackVelocity, ForceMode.Impulse);
 
+            playerHPScript.iSceneEnabled = true;
 
-
-            if (!playerHPScript.iSceneEnabled)
+            Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
+            if (!orcPatrolParent.dealDamage)
             {
-                playerHPScript.iSceneEnabled = true;
-
-                Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
-                if (!orcPatrolParent.dealDamage)
-                {
-                    print("Collided with " + other.gameObject.name);
-                    print("Orc dealt " + orc.orcDamage);
-                    playerHPScript.TakeDamage(orc.orcDamage);
-                    orcPatrolParent.dealDamage = true;
-                }
+                print("Collided with " + other.gameObject.name);
+                print("Orc dealt " + orc.orcDamage);
+                playerHPScript.TakeDamage(orc.orcDamage);
+                orcPatrolParent.dealDamage = true;
             }
+
         }
-        else if(other.CompareTag("Potion"))
+        else if (other.CompareTag("Potion"))
         {
             moveThrough = true;
-            player.potionLaunch = true;
         }
         else
         {
-            orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            //moveThrough = false;
-            Debug.Log("Trigger exit has occured from the Orc Patrol Sensor Script");
+            ///If the Orc is colliding with anything other then the Player and Potion,
+            ///then it will turn around.
+            if (!other.CompareTag("Player") && !other.CompareTag("Potion"))
+            {
+                orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
+            }
         }
     }
 
     private void Update()
     {
-        groundDetectRay = new Ray(transform.position + new Vector3(orcPatrolParent.movingRight ? rayCastOffset : -rayCastOffset, 0, 0), Vector3.down);
-
+        ///When the downwards raycast doesn't touch any objects/ground then the orc will determine that it has reached a ledge
+        ///and turn back around.
         if (!Physics.Raycast(groundDetectRay, out hitInfo, maxRayDistance))
         {
             orcPatrolParent.movingRight = !orcPatrolParent.movingRight;
@@ -123,16 +112,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
         if (moveThrough)
         {
-            Debug.Log("Move through is true");
             Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
-            //Physics.IgnoreCollision(orcTestingCollision, playerColliderInfo, true);
-        }
-
-        if(!moveThrough)
-        {
-            Debug.Log("The other player object is not colliding with the orc collider anymore");
-
-            Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, false);
         }
     }
 }
