@@ -29,6 +29,7 @@ public class OrcPatrolSensor : MonoBehaviour
     Vector3 orcPosition;
     public float potionLaunchEffectHeight = 1;
     public float testOrcPushBackForce;
+    Animator anim;
 
 
     private void Start()
@@ -48,6 +49,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
         ///Always ignore collision between the Orc and Player.
         Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
+        anim = GetComponent<Animator>();
 
     }
     private void OnTriggerEnter(Collider other)
@@ -87,6 +89,7 @@ public class OrcPatrolSensor : MonoBehaviour
         else if (other.CompareTag("Potion"))
         {
             moveThrough = true;
+            anim.SetTrigger("stun");
         }
         else
         {

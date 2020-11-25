@@ -62,4 +62,8 @@ public class GoblinAttackScript : MonoBehaviour
         potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
         
     }
+    private void OnDestroy()
+    {
+        Destroy(potionPrefab);
+    }
 }
