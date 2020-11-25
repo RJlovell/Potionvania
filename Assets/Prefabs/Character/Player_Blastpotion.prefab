@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  explosionForce: 12
+  explosionForce: 8.6
   minExplosionForce: 8
   potionLaunchEffectHeight: 1
   appliedToPlayer: 0

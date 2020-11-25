@@ -47,7 +47,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
         ///Always ignore collision between the Orc and Player.
         Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animator>();
 
     }
     private void OnTriggerEnter(Collider other)

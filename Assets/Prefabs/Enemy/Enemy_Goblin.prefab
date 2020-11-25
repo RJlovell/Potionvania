@@ -48,15 +48,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7115723604514426764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: -0.045714147, y: 0, z: -0.15719438}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 693774769371740610}
   - {fileID: 4478710166426596261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!114 &2670090652794697679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,10 +74,10 @@ MonoBehaviour:
   throwingForce: 1
   attackCountdown: 0
   hasThrown: 0
-  potionPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,
+  bombPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,
     type: 3}
-  potionSpawnXOffset: 1
-  potionSpawnYOffset: 1
+  bombSpawnXOffset: 0
+  bombSpawnYOffset: 0
 --- !u!114 &8715429561056790048
 MonoBehaviour:
   m_ObjectHideFlags: 0
