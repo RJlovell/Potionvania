@@ -37,13 +37,7 @@ public class Projectile : MonoBehaviour
         float arc = arcHeight * (nextX - x0) * (nextX - x1)/ (-0.25f * distance * distance);
         nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
         //So the object will rotate within the direction it is meant to be moving in.
-        //transform.rotation = Quaternion.LookRotation(nextPos - transform.position);
         transform.position = nextPos;
-        //For debugging purposes
-        if(nextPos == projectileTargetPos.position)
-        {
-            Debug.Log("Damage Dealt");
-        }
     }
 
     public void SetTarget(Transform targetPos)
@@ -57,8 +51,6 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
             playerHPScript.iSceneEnabled = true;
-
-            Debug.Log("Trigger has occured from the Goblin's Projectile Sensor script");
             playerHPScript.TakeDamage(goblin.goblinDamage);
         }
         
