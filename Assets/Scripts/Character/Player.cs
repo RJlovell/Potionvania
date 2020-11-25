@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
                 potionPos.y /= mag;
                 potionVel = potionPos;
                 if(transform.position.x < mousePos.x)
-                    potionPos.x+= transform.position.x - throwXPos;
+                    potionPos.x = transform.position.x - throwXPos;
                 else
                     potionPos.x = transform.position.x + throwXPos;
                 potionPos.y = transform.position.y + throwYPos;
