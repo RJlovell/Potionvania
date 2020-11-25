@@ -24,11 +24,9 @@ public class OrcPatrolSensor : MonoBehaviour
 
     Vector3 orcKnockBackVelocity;
     public float knockBackForce = 7.0f;
-    public float minExplosionForce = 4.0f;
     float magnitude;
     Vector3 orcPosition;
     public float potionLaunchEffectHeight = 1;
-    public float testOrcPushBackForce;
     Animator anim;
 
 
@@ -104,6 +102,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
     private void Update()
     {
+        groundDetectRay = new Ray(transform.position + new Vector3(orcPatrolParent.movingRight ? rayCastOffset : -rayCastOffset, 0, 0), Vector3.down);
         ///When the downwards raycast doesn't touch any objects/ground then the orc will determine that it has reached a ledge
         ///and turn back around.
         if (!Physics.Raycast(groundDetectRay, out hitInfo, maxRayDistance))

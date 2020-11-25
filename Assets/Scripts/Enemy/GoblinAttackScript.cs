@@ -18,7 +18,7 @@ public class GoblinAttackScript : MonoBehaviour
     private Transform myTransform;
     //Test variables
     public GameObject bombPrefab;
-    GameObject potionSpawn;
+    GameObject bombSpawn;
     public float bombSpawnXOffset;
     public float bombSpawnYOffset;
     Animator anim;
@@ -57,13 +57,13 @@ public class GoblinAttackScript : MonoBehaviour
     {
         
         Debug.Log("Spawning the potion");
-        potionSpawn = Instantiate(bombPrefab);
-        potionSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
-        potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
+        bombSpawn = Instantiate(bombPrefab);
+        bombSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
+        bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
         
     }
     private void OnDestroy()
     {
-        Destroy(potionPrefab);
+        Destroy(bombPrefab);
     }
 }
