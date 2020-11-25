@@ -18,6 +18,7 @@ public class AirPotion : MonoBehaviour
     Ray blockCheck;
     RaycastHit hitInfo;
     bool blocked = false;
+    bool directHit = false; //checks if goblin is hit directly due to direct collision proving difficult for the engine to calculate normally
 
     private void Start()
     {
@@ -35,6 +36,23 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        
+        if(other.gameObject.CompareTag("Goblin"))
+        {
+            directHit = true;
+            if(transform.position.x < other.transform.position.x)
+            {
+                explosionVec = Vector3.up + Vector3.right;
+                explosionVec *= explosionForce;
+                other.gameObject.GetComponent<Rigidbody>().AddForce(explosionVec, ForceMode.VelocityChange);
+            }
+            else
+            {
+                explosionVec = Vector3.up + Vector3.left;
+                explosionVec *= explosionForce;
+                other.gameObject.GetComponent<Rigidbody>().AddForce(explosionVec, ForceMode.VelocityChange);
+            }
+        }
         Vector3 explosionPos = transform.position;
         Collider[] colliderList = Physics.OverlapSphere(explosionPos, radius);//check for colliders in explosion radius
         foreach (Collider hit in colliderList)
@@ -51,6 +69,8 @@ public class AirPotion : MonoBehaviour
             }
             if(hit.CompareTag("Goblin"))
             {
+                if (directHit)
+                    continue;
                 Vector3 dir = new Vector3(hit.transform.position.x - explosionPos.x, (hit.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
                 magnitude = GetMag(dir.x, dir.y);
                 dir.x /= magnitude;
@@ -90,7 +110,7 @@ public class AirPotion : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
                 
-                double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
+               /* double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
                 if (distance >= 1)
                 {
                     distance = radius - distance;
@@ -98,7 +118,7 @@ public class AirPotion : MonoBehaviour
                     explosionForce *= (float)distance;
                 }
                 if (explosionForce < minExplosionForce)
-                    explosionForce = minExplosionForce;
+                    explosionForce = minExplosionForce;*/
 
                 //normalise vector
                 magnitude = GetMag(explosionVec.x, explosionVec.y);
