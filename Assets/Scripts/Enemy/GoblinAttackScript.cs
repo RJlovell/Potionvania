@@ -21,10 +21,12 @@ public class GoblinAttackScript : MonoBehaviour
     GameObject potionSpawn;
     public float potionSpawnXOffset;
     public float potionSpawnYOffset;
+    Animator anim;
 
     // Start is called before the first frame update
     private void Start()
     {
+        anim = GetComponent<Animator>();
         myTransform = transform;
         attackCountdown = attackDelay;
         potionTransform = potionPrefab.transform;
@@ -42,20 +44,23 @@ public class GoblinAttackScript : MonoBehaviour
             hasThrown = false;
         }
         //attackCountdown -= Time.deltaTime;
-        if (attackCountdown <= 0f && !hasThrown)
+        if (attackCountdown <= 0 && !hasThrown)
         {
-
+            anim.SetTrigger("throw");
             SpawnPotion();
             hasThrown = true;
             attackCountdown = attackDelay;
+            
         }
     }
     void SpawnPotion()
     {
+        
         Debug.Log("Spawning the potion");
         potionSpawn = Instantiate(potionPrefab);
         potionSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + potionSpawnXOffset, myTransform.position.y + potionSpawnYOffset, myTransform.position.z);
         potionSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
+        
     }
     private void OnDestroy()
     {
