@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject optionsMenuUI;
+    public GameObject howToPlayUI;
     Player player;
     public string mainMenuSceneName, settingsSceneName;
     public static bool gameIsPaused = false;
@@ -48,13 +50,15 @@ public class PauseMenu : MonoBehaviour
             //Plays the music in the scene when the pause menu is deactivated
             //AudioListener.pause = false;
             pauseMenuUI.SetActive(false);
-            ///This line is coded to ensure that when the player selects the resume button, 
-            ///it will not spawn a potion at the position of the mouses click.
+            optionsMenuUI.SetActive(false);
+            howToPlayUI.SetActive(false);
         }
         else
         {
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0;
+            ///This line is coded to ensure that when the player selects the resume button, 
+            ///it will not spawn a potion at the position of the mouses click.
             if (player.canThrow)
             {
                 player.canThrow = false;
