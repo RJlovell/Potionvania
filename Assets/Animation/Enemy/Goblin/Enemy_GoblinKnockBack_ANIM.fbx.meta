@@ -84,11 +84,11 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Hips_JNT
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 08c46d817872e8d4baafd375af36250e,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 85817f0b25b3c1741b6baf6875e56269,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
