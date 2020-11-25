@@ -28,6 +28,7 @@ public class OrcPatrolSensor : MonoBehaviour
     float magnitude;
     Vector3 explosionPos;
     public float potionLaunchEffectHeight = 1;
+    public float testOrcPushBackForce;
 
 
     private void Start()
@@ -54,21 +55,29 @@ public class OrcPatrolSensor : MonoBehaviour
             //newVelocity.y = 0;
             //other.attachedRigidbody.velocity = newVelocity;
             //other.attachedRigidbody.AddForce(orcPatrolParent.movingRight ? -xAxisForce : xAxisForce, yAxisForce, 0);
-            explosionPos = transform.position;
 
-            explosionVec = new Vector3(other.attachedRigidbody.transform.position.x - explosionPos.x, (other.attachedRigidbody.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
-            if (explosionForce < minExplosionForce)
-                explosionForce = minExplosionForce;
+            /*explosionPos = transform.position;
+            explosionVec = new Vector3((other.attachedRigidbody.transform.position.x + xAxisForce) - explosionPos.x, (other.attachedRigidbody.transform.position.y + yAxisForce) - explosionPos.y, 0);
 
             //normalise vector
             magnitude = AirPotion.GetMag(explosionVec.x, explosionVec.y);
             explosionVec.x /= magnitude;
             explosionVec.y /= magnitude;
+
+            //explosionVec.Normalize();
             //apply explosion force
             explosionVec *= explosionForce;
             //zero velocity then add force to rigid body
 
-            other.attachedRigidbody.AddForce(explosionVec, ForceMode.VelocityChange);
+            other.attachedRigidbody.AddForce(explosionVec, ForceMode.Impulse);*/
+            Vector3 testPushBackForce = new Vector3(xAxisForce, yAxisForce, 0);
+            //Vector3 dir = transform.position - other.transform.position;
+            //dir.Normalize();
+            Vector3 direction = other.ClosestPointOnBounds(other.transform.position) - transform.position;
+            direction.Normalize();
+            other.gameObject.GetComponent<Rigidbody>().AddForce(direction * testOrcPushBackForce);
+
+
 
             if (!playerHPScript.iSceneEnabled)
             {
