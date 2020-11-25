@@ -12,7 +12,7 @@ public class OrcPatrolSensor : MonoBehaviour
     Collider orcColliderInfo;
     Collider playerColliderInfo;
     public bool moveThrough = true;
-    //public bool orcPushBack = false;
+
 
     public float xAxisForce;
     public float yAxisForce;
@@ -24,11 +24,10 @@ public class OrcPatrolSensor : MonoBehaviour
 
     Vector3 orcKnockBackVelocity;
     public float knockBackForce = 7.0f;
-    public float minExplosionForce = 4.0f;
     float magnitude;
     Vector3 orcPosition;
     public float potionLaunchEffectHeight = 1;
-    public float testOrcPushBackForce;
+    Animator anim;
 
 
     private void Start()
@@ -48,13 +47,15 @@ public class OrcPatrolSensor : MonoBehaviour
 
         ///Always ignore collision between the Orc and Player.
         Physics.IgnoreCollision(orcColliderInfo, playerColliderInfo, true);
+        anim = GetComponent<Animator>();
 
     }
     private void OnTriggerEnter(Collider other)
     {
         ///If the colliding object is the Player and they are not invincible this function will set the players velocity to 0
         ///and the potion launch variable to true so they player can get properly knocked back/up when the add force is called.
-        ///
+        ///When the player triggers/(collides with) the orc the iSceneEnabled becomes true and applys damage to the player.
+        ///This is needed so the player is not constantly dealt damage before the invincibility
         if (other.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
             other.attachedRigidbody.velocity = Vector3.zero;
@@ -76,11 +77,8 @@ public class OrcPatrolSensor : MonoBehaviour
 
             playerHPScript.iSceneEnabled = true;
 
-            Debug.Log("Trigger has occured from the Orc Patrol Sensor script");
             if (!orcPatrolParent.dealDamage)
             {
-                print("Collided with " + other.gameObject.name);
-                print("Orc dealt " + orc.orcDamage);
                 playerHPScript.TakeDamage(orc.orcDamage);
                 orcPatrolParent.dealDamage = true;
             }
@@ -89,6 +87,7 @@ public class OrcPatrolSensor : MonoBehaviour
         else if (other.CompareTag("Potion"))
         {
             moveThrough = true;
+            anim.SetTrigger("stun");
         }
         else
         {
@@ -103,6 +102,7 @@ public class OrcPatrolSensor : MonoBehaviour
 
     private void Update()
     {
+        groundDetectRay = new Ray(transform.position + new Vector3(orcPatrolParent.movingRight ? rayCastOffset : -rayCastOffset, 0, 0), Vector3.down);
         ///When the downwards raycast doesn't touch any objects/ground then the orc will determine that it has reached a ledge
         ///and turn back around.
         if (!Physics.Raycast(groundDetectRay, out hitInfo, maxRayDistance))
