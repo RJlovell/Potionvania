@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     public float turnSpeed = 10;
     bool right;
     bool left;
-    int moveDir = 0;
+    [System.NonSerialized]
+    public int moveDir = 0;
     [System.NonSerialized]
     public bool potionLaunch = false;
     public float maxVelocityX = 5;
@@ -62,6 +63,8 @@ public class Player : MonoBehaviour
     public Vector3 velocityChange;
     Animator anim; //animator reference
 
+    public bool dead = false;
+
 
     void Start()
     {
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        ///change angleFacing with speed to turn character around smoothly and quickly
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
         if(right && angleFacing > 90)
         {
@@ -105,11 +109,12 @@ public class Player : MonoBehaviour
             left = false;
         }
 
-        if (moveDir == 1)
+        if (moveDir == 1 && !dead)
         {
             //angleFacing = 90;
             if(!held && !left)
                 right = true;
+
             if (!potionLaunch)
             {
                 if (grounded)
@@ -131,11 +136,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == -1)
+        else if (moveDir == -1 && !dead)
         {
             //angleFacing = -90;
             if(!held && !right)
                 left = true;
+
             if (!potionLaunch)
             {
                 if (grounded)
@@ -157,12 +163,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == 0 || potionLaunch)
+        else if (moveDir == 0 || potionLaunch && !dead)
         {
             currentSpeed = rb.velocity.x;
         }
 
-        if (!potionLaunch)
+        if (!potionLaunch && !dead)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         velocityChange = rb.velocity;
     }
@@ -174,11 +180,7 @@ public class Player : MonoBehaviour
         rawMousePos.z = 12;
         mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
 
-        if(jumping && jumpCount < jumpWaitTime)
-        {
-            jumpCount += Time.deltaTime;
-        }
-
+        
         if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
         {
             timeSinceMove += Time.deltaTime;
@@ -222,12 +224,11 @@ public class Player : MonoBehaviour
         {
             moveDir = 3;//Halt player until input read or force applied
             currentSpeed = 0;
-            //Debug.Log("HALT");
         }
         ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
         if (!PauseMenu.gameIsPaused)
         {
-            if (Input.GetKey(KeyCode.Mouse0) && canThrow)
+            if (Input.GetKey(KeyCode.Mouse0) && canThrow && !dead)
             {
                 held = true;
                 if (mousePos.x < transform.position.x)
