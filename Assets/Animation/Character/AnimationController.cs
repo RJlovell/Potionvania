@@ -33,11 +33,11 @@ public class AnimationController : MonoBehaviour
 
         if (health.playerCurrentHealth == 0)
         {
-            anim.SetBool("isDead", true);
+           // anim.SetBool("isDead", true);
         }
         if (health.damageTaken == true )
         {
-            anim.SetBool("takeDamage", true);
+            anim.SetTrigger("takeDamage");
         }
        // if (Input.GetKey(KeyCode.Space))
          //   anim.SetTrigger("jumpStart"); anim.SetBool("jumpEnd", false);//
