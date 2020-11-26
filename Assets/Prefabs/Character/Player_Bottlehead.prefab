@@ -57,8 +57,10 @@ MonoBehaviour:
   rampSpeed: 1.5
   maxVelocityX: 5
   jumpForce: 6
-  jumpTime: 0.1
+  jumpWaitTime: 0.25
   grounded: 0
+  throwXPos: 0
+  throwYPos: 0
   potionExists: 0
   height: 2.4
   throwDelay: 1

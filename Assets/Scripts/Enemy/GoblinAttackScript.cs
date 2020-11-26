@@ -9,7 +9,11 @@ public class GoblinAttackScript : MonoBehaviour
     //public float throwingAngle;
     public float attackDelay;
     public float throwingForce;
-    public float attackCountdown;
+    private float attackCountdown;
+
+    private float animThrowCountdown;
+    public float animThrowDelay;
+    public bool animTrigger = false;
     //Offset to the y-axis
     //public float throwOffset;
     //public float artificalGravity;
@@ -30,6 +34,7 @@ public class GoblinAttackScript : MonoBehaviour
         myTransform = transform;
         attackCountdown = attackDelay;
         potionTransform = bombPrefab.transform;
+        animThrowCountdown = animThrowDelay;
     }
 
     // Update is called once per frame
@@ -43,27 +48,33 @@ public class GoblinAttackScript : MonoBehaviour
         {
             hasThrown = false;
         }
-        //attackCountdown -= Time.deltaTime;
+        ///When the attack countdown reaches 0, the throw animation will play and
+        ///the Goblin will be unable to throw anymore.
+        ///The animTrigger will become true.
         if (attackCountdown <= 0 && !hasThrown)
         {
             anim.SetTrigger("throw");
-            SpawnPotion();
             hasThrown = true;
             attackCountdown = attackDelay;
+            animTrigger = true;
             
+        }
+        ///When this is true, it's purposeis  to delay the bomb prefab from instantiating before the throwing animation finishes
+        if (animTrigger)
+        {
+            animThrowCountdown -= Time.deltaTime;
+            if(animThrowCountdown <=0)
+            {
+                SpawnPotion();
+                animThrowCountdown = animThrowDelay;
+                animTrigger = false;
+            }
         }
     }
     void SpawnPotion()
     {
-        
-        Debug.Log("Spawning the potion");
         bombSpawn = Instantiate(bombPrefab);
         bombSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
-        bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
-        
-    }
-    private void OnDestroy()
-    {
-        Destroy(bombPrefab);
+        bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);  
     }
 }

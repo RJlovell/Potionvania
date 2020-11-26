@@ -11,7 +11,8 @@ public class PauseMenu : MonoBehaviour
     Player player;
     public string mainMenuSceneName, settingsSceneName;
     public static bool gameIsPaused = false;
-    public float timer = 0.0f;
+
+    private float timer = 0.0f;
     public float timeLimit = 0.5f;
 
     private void Start()
