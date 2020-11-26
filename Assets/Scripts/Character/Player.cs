@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public GameObject potion;
     Rigidbody rb;
     AirPotion airPotion;
+    Aiming aim;
+
     public float groundSpeed = 5.0f;
     public float airSpeed = 2.5f;
     public float rampSpeed = 2;
@@ -47,11 +49,14 @@ public class Player : MonoBehaviour
     public float timeSinceThrow = 0;
     public float throwCharge = 0;
     public float chargeSpeed = 1;
+    public float timeHeld = 0;
+    public float timeBeforeAimAssistance = 0.5f;
     public float minThrowForce = 1;
     public float maxThrowForce = 7;
     float timeSinceMove = 0;
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
+    Animator anim; //animator reference
 
 
     void Start()
@@ -67,6 +72,12 @@ public class Player : MonoBehaviour
         velocityChange = rb.velocity;
 
         orcSensor = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrolSensor>();
+
+        aim = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Aiming>();
+
+        aim.gameObject.SetActive(false);
+
+        anim = GetComponent<Animator>(); //get the animator component
     }
     private void FixedUpdate()
     {
@@ -190,22 +201,27 @@ public class Player : MonoBehaviour
         ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
         if (!PauseMenu.gameIsPaused)
         {
-            if(Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) && canThrow)
             {
                 if (mousePos.x < transform.position.x)
                     angleFacing = -90;
                 if (mousePos.x > transform.position.x)
                     angleFacing = 90;
             }
-            ///charging potion throw
+            ///charging potion throw and checking time held for aim assistance
             if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
             {
                 throwCharge += Time.deltaTime * chargeSpeed;
-                //Debug.Log("We Chargin'");
+                if (timeHeld < 3)
+                    timeHeld += Time.deltaTime;
+                if(timeHeld >= timeBeforeAimAssistance)
+                    aim.gameObject.SetActive(true);
             }
             ///throwing potion
             if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
             {
+                aim.gameObject.SetActive(false);
+                timeHeld = 0;
                 canThrow = false;
 
                 //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
@@ -231,6 +247,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
         {
             Jump();
+            anim.SetTrigger("jumpStart"); //animation trigger call
             jumping = true;
         }
     }
@@ -244,6 +261,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         jumping = false;
+        //anim.SetTrigger("jumpEnd"); // landin animation call
         if (potionLaunch)
         {
             potionLaunch = false;
