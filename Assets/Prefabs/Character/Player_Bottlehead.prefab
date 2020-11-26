@@ -55,6 +55,7 @@ MonoBehaviour:
   groundSpeed: 6
   airSpeed: 2
   rampSpeed: 1.5
+  turnSpeed: 1000
   maxVelocityX: 5
   jumpForce: 6
   jumpWaitTime: 0.25
@@ -67,9 +68,12 @@ MonoBehaviour:
   timeSinceThrow: 0
   throwCharge: 0
   chargeSpeed: 5
+  timeHeld: 0
+  timeBeforeAimAssistance: 0.5
   minThrowForce: 4
   maxThrowForce: 14
   velocityChange: {x: 0, y: 0, z: 0}
+  dead: 0
 --- !u!114 &196173480771105101
 MonoBehaviour:
   m_ObjectHideFlags: 0
