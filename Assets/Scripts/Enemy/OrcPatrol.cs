@@ -12,11 +12,13 @@ public class OrcPatrol : MonoBehaviour
     //[System.NonSerialized]public bool movingRight;
     public bool movingRight;
     [System.NonSerialized]public bool dealDamage = false;
+    
 
     private void Start()
     {
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         orcSensor = GetComponentInChildren<OrcPatrolSensor>();
+        
     }
 
     void Update()
@@ -36,5 +38,7 @@ public class OrcPatrol : MonoBehaviour
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
         transform.rotation = Quaternion.Euler(0, movingRight ? orcRotationAngle : -orcRotationAngle, 0);
+
+        
     }
 }
