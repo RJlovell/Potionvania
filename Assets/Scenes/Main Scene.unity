@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1478,7 +1478,7 @@ RectTransform:
   - {fileID: 1308830412}
   - {fileID: 513612911}
   m_Father: {fileID: 432964150}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2584,7 +2584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: 
   audioMixer: {fileID: 24100000, guid: 5972b4632dd64be49babfcbfd3df10cf, type: 2}
-  audioMixerName: volume
+  audioMixerVariableName: volume
+  slider: {fileID: 1720450031}
   resolutionDropdown: {fileID: 656954287}
 --- !u!114 &432964146
 MonoBehaviour:
@@ -2603,7 +2604,6 @@ MonoBehaviour:
   howToPlayUI: {fileID: 1392105881}
   mainMenuSceneName: MainMenu
   settingsSceneName: Settings
-  timer: 0
   timeLimit: 0.5
 --- !u!114 &432964147
 MonoBehaviour:
@@ -2676,6 +2676,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 740334025}
   - {fileID: 619901343}
   - {fileID: 135830465}
   - {fileID: 1392105882}
@@ -2747,7 +2748,7 @@ Transform:
   - {fileID: 876641226}
   - {fileID: 2098984895}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &442512861 stripped
 Transform:
@@ -3296,7 +3297,7 @@ RectTransform:
   - {fileID: 2108161400}
   - {fileID: 90310059}
   m_Father: {fileID: 432964150}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4033,8 +4034,8 @@ GameObject:
   - component: {fileID: 740334025}
   - component: {fileID: 740334024}
   m_Layer: 0
-  m_Name: Music
-  m_TagString: Untagged
+  m_Name: Background Music
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4048,7 +4049,8 @@ AudioSource:
   m_GameObject: {fileID: 740334023}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 5972b4632dd64be49babfcbfd3df10cf,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a6deeb07722008542b76101bd0134c23, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4142,12 +4144,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740334023}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08146483, y: 72.22447, z: -0.026690692}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960.1036, y: -448.2654, z: -0.033915374}
+  m_LocalScale: {x: 1.2706817, y: 1.2706817, z: 1.2706817}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 432964150}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &746085215 stripped
 Transform:
@@ -7241,7 +7243,7 @@ RectTransform:
   - {fileID: 1970507155}
   - {fileID: 1218695644}
   m_Father: {fileID: 432964150}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8781,14 +8783,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 2011813384}
   m_HandleRect: {fileID: 1038922432}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: -60
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 432964145}
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -9563,7 +9565,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1936016022
 GameObject:
