@@ -33,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5884638004099302101}
+  - {fileID: 9144101835211572337}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +81,10 @@ MonoBehaviour:
   minExplosionForce: 8
   potionLaunchEffectHeight: 1
   appliedToPlayer: 0
+  particleTrail: {fileID: 5550737027523392591, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+    type: 3}
+  potionTrail: {fileID: 7569152690021031460, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+    type: 3}
 --- !u!54 &-1795617869263031207
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,17 +124,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 698270363edbfc54481a6abf72a14e65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.016433481
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 698270363edbfc54481a6abf72a14e65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06930508
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 698270363edbfc54481a6abf72a14e65,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.032795995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 698270363edbfc54481a6abf72a14e65,
         type: 3}
@@ -188,4 +193,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 698270363edbfc54481a6abf72a14e65,
     type: 3}
   m_PrefabInstance: {fileID: 1499940399551343055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2422643201969049490
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2748125848408339637}
+    m_Modifications:
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879412274737040359, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+        type: 3}
+      propertyPath: m_Name
+      value: PotionTrail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 41b09b4cf7358374fbaf836e36ccbb0e, type: 3}
+--- !u!4 &9144101835211572337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6879412274737040355, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2422643201969049490}
   m_PrefabAsset: {fileID: 0}
