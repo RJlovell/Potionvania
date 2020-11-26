@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
         aim = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Aiming>();
 
         aim.gameObject.SetActive(false);
+
+        Animation = GetComponent<Animator>(); //get the animator component
     }
     private void FixedUpdate()
     {
