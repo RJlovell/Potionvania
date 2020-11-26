@@ -55,6 +55,7 @@ MonoBehaviour:
   groundSpeed: 6
   airSpeed: 2
   rampSpeed: 1.5
+  turnSpeed: 1000
   maxVelocityX: 5
   jumpForce: 6
   jumpWaitTime: 0.25
@@ -72,6 +73,7 @@ MonoBehaviour:
   minThrowForce: 7
   maxThrowForce: 14
   velocityChange: {x: 0, y: 0, z: 0}
+  dead: 0
 --- !u!114 &196173480771105101
 MonoBehaviour:
   m_ObjectHideFlags: 0

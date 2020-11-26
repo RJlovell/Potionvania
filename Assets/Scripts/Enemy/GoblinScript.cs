@@ -6,7 +6,7 @@ public class GoblinScript : MonoBehaviour
 {
     
     [SerializeField] private bool onFloor = false;
-    [SerializeField] private bool deathTriggered = false;
+    [SerializeField] public bool deathTriggered = false;
     [SerializeField] private bool offGround = false;
     public int goblinDamage = 1;
     private float deathanim = 2f;
@@ -73,6 +73,5 @@ public class GoblinScript : MonoBehaviour
     {
         Debug.Log("The goblin has died");
         gameObject.SetActive(false);
-       
     }
 }
