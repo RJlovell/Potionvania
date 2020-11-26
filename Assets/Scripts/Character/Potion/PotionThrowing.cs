@@ -34,7 +34,7 @@ public class PotionThrowing : MonoBehaviour
         tempAngle += spinSpeed * throwForce;
         //potionAngle += 20;
         potionAngle = (rb.velocity.x >= 0 ? tempAngle * -1 : tempAngle);
-        transform.rotation = Quaternion.Euler(0, 0, potionAngle);
+        //transform.rotation = Quaternion.Euler(0, 0, potionAngle);
     }
 
     // Update is called once per frame
