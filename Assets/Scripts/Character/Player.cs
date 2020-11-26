@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     float timeSinceMove = 0;
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
+    Animator anim; //animator reference
 
 
     void Start()
@@ -67,6 +68,10 @@ public class Player : MonoBehaviour
         velocityChange = rb.velocity;
 
         orcSensor = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrolSensor>();
+
+        anim = GetComponent<Animator>(); //get component animator
+
+        //anim.SetTrigger ("jumpEnd");
     }
     private void FixedUpdate()
     {
@@ -231,6 +236,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
         {
             Jump();
+            anim.SetTrigger("jumpStart"); //animation trigger call
             jumping = true;
         }
     }
@@ -244,6 +250,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         jumping = false;
+        //anim.SetTrigger("jumpEnd"); // landin animation call
         if (potionLaunch)
         {
             potionLaunch = false;
