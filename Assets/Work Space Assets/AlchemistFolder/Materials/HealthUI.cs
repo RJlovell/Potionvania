@@ -19,7 +19,7 @@ public class HealthUI : MonoBehaviour
     private void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        //health = playerHealth.playerCurrentHealth;
+
         numberOfHearts = playerHealth.playerMaxHealth;
     }
 
