@@ -14,7 +14,7 @@ public class AirPotion : MonoBehaviour
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
-    public GameObject particleTrail;
+    public GameObject potionImpact;
     public ParticleSystem potionTrail;
     public
 
@@ -40,7 +40,6 @@ public class AirPotion : MonoBehaviour
     void OnDestroy()
     {
         playerScript.potionExists = false;
-        Destroy(particleTrail);
     }
 
     void OnCollisionEnter(Collision other)
@@ -94,8 +93,8 @@ public class AirPotion : MonoBehaviour
             }
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-
-            ///radius drawing
+            Instantiate(potionImpact,explosionPos,Quaternion.Euler(0,90,-5));
+          /*  ///radius drawing
             float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
             
             Debug.DrawLine(explosionPos, explosionPos + Vector3.up * radius, Color.yellow, 1.0f, false);
@@ -108,7 +107,7 @@ public class AirPotion : MonoBehaviour
             Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
 
             Debug.DrawLine(explosionPos, explosionPos + Vector3.right * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);*/
 
            
             

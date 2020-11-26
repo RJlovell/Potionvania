@@ -81,7 +81,7 @@ MonoBehaviour:
   minExplosionForce: 8
   potionLaunchEffectHeight: 1
   appliedToPlayer: 0
-  particleTrail: {fileID: 5550737027523392591, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
+  potionImpact: {fileID: 7698277671496699712, guid: 668300c71debe7843a4c31ae0dcf6d9e,
     type: 3}
   potionTrail: {fileID: 7569152690021031460, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
     type: 3}

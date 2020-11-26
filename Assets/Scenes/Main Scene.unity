@@ -10709,7 +10709,7 @@ PrefabInstance:
     - target: {fileID: 5332009214434758281, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
       propertyPath: minThrowForce
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5332009214434758281, guid: 56a452ad953b9cc45b2384b18f7cd0d4,
         type: 3}
