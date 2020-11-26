@@ -37,7 +37,7 @@ public class AnimationController : MonoBehaviour
         }
         if (health.damageTaken == true )
         {
-            anim.SetTrigger("takeDamage");
+          //  anim.SetTrigger("takeDamage");
         }
        // if (Input.GetKey(KeyCode.Space))
          //   anim.SetTrigger("jumpStart"); anim.SetBool("jumpEnd", false);//

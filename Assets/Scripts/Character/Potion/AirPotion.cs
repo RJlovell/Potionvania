@@ -14,6 +14,9 @@ public class AirPotion : MonoBehaviour
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
+    public GameObject particleTrail;
+    public ParticleSystem potionTrail;
+    public
 
     Ray blockCheck;
     RaycastHit hitInfo;
@@ -23,15 +26,21 @@ public class AirPotion : MonoBehaviour
     private void Start()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //Instantiate(particleTrail);
+       // particleTrail.transform.position = transform.localPosition;
+       // Instantiate(potionTrail);
+       
     }
 
     void Update()
     {
         playerScript.potionExists = true;
+       // particleTrail.transform.position = transform.localPosition;
     }
     void OnDestroy()
     {
         playerScript.potionExists = false;
+        Destroy(particleTrail);
     }
 
     void OnCollisionEnter(Collision other)
@@ -136,4 +145,6 @@ public class AirPotion : MonoBehaviour
         float mag = Mathf.Sqrt(((first * first) + (second * second)));
         return mag;
     }
+
+    
 }
