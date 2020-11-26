@@ -69,7 +69,7 @@ MonoBehaviour:
   throwCharge: 0
   chargeSpeed: 5
   timeHeld: 0
-  timeBeforeAimAssistance: 0.5
+  timeBeforeAimAssistance: 0.2
   minThrowForce: 4
   maxThrowForce: 14
   velocityChange: {x: 0, y: 0, z: 0}
