@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
         aim.gameObject.SetActive(false);
 
-        Animation = GetComponent<Animator>(); //get the animator component
+        anim = GetComponent<Animator>(); //get the animator component
     }
     private void FixedUpdate()
     {
