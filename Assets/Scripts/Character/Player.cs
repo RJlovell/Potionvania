@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     public float rampSpeed = 2;
     float currentSpeed = 0;
     float angleFacing = 180;
+    public float turnSpeed = 10;
+    bool right;
+    bool left;
     int moveDir = 0;
     [System.NonSerialized]
     public bool potionLaunch = false;
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
     public bool canThrow = true;
     public float throwXPos = 0;
     public float throwYPos = 0;
+    bool held = false;
 
     public bool potionExists;
     Vector3 mousePos;
@@ -82,10 +86,30 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
+        if(right && angleFacing > 90)
+        {
+            angleFacing -= turnSpeed * Time.deltaTime;
+        }
+        if(right && angleFacing <= 90)
+        {
+            angleFacing = 90;
+            right = false;
+        }
+        if (left && angleFacing < 270)
+        {
+            angleFacing += turnSpeed * Time.deltaTime;
+        }
+        if(left && angleFacing >= 270)
+        {
+            angleFacing = 270;
+            left = false;
+        }
 
         if (moveDir == 1)
         {
-            angleFacing = 90;
+            //angleFacing = 90;
+            if(!held && !left)
+                right = true;
             if (!potionLaunch)
             {
                 if (grounded)
@@ -109,7 +133,9 @@ public class Player : MonoBehaviour
         }
         else if (moveDir == -1)
         {
-            angleFacing = -90;
+            //angleFacing = -90;
+            if(!held && !right)
+                left = true;
             if (!potionLaunch)
             {
                 if (grounded)
@@ -203,10 +229,18 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Mouse0) && canThrow)
             {
+                held = true;
                 if (mousePos.x < transform.position.x)
-                    angleFacing = -90;
+                {
+                    right = false;
+                    left = true;
+                }
+
                 if (mousePos.x > transform.position.x)
-                    angleFacing = 90;
+                {
+                    left = false;
+                    right = true;
+                }
             }
             ///charging potion throw and checking time held for aim assistance
             if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
@@ -220,6 +254,9 @@ public class Player : MonoBehaviour
             ///throwing potion
             if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
             {
+                held = false;
+                right = false;
+                left = false;
                 aim.gameObject.SetActive(false);
                 timeHeld = 0;
                 canThrow = false;
