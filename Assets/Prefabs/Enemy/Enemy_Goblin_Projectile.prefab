@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bd8ee02a308b942998b123718917f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arcHeight: 3
+  arcHeight: 2
   projectileSpeed: 5
 --- !u!54 &6448552337867688302
 Rigidbody:
