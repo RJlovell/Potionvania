@@ -5727,6 +5727,21 @@ PrefabInstance:
       propertyPath: potionSpawnYOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2670090652794697679, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: bombSpawnXOffset
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670090652794697679, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: bombSpawnYOffset
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670090652794697679, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
+        type: 3}
+      propertyPath: throwingForce
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4478710166426596261, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5735,12 +5750,12 @@ PrefabInstance:
     - target: {fileID: 4478710166426596261, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48
+      value: -0.98
       objectReference: {fileID: 0}
     - target: {fileID: 4478710166426596261, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.09
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 7115723604514426764, guid: d3ec50480ff2dc24c870e2b3ff27cd21,
         type: 3}
