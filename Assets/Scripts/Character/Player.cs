@@ -6,10 +6,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    OrcPatrolSensor orcSensor;
     public GameObject potion;
     Rigidbody rb;
-    AirPotion airPotion;
     Aiming aim;
 
     public float groundSpeed = 5.0f;
@@ -30,7 +28,6 @@ public class Player : MonoBehaviour
     public float groundFriction = 0.6f;
     public float jumpForce = 1.0f;
     public float jumpWaitTime = 0.25f;
-    float jumpCount = 0;
     Vector3 jumpVec;
     bool jumping;
     [System.NonSerialized]
@@ -64,8 +61,8 @@ public class Player : MonoBehaviour
     Animator anim; //animator reference
     AudioSource sound;
 
-    public bool dead = false;
 
+    public bool dead = false;
 
     void Start() ///initialise start game variables and attach links to other scripts needed for interaction
     {
@@ -75,11 +72,7 @@ public class Player : MonoBehaviour
 
         rb.velocity = Vector3.zero;
 
-        airPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AirPotion>();
-
         velocityChange = rb.velocity;
-
-        orcSensor = GameObject.FindGameObjectWithTag("Orc").GetComponent<OrcPatrolSensor>();
 
         aim = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Aiming>();
 
@@ -298,6 +291,7 @@ public class Player : MonoBehaviour
         {
             currentSpeed = 0;
             moveDir = 3;
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
     }
 

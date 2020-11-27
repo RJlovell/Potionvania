@@ -72,7 +72,7 @@ MonoBehaviour:
   targetPosition: {fileID: 4478710166426596261}
   attackDelay: 2
   throwingForce: 1
-  animThrowDelay: 0
+  animThrowDelay: 0.6
   animTrigger: 0
   hasThrown: 0
   bombPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,

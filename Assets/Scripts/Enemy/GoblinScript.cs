@@ -7,7 +7,7 @@ public class GoblinScript : MonoBehaviour
     
     [SerializeField] private bool onFloor = false;
     [SerializeField] public bool deathTriggered = false;
-    [SerializeField] private bool offGround = false;
+    [SerializeField] public bool offGround = false;
     public int goblinDamage = 1;
     private float deathanim = 2f;
     Animator anim;
