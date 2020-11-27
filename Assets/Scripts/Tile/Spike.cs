@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     PlayerHealth playerHPScript;
+    Player player;
 
     public float xAxisPushBackForce;
     public float yAxisPushBackForce;
@@ -13,6 +14,7 @@ public class Spike : MonoBehaviour
     void Start()
     {
         playerHPScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +30,8 @@ public class Spike : MonoBehaviour
             Vector3 newVelocity = other.attachedRigidbody.velocity;
             newVelocity.y = 0;
             other.attachedRigidbody.velocity = newVelocity;
-            other.attachedRigidbody.AddForce(xAxisPushBackForce, yAxisPushBackForce, 0, ForceMode.Impulse);
+            if(!player.dead)
+                other.attachedRigidbody.AddForce(xAxisPushBackForce, yAxisPushBackForce, 0, ForceMode.Impulse);
             
         }
     }
