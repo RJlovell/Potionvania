@@ -80,20 +80,13 @@ MonoBehaviour:
   minExplosionForce: 8
   potionLaunchEffectHeight: 1
   appliedToPlayer: 0
-  potionImpact1: {fileID: 7698277671496699712, guid: 7fd0a8d0e649bf541b5e4e42d45d4ec5,
-    type: 3}
-  potionImpact2: {fileID: 7698277671496699712, guid: 28dd0be3863980f4283afb2594941585,
-    type: 3}
-  potionImpact3: {fileID: 7698277671496699712, guid: 06a1dc1893297a248a145f0a73f3fb8c,
-    type: 3}
-  potionImpact4: {fileID: 7698277671496699712, guid: 3fa7277deda03de47ae5cfb16095c436,
-    type: 3}
-  potionImpact5: {fileID: 7698277671496699712, guid: 668300c71debe7843a4c31ae0dcf6d9e,
-    type: 3}
-  potionImpact6: {fileID: 7698277671496699712, guid: d3192c4d06644064db1d1186ec66e51f,
-    type: 3}
-  potionTrail: {fileID: 7569152690021031460, guid: 41b09b4cf7358374fbaf836e36ccbb0e,
-    type: 3}
+  potionImpacts:
+  - {fileID: 7698277671496699712, guid: 7fd0a8d0e649bf541b5e4e42d45d4ec5, type: 3}
+  - {fileID: 7698277671496699712, guid: 28dd0be3863980f4283afb2594941585, type: 3}
+  - {fileID: 7698277671496699712, guid: 06a1dc1893297a248a145f0a73f3fb8c, type: 3}
+  - {fileID: 7698277671496699712, guid: 3fa7277deda03de47ae5cfb16095c436, type: 3}
+  - {fileID: 7698277671496699712, guid: 668300c71debe7843a4c31ae0dcf6d9e, type: 3}
+  - {fileID: 7698277671496699712, guid: d3192c4d06644064db1d1186ec66e51f, type: 3}
 --- !u!54 &-1795617869263031207
 Rigidbody:
   m_ObjectHideFlags: 0
