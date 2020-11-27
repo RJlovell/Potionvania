@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
     Animator anim; //animator reference
+    AudioSource sound;
 
     public bool dead = false;
 
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
         aim.gameObject.SetActive(false);
 
         anim = GetComponent<Animator>(); //get the animator component
+
+        sound = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -287,6 +290,7 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
             {
                 Jump();
+                sound.Play();
                 anim.SetTrigger("jumpStart"); //animation trigger call
                 jumping = true;
             }
