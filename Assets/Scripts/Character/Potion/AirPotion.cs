@@ -93,7 +93,7 @@ public class AirPotion : MonoBehaviour
             }
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            Instantiate(potionImpact,explosionPos,Quaternion.Euler(0,90,-5));
+            Instantiate(potionImpact,explosionPos,Quaternion.Euler(0,90,-5)); //instantiate explosion particles
           /*  ///radius drawing
             float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
             
