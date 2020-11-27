@@ -171,18 +171,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!dead)
+        if (!dead)//Only check for inputs if the player is alive AKA not mid Death animation
         {
             Vector3 rawMousePos = Input.mousePosition;
             rawMousePos.z = 12;
-            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos); //get mouse on screen position
 
 
-            if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
+            if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay) //checked if potionlaunch caused player to never leave ground and inable to move
             {
                 timeSinceMove += Time.deltaTime;
             }
-            if (timeSinceMove >= stunDelay)
+            if (timeSinceMove >= stunDelay) //reEnable movement if inability to mve lasts stunDelay duration
             {
                 potionLaunch = false;
                 timeSinceMove = 0;
@@ -194,19 +194,19 @@ public class Player : MonoBehaviour
 
             if (Input.GetKey(KeyCode.A))
             {
-                moveDir = -1;
+                moveDir = -1; //set movement direction for FixedUpdate
                 GetComponent<Collider>().material.dynamicFriction = 0; //changes to friction based on movement allows character to jump when walking into a wall
                 GetComponent<Collider>().material.staticFriction = 0;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                moveDir = 1;
+                moveDir = 1; //set movement direction for FixedUpdate
                 GetComponent<Collider>().material.dynamicFriction = 0;
                 GetComponent<Collider>().material.staticFriction = 0;
             }
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
             {
-                moveDir = 0;
+                moveDir = 0; //set movement direction for FixedUpdate. 0 being not left nor right
                 GetComponent<Collider>().material.dynamicFriction = 0.6f;
                 GetComponent<Collider>().material.staticFriction = 0.6f;
                 if (grounded)
@@ -219,21 +219,21 @@ public class Player : MonoBehaviour
             ///Halt player if no movement input detected or left and right input both read simultaniously
             if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
             {
-                moveDir = 3;//Halt player until input read or force applied
+                moveDir = 3; //Halt player until input read or force applied
                 currentSpeed = 0;
             }
             ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
             if (!PauseMenu.gameIsPaused)
             {
-                if (Input.GetKey(KeyCode.Mouse0) && canThrow)
+                if (Input.GetKey(KeyCode.Mouse0) && canThrow) //check for mouseclick and canThrow bool for aiming purposes
                 {
-                    held = true;
+                    held = true; //bool for retaining info on mouse click being held. Allows aiming to overrride the direction the player faces
+                    ///check mouse position for changing Facing Direction
                     if (mousePos.x < transform.position.x)
                     {
                         right = false;
                         left = true;
                     }
-
                     if (mousePos.x > transform.position.x)
                     {
                         left = false;
@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
                     if (timeHeld >= timeBeforeAimAssistance)
                         aim.gameObject.SetActive(true);
                 }
-                ///throwing potion
+                ///throwing potion on release of mouse click
                 if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
                 {
                     held = false;
@@ -262,6 +262,7 @@ public class Player : MonoBehaviour
                     //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
                     float yPos = transform.position.y + (height / 2);
 
+                    //get normalised vector between player and mouseclick for velocity direction of throw
                     potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
 
                     float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
@@ -269,25 +270,24 @@ public class Player : MonoBehaviour
                     potionPos.y /= mag;
                     potionVel = potionPos;
                     if (transform.position.x < mousePos.x)
-                        potionPos.x = transform.position.x - throwXPos;
+                        potionPos.x = transform.position.x - throwXPos; //throwXPos used in engine for lining up potion spawn position
                     else
-                        potionPos.x = transform.position.x + throwXPos;
+                        potionPos.x = transform.position.x + throwXPos; //throwYPos used in engine for lining up potion spawn position
                     potionPos.y = transform.position.y + throwYPos;
-
-                    Instantiate(potion, potionPos, transform.rotation);
-                    //throwCharge = minThrowForce;
+                    
+                    Instantiate(potion, potionPos, transform.rotation); //spawn potion
                 }
             }
 
-            if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
+            if (Input.GetKey(KeyCode.Space) && grounded && jumping == false) //check player is grounded and not currently jumping when space is pressed
             {
                 Jump();
-                sound.Play();
+                sound.Play(); // play jump sound
                 anim.SetTrigger("jumpStart"); //animation trigger call
                 jumping = true;
             }
         }
-        else // Ensure player also slide endlessly due to a potion Launch happening at the time of death
+        else // if dead, seize movement and velocity in x direction, allowing player to fall
         {
             currentSpeed = 0;
             moveDir = 3;
@@ -298,21 +298,20 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         jumpVec = new Vector3(rb.velocity.x, jumpForce, 0);
-        rb.velocity = jumpVec;
+        rb.velocity = jumpVec; //set player velocity to be it's existing x velocity, setting the Y velocity to the JumpForce chosen in engine
     }
 
     void OnCollisionEnter(Collision other)
     {
-        jumping = false;
-        //anim.SetTrigger("jumpEnd"); // landin animation call
+        jumping = false; //No longer jumping but not necessarily grounded
         if (potionLaunch)
         {
-            potionLaunch = false;
-            moveDir = 0;
+            potionLaunch = false; //deactivate potionLaunch effect when grounded
+            moveDir = 0; //Deactivate movement until input is read
         }
         if(grounded)
         {
-            currentSpeed = 0;
+            currentSpeed = 0; //set speed to 0 until input is read
         }
     }
 }
