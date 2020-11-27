@@ -38,6 +38,7 @@ public class GoblinScript : MonoBehaviour
     {
         if (onFloor)
         {
+            deathTriggered = true;
             onFloor = false;
             offGround = true;
             anim.SetTrigger("inAir");
@@ -56,7 +57,6 @@ public class GoblinScript : MonoBehaviour
         //}
         if (deathTriggered)
         {
-
             anim.SetTrigger("dead");
             deathanim -= Time.deltaTime;
         }
