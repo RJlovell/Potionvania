@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xAxisPushBackForce: 3
-  yAxisPushBackForce: 3
+  yAxisPushBackForce: 50
   spikeDamage: 1
 --- !u!65 &3833111045282713627
 BoxCollider:

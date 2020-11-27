@@ -32,7 +32,7 @@ public class Spike : MonoBehaviour
             
         }
     }
-    private void OnTriggerStay(Collider other)
+    /*private void OnTriggerStay(Collider other)
     {
         if (!playerHPScript.iSceneEnabled)
         {
@@ -40,5 +40,5 @@ public class Spike : MonoBehaviour
             playerHPScript.TakeDamage(spikeDamage);
             playerHPScript.iSceneEnabled = true;
         }
-    }
+    }*/
 }
