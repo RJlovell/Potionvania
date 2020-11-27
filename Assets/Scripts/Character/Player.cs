@@ -298,6 +298,7 @@ public class Player : MonoBehaviour
         {
             currentSpeed = 0;
             moveDir = 3;
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
     }
 
