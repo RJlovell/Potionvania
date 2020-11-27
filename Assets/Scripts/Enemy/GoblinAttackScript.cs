@@ -26,6 +26,7 @@ public class GoblinAttackScript : MonoBehaviour
     public float bombSpawnXOffset;
     public float bombSpawnYOffset;
     Animator anim;
+    GoblinScript goblin;
 
     // Start is called before the first frame update
     private void Start()
@@ -35,46 +36,53 @@ public class GoblinAttackScript : MonoBehaviour
         attackCountdown = attackDelay;
         potionTransform = bombPrefab.transform;
         animThrowCountdown = animThrowDelay;
+        goblin = GameObject.FindGameObjectWithTag("Goblin").GetComponent<GoblinScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!hasThrown)
+        if (!goblin.deathTriggered)
         {
-            attackCountdown -= Time.deltaTime;
-        }
-        else
-        {
-            hasThrown = false;
-        }
-        ///When the attack countdown reaches 0, the throw animation will play and
-        ///the Goblin will be unable to throw anymore.
-        ///The animTrigger will become true.
-        if (attackCountdown <= 0 && !hasThrown)
-        {
-            anim.SetTrigger("throw");
-            hasThrown = true;
-            attackCountdown = attackDelay;
-            animTrigger = true;
-            
-        }
-        ///When this is true, it's purposeis  to delay the bomb prefab from instantiating before the throwing animation finishes
-        if (animTrigger)
-        {
-            animThrowCountdown -= Time.deltaTime;
-            if(animThrowCountdown <=0)
+            if (!hasThrown)
             {
-                SpawnPotion();
-                animThrowCountdown = animThrowDelay;
-                animTrigger = false;
+                attackCountdown -= Time.deltaTime;
+            }
+            else
+            {
+                hasThrown = false;
+            }
+            ///When the attack countdown reaches 0, the throw animation will play and
+            ///the Goblin will be unable to throw anymore.
+            ///The animTrigger will become true.
+            if (attackCountdown <= 0 && !hasThrown)
+            {
+                anim.SetTrigger("throw");
+                hasThrown = true;
+                attackCountdown = attackDelay;
+                animTrigger = true;
+
+            }
+            ///When this is true, it's purposeis  to delay the bomb prefab from instantiating before the throwing animation finishes
+            if (animTrigger)
+            {
+                animThrowCountdown -= Time.deltaTime;
+                if (animThrowCountdown <= 0)
+                {
+                    SpawnPotion();
+                    animThrowCountdown = animThrowDelay;
+                    animTrigger = false;
+                }
             }
         }
     }
     void SpawnPotion()
     {
-        bombSpawn = Instantiate(bombPrefab);
-        bombSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
-        bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);  
+        if (!goblin.deathTriggered)
+        {
+            bombSpawn = Instantiate(bombPrefab);
+            bombSpawn.gameObject.transform.position = new Vector3(myTransform.position.x + bombSpawnXOffset, myTransform.position.y + bombSpawnYOffset, myTransform.position.z);
+            bombSpawn.GetComponent<Projectile>().SetTarget(targetPosition);
+        }
     }
 }

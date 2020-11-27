@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     private float iSceneCountdown;
     private float deathAnimCount = 5f;
     private bool deathAnim = false;
+    private int death = 0;
 
     public bool damageTaken = false;
 
@@ -20,10 +21,13 @@ public class PlayerHealth : MonoBehaviour
 
     Animator anim;//ref for animator
 
+    Player player;
+
     private void Start()
     {
         playerCurrentHealth = playerMaxHealth;
         iSceneCountdown = iSceneDuration;
+        player = gameObject.GetComponent<Player>();
 
         gameCon = gameObject.GetComponent<GameCondition>();
         anim = GetComponent<Animator>(); //get compnent for animator
@@ -49,9 +53,17 @@ public class PlayerHealth : MonoBehaviour
         IsPlayerDead();
         if (deathAnim)
         {
+            if (death == 0)
+            {
+                anim.SetTrigger("isDead");
+                death = 1;
+
+            }
             deathAnimCount -= Time.deltaTime;
             if (deathAnimCount <= 0f)
             {
+                
+
                 playerCurrentHealth = playerMaxHealth;
                 SceneManager.LoadScene(gameCon.defeatSceneName);
                 anim.SetBool("isDead", false);
@@ -63,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
     {
         playerCurrentHealth -= damage;
         damageTaken = true;
+        if (playerCurrentHealth >0 )
+            anim.SetTrigger("takeDamage");
     }
 
     public bool IsPlayerDead()
@@ -73,9 +87,10 @@ public class PlayerHealth : MonoBehaviour
             //This means if player goes below 0 they will die
             //Game Manager will change the scene to either the defeat screen or just restart the level
             //gameObject.SetActive(false);
+            player.dead = true;
             Debug.Log("The player has died");
             deathAnim = true;
-            anim.SetTrigger("isDead");
+            
             return true;
           
         }

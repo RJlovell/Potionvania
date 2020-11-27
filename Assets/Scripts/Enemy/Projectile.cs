@@ -38,6 +38,9 @@ public class Projectile : MonoBehaviour
         nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
         //So the object will rotate within the direction it is meant to be moving in.
         transform.position = nextPos;
+
+        if (goblin.deathTriggered)
+            Destroy(gameObject);
     }
 
     public void SetTarget(Transform targetPos)
@@ -55,5 +58,4 @@ public class Projectile : MonoBehaviour
         }
         
     }
-    
 }

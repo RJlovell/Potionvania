@@ -17,7 +17,11 @@ public class Player : MonoBehaviour
     public float rampSpeed = 2;
     float currentSpeed = 0;
     float angleFacing = 180;
-    int moveDir = 0;
+    public float turnSpeed = 10;
+    bool right;
+    bool left;
+    [System.NonSerialized]
+    public int moveDir = 0;
     [System.NonSerialized]
     public bool potionLaunch = false;
     public float maxVelocityX = 5;
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
     public bool canThrow = true;
     public float throwXPos = 0;
     public float throwYPos = 0;
+    bool held = false;
 
     public bool potionExists;
     Vector3 mousePos;
@@ -57,6 +62,8 @@ public class Player : MonoBehaviour
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
     Animator anim; //animator reference
+
+    public bool dead = false;
 
 
     void Start()
@@ -81,11 +88,33 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        ///change angleFacing with speed to turn character around smoothly and quickly
         transform.rotation = Quaternion.Euler(0, angleFacing, 0);
-
-        if (moveDir == 1)
+        if(right && angleFacing > 90)
+        {
+            angleFacing -= turnSpeed * Time.deltaTime;
+        }
+        if(right && angleFacing <= 90)
         {
             angleFacing = 90;
+            right = false;
+        }
+        if (left && angleFacing < 270)
+        {
+            angleFacing += turnSpeed * Time.deltaTime;
+        }
+        if(left && angleFacing >= 270)
+        {
+            angleFacing = 270;
+            left = false;
+        }
+
+        if (moveDir == 1 && !dead)
+        {
+            //angleFacing = 90;
+            if(!held && !left)
+                right = true;
+
             if (!potionLaunch)
             {
                 if (grounded)
@@ -107,9 +136,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == -1)
+        else if (moveDir == -1 && !dead)
         {
-            angleFacing = -90;
+            //angleFacing = -90;
+            if(!held && !right)
+                left = true;
+
             if (!potionLaunch)
             {
                 if (grounded)
@@ -131,12 +163,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == 0 || potionLaunch)
+        else if (moveDir == 0 || potionLaunch && !dead)
         {
             currentSpeed = rb.velocity.x;
         }
 
-        if (!potionLaunch)
+        if (!potionLaunch && !dead)
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         velocityChange = rb.velocity;
     }
@@ -144,111 +176,120 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 rawMousePos = Input.mousePosition;
-        rawMousePos.z = 12;
-        mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
+        if (!dead)
+        {
+            Vector3 rawMousePos = Input.mousePosition;
+            rawMousePos.z = 12;
+            mousePos = Camera.main.ScreenToWorldPoint(rawMousePos);
 
-        if(jumping && jumpCount < jumpWaitTime)
-        {
-            jumpCount += Time.deltaTime;
-        }
 
-        if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
-        {
-            timeSinceMove += Time.deltaTime;
-        }
-        if (timeSinceMove >= stunDelay)
-        {
-            potionLaunch = false;
-            timeSinceMove = 0;
-        }
-        if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded) || (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
-        {
-            potionLaunch = false;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveDir = -1;
-            GetComponent<Collider>().material.dynamicFriction = 0; //changes to friction based on movement allows character to jump when walking into a wall
-            GetComponent<Collider>().material.staticFriction = 0;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveDir = 1;
-            GetComponent<Collider>().material.dynamicFriction = 0;
-            GetComponent<Collider>().material.staticFriction = 0;
-        }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-        {
-            moveDir = 0;
-            GetComponent<Collider>().material.dynamicFriction = 0.6f;
-            GetComponent<Collider>().material.staticFriction = 0.6f;
-            if (grounded)
+            if (potionLaunch && grounded && rb.velocity == Vector3.zero && timeSinceMove < stunDelay)
             {
+                timeSinceMove += Time.deltaTime;
+            }
+            if (timeSinceMove >= stunDelay)
+            {
+                potionLaunch = false;
+                timeSinceMove = 0;
+            }
+            if ((rb.velocity.x > 0 && rb.velocity.x < airSpeed && potionLaunch && !grounded) || (rb.velocity.x < 0 && rb.velocity.x > -airSpeed && potionLaunch && !grounded))//allow air control
+            {
+                potionLaunch = false;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveDir = -1;
+                GetComponent<Collider>().material.dynamicFriction = 0; //changes to friction based on movement allows character to jump when walking into a wall
+                GetComponent<Collider>().material.staticFriction = 0;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveDir = 1;
+                GetComponent<Collider>().material.dynamicFriction = 0;
+                GetComponent<Collider>().material.staticFriction = 0;
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                moveDir = 0;
                 GetComponent<Collider>().material.dynamicFriction = 0.6f;
                 GetComponent<Collider>().material.staticFriction = 0.6f;
+                if (grounded)
+                {
+                    GetComponent<Collider>().material.dynamicFriction = 0.6f;
+                    GetComponent<Collider>().material.staticFriction = 0.6f;
+                }
             }
-        }
 
-        ///Halt player if no movement input detected or left and right input both read simultaniously
-        if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
-        {
-            moveDir = 3;//Halt player until input read or force applied
-            currentSpeed = 0;
-            //Debug.Log("HALT");
-        }
-        ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
-        if (!PauseMenu.gameIsPaused)
-        {
-            if (Input.GetKey(KeyCode.Mouse0) && canThrow)
+            ///Halt player if no movement input detected or left and right input both read simultaniously
+            if ((Input.GetKeyUp(KeyCode.D) && grounded) || (Input.GetKeyUp(KeyCode.A) && grounded) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
             {
-                if (mousePos.x < transform.position.x)
-                    angleFacing = -90;
-                if (mousePos.x > transform.position.x)
-                    angleFacing = 90;
+                moveDir = 3;//Halt player until input read or force applied
+                currentSpeed = 0;
             }
-            ///charging potion throw and checking time held for aim assistance
-            if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
+            ///Linked this with the gameIsPaused bool, so the player will not spawn a potion when the game is meant to be paused
+            if (!PauseMenu.gameIsPaused)
             {
-                throwCharge += Time.deltaTime * chargeSpeed;
-                if (timeHeld < 3)
-                    timeHeld += Time.deltaTime;
-                if(timeHeld >= timeBeforeAimAssistance)
-                    aim.gameObject.SetActive(true);
+                if (Input.GetKey(KeyCode.Mouse0) && canThrow)
+                {
+                    held = true;
+                    if (mousePos.x < transform.position.x)
+                    {
+                        right = false;
+                        left = true;
+                    }
+
+                    if (mousePos.x > transform.position.x)
+                    {
+                        left = false;
+                        right = true;
+                    }
+                }
+                ///charging potion throw and checking time held for aim assistance
+                if (Input.GetKey(KeyCode.Mouse0) && canThrow && throwCharge < maxThrowForce)
+                {
+                    throwCharge += Time.deltaTime * chargeSpeed;
+                    if (timeHeld < 3)
+                        timeHeld += Time.deltaTime;
+                    if (timeHeld >= timeBeforeAimAssistance)
+                        aim.gameObject.SetActive(true);
+                }
+                ///throwing potion
+                if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
+                {
+                    held = false;
+                    right = false;
+                    left = false;
+                    aim.gameObject.SetActive(false);
+                    timeHeld = 0;
+                    canThrow = false;
+
+                    //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
+                    float yPos = transform.position.y + (height / 2);
+
+                    potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
+
+                    float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
+                    potionPos.x /= mag;
+                    potionPos.y /= mag;
+                    potionVel = potionPos;
+                    if (transform.position.x < mousePos.x)
+                        potionPos.x = transform.position.x - throwXPos;
+                    else
+                        potionPos.x = transform.position.x + throwXPos;
+                    potionPos.y = transform.position.y + throwYPos;
+
+                    Instantiate(potion, potionPos, transform.rotation);
+                    //throwCharge = minThrowForce;
+                }
             }
-            ///throwing potion
-            if (Input.GetKeyUp(KeyCode.Mouse0) && canThrow)
+
+            if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
             {
-                aim.gameObject.SetActive(false);
-                timeHeld = 0;
-                canThrow = false;
-
-                //ensures the calculation for angle of potion thrown is calculated from centre of player rather than feet.
-                float yPos = transform.position.y + (height / 2);
-
-                potionPos = new Vector3(mousePos.x - transform.position.x, mousePos.y - yPos, 0);
-
-                float mag = Mathf.Sqrt((potionPos.x * potionPos.x) + (potionPos.y * potionPos.y));
-                potionPos.x /= mag;
-                potionPos.y /= mag;
-                potionVel = potionPos;
-                if(transform.position.x < mousePos.x)
-                    potionPos.x = transform.position.x - throwXPos;
-                else
-                    potionPos.x = transform.position.x + throwXPos;
-                potionPos.y = transform.position.y + throwYPos;
-
-                Instantiate(potion, potionPos, transform.rotation);
-                //throwCharge = minThrowForce;
+                Jump();
+                anim.SetTrigger("jumpStart"); //animation trigger call
+                jumping = true;
             }
-        }
-
-        if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
-        {
-            Jump();
-            anim.SetTrigger("jumpStart"); //animation trigger call
-            jumping = true;
         }
     }
 

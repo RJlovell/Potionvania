@@ -14,6 +14,9 @@ public class AirPotion : MonoBehaviour
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
+    public GameObject potionImpact;
+    public ParticleSystem potionTrail;
+    public
 
     Ray blockCheck;
     RaycastHit hitInfo;
@@ -23,11 +26,16 @@ public class AirPotion : MonoBehaviour
     private void Start()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //Instantiate(particleTrail);
+       // particleTrail.transform.position = transform.localPosition;
+       // Instantiate(potionTrail);
+       
     }
 
     void Update()
     {
         playerScript.potionExists = true;
+       // particleTrail.transform.position = transform.localPosition;
     }
     void OnDestroy()
     {
@@ -85,8 +93,8 @@ public class AirPotion : MonoBehaviour
             }
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-
-            ///radius drawing
+            Instantiate(potionImpact,explosionPos,Quaternion.Euler(0,90,-5));
+          /*  ///radius drawing
             float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
             
             Debug.DrawLine(explosionPos, explosionPos + Vector3.up * radius, Color.yellow, 1.0f, false);
@@ -99,7 +107,7 @@ public class AirPotion : MonoBehaviour
             Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
 
             Debug.DrawLine(explosionPos, explosionPos + Vector3.right * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
+            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);*/
 
            
             
@@ -136,4 +144,6 @@ public class AirPotion : MonoBehaviour
         float mag = Mathf.Sqrt(((first * first) + (second * second)));
         return mag;
     }
+
+    
 }
