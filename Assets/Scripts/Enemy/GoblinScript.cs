@@ -21,7 +21,7 @@ public class GoblinScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.activeInHierarchy)
+        if(collision.collider.gameObject.activeInHierarchy || collision.collider.gameObject.CompareTag("potion"))
         {
             onFloor = true;
             if (offGround)
@@ -38,6 +38,7 @@ public class GoblinScript : MonoBehaviour
     {
         if (onFloor)
         {
+            deathTriggered = true;
             onFloor = false;
             offGround = true;
             anim.SetTrigger("inAir");
@@ -56,7 +57,6 @@ public class GoblinScript : MonoBehaviour
         //}
         if (deathTriggered)
         {
-
             anim.SetTrigger("dead");
             deathanim -= Time.deltaTime;
         }

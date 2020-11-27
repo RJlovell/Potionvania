@@ -32,4 +32,13 @@ public class Spike : MonoBehaviour
             
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (!playerHPScript.iSceneEnabled)
+        {
+            Debug.Log("Player has taken damage from the spike");
+            playerHPScript.TakeDamage(spikeDamage);
+            playerHPScript.iSceneEnabled = true;
+        }
+    }
 }

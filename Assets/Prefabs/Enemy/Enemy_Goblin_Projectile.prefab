@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arcHeight: 2
   projectileSpeed: 5
+  impact: {fileID: 8798519288003695825, guid: d782c4c57a325fc469aed150f02be4eb, type: 3}
 --- !u!54 &6448552337867688302
 Rigidbody:
   m_ObjectHideFlags: 0
