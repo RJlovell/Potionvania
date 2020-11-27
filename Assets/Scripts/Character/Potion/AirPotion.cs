@@ -14,13 +14,10 @@ public class AirPotion : MonoBehaviour
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
-    public GameObject potionImpact1;
-    public GameObject potionImpact2;
-    public GameObject potionImpact3;
-    public GameObject potionImpact4;
-    public GameObject potionImpact5;
-    public GameObject potionImpact6;
-    public ParticleSystem potionTrail;
+    bool impacted = false;
+    public GameObject[] potionImpacts = new GameObject[6];
+    float[] timers = new float[6];
+    int num = 0;
 
     Ray blockCheck;
     RaycastHit hitInfo;
@@ -30,14 +27,19 @@ public class AirPotion : MonoBehaviour
     private void Start()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        //Instantiate(particleTrail);
-       // particleTrail.transform.position = transform.localPosition;
-       // Instantiate(potionTrail);
-       
     }
 
     void Update()
     {
+        if(num !=0)
+        {
+            if (timers[num - 1] > 0)
+                timers[num - 1] -= Time.deltaTime;
+            else
+            {
+                Destroy(potionImpacts[num-1]);
+            }
+        }
         playerScript.potionExists = true;
        // particleTrail.transform.position = transform.localPosition;
     }
@@ -48,20 +50,15 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (!impacted)
+        {
+            num = UnityEngine.Random.Range(1, 6);
 
-        int num = UnityEngine.Random.Range(1, 6);
-        if (num == 1)
-            Instantiate(potionImpact1, transform.position, Quaternion.Euler(0, 90, -5));
-        if (num == 2)
-            Instantiate(potionImpact2, transform.position, Quaternion.Euler(0, 90, -5));
-        if (num == 3)
-            Instantiate(potionImpact3, transform.position, Quaternion.Euler(0, 90, -5));
-        if (num == 4)
-            Instantiate(potionImpact4, transform.position, Quaternion.Euler(0, 90, -5));
-        if (num == 5)
-            Instantiate(potionImpact5, transform.position, Quaternion.Euler(0, 90, -5));
-        if (num == 6)
-            Instantiate(potionImpact6, transform.position, Quaternion.Euler(0, 90, -5));
+            Instantiate(potionImpacts[num - 1], transform.position, Quaternion.Euler(0, 90, -5));
+            timers[num - 1] = 2;
+
+            impacted = true;
+        }
 
         if (other.gameObject.CompareTag("Goblin"))
         {
