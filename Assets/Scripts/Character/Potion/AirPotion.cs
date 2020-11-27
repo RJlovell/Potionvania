@@ -16,7 +16,6 @@ public class AirPotion : MonoBehaviour
     public bool appliedToPlayer = false;
     bool impacted = false;
     public GameObject[] potionImpacts = new GameObject[6];
-    float[] timers = new float[6];
     int num = 0;
 
     Ray blockCheck;
@@ -31,32 +30,20 @@ public class AirPotion : MonoBehaviour
 
     void Update()
     {
-        if(num !=0)
-        {
-            if (timers[num - 1] > 0)
-                timers[num - 1] -= Time.deltaTime;
-            else
-            {
-                Destroy(potionImpacts[num-1]);
-            }
-        }
         playerScript.potionExists = true;
        // particleTrail.transform.position = transform.localPosition;
     }
-    void OnDestroy()
-    {
-        playerScript.potionExists = false;
-    }
+
 
     void OnCollisionEnter(Collision other)
     {
         if (!impacted)
         {
+            ///Randomly generate one of thr 6 options for explosion animation/sound
             num = UnityEngine.Random.Range(1, 6);
 
             Instantiate(potionImpacts[num - 1], transform.position, Quaternion.Euler(0, 90, -5));
-            timers[num - 1] = 2;
-
+            
             impacted = true;
         }
 
@@ -108,7 +95,7 @@ public class AirPotion : MonoBehaviour
             }
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            ///Randomly generate one of thr 6 options for explosion animation/sound
+            
             
             
 
@@ -118,15 +105,6 @@ public class AirPotion : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 explosionVec = new Vector3(rb.transform.position.x - explosionPos.x, (rb.transform.position.y + potionLaunchEffectHeight) - explosionPos.y, 0);
                 
-               /* double distance = Math.Sqrt(Math.Pow(rb.transform.position.x - explosionPos.x, 2) + Math.Pow(rb.transform.position.y - explosionPos.y, 2));
-                if (distance >= 1)
-                {
-                    distance = radius - distance;
-                    distance /= radius;
-                    explosionForce *= (float)distance;
-                }
-                if (explosionForce < minExplosionForce)
-                    explosionForce = minExplosionForce;*/
 
                 //normalise vector
                 magnitude = GetMag(explosionVec.x, explosionVec.y);
@@ -145,5 +123,9 @@ public class AirPotion : MonoBehaviour
         return mag;
     }
 
-    
+    void OnDestroy()
+    {
+        playerScript.potionExists = false;    
+    }
+
 }
