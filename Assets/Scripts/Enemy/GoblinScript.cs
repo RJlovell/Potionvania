@@ -21,7 +21,7 @@ public class GoblinScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.activeInHierarchy)
+        if(collision.collider.gameObject.activeInHierarchy || collision.collider.gameObject.CompareTag("potion"))
         {
             onFloor = true;
             if (offGround)

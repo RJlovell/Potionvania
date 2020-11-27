@@ -16,7 +16,6 @@ public class AirPotion : MonoBehaviour
     public bool appliedToPlayer = false;
     public GameObject potionImpact;
     public ParticleSystem potionTrail;
-    public
 
     Ray blockCheck;
     RaycastHit hitInfo;

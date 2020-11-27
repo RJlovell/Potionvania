@@ -291,6 +291,11 @@ public class Player : MonoBehaviour
                 jumping = true;
             }
         }
+        else // Ensure player also slide endlessly due to a potion Launch happening at the time of death
+        {
+            currentSpeed = 0;
+            moveDir = 3;
+        }
     }
 
     public void Jump()
