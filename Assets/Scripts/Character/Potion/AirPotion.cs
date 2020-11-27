@@ -14,9 +14,10 @@ public class AirPotion : MonoBehaviour
     private Player playerScript;
     public float potionLaunchEffectHeight = 1; //how high from feet level does the potion launch push
     public bool appliedToPlayer = false;
-    public GameObject potionImpact;
-    public ParticleSystem potionTrail;
-    public
+    bool impacted = false;
+    public GameObject[] potionImpacts = new GameObject[6];
+    float[] timers = new float[6];
+    int num = 0;
 
     Ray blockCheck;
     RaycastHit hitInfo;
@@ -26,14 +27,19 @@ public class AirPotion : MonoBehaviour
     private void Start()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        //Instantiate(particleTrail);
-       // particleTrail.transform.position = transform.localPosition;
-       // Instantiate(potionTrail);
-       
     }
 
     void Update()
     {
+        if(num !=0)
+        {
+            if (timers[num - 1] > 0)
+                timers[num - 1] -= Time.deltaTime;
+            else
+            {
+                Destroy(potionImpacts[num-1]);
+            }
+        }
         playerScript.potionExists = true;
        // particleTrail.transform.position = transform.localPosition;
     }
@@ -44,8 +50,17 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        
-        if(other.gameObject.CompareTag("Goblin"))
+        if (!impacted)
+        {
+            num = UnityEngine.Random.Range(1, 6);
+
+            Instantiate(potionImpacts[num - 1], transform.position, Quaternion.Euler(0, 90, -5));
+            timers[num - 1] = 2;
+
+            impacted = true;
+        }
+
+        if (other.gameObject.CompareTag("Goblin"))
         {
             directHit = true;
             if(transform.position.x < other.transform.position.x)
@@ -93,26 +108,11 @@ public class AirPotion : MonoBehaviour
             }
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            Instantiate(potionImpact,explosionPos,Quaternion.Euler(0,90,-5));
-          /*  ///radius drawing
-            float diagRadius = radius * (float)Math.Cos(45) + 0.4f;
-            
-            Debug.DrawLine(explosionPos, explosionPos + Vector3.up * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.right) * diagRadius, Color.yellow, 1.0f, false);
-
-            Debug.DrawLine(explosionPos, explosionPos + Vector3.down * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.right) * diagRadius, Color.yellow, 1.0f, false);
-
-            Debug.DrawLine(explosionPos, explosionPos + Vector3.left * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.up + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);
-
-            Debug.DrawLine(explosionPos, explosionPos + Vector3.right * radius, Color.yellow, 1.0f, false);
-            Debug.DrawLine(explosionPos, explosionPos + (Vector3.down + Vector3.left) * diagRadius, Color.yellow, 1.0f, false);*/
-
-           
+            ///Randomly generate one of thr 6 options for explosion animation/sound
             
             
-            
+
+
             if (rb != null && !blocked) //if the collided object has a rigid body, generate distance vector between potion impact point and collided rigid body.
             {
                 rb.velocity = Vector3.zero;

@@ -62,11 +62,12 @@ public class Player : MonoBehaviour
     float stunDelay = 0.2f;
     public Vector3 velocityChange;
     Animator anim; //animator reference
+    AudioSource sound;
 
     public bool dead = false;
 
 
-    void Start()
+    void Start() ///initialise start game variables and attach links to other scripts needed for interaction
     {
         throwCharge = minThrowForce;
 
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
         aim.gameObject.SetActive(false);
 
         anim = GetComponent<Animator>(); //get the animator component
+
+        sound = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
@@ -108,20 +111,19 @@ public class Player : MonoBehaviour
             angleFacing = 270;
             left = false;
         }
-
+        ///check for move Direction as long as player is alive
         if (moveDir == 1 && !dead)
         {
-            //angleFacing = 90;
-            if(!held && !left)
+            if(!held && !left) //let direction player is facing be overwritten by the direction the player is aiming when holding aim
                 right = true;
 
-            if (!potionLaunch)
+            if (!potionLaunch) //Allow control if the player is not currently being potion Launched
             {
-                if (grounded)
+                if (grounded) // if grounded, let the player run at the set ground speed
                     currentSpeed = groundSpeed;
-                else
+                else // if the player is in the air, make movement speed slow down to set air speed for as long as the player continues in the jumped direction
                 {
-                    if (rb.velocity.x <= 0)
+                    if (rb.velocity.x <= 0) // if the player turns around mid air, set speed to airspeed value
                     {
                         currentSpeed = airSpeed;
                     }
@@ -136,7 +138,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == -1 && !dead)
+        else if (moveDir == -1 && !dead)//Same as above section for moveDir==1 but inverted for moving in the other direction
         {
             //angleFacing = -90;
             if(!held && !right)
@@ -163,12 +165,12 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (moveDir == 0 || potionLaunch && !dead)
+        else if (moveDir == 0 || potionLaunch && !dead) // if the player is potionlaunched of moveDirection is set to 0, let the physics engine and applied forces control the player's movement if any are applied
         {
             currentSpeed = rb.velocity.x;
         }
 
-        if (!potionLaunch && !dead)
+        if (!potionLaunch && !dead) //as long as the player is not being potion launched and is alive, x axis speed is controlled by currentSpeed variable and Y axis movement continues to be controlled by the engine and forces applied.
             rb.velocity = new Vector3(currentSpeed, rb.velocity.y, 0);
         velocityChange = rb.velocity;
     }
@@ -287,9 +289,15 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.Space) && grounded && jumping == false)
             {
                 Jump();
+                sound.Play();
                 anim.SetTrigger("jumpStart"); //animation trigger call
                 jumping = true;
             }
+        }
+        else // Ensure player also slide endlessly due to a potion Launch happening at the time of death
+        {
+            currentSpeed = 0;
+            moveDir = 3;
         }
     }
 

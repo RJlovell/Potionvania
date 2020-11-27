@@ -72,7 +72,8 @@ MonoBehaviour:
   targetPosition: {fileID: 4478710166426596261}
   attackDelay: 2
   throwingForce: 1
-  attackCountdown: 0
+  animThrowDelay: 0
+  animTrigger: 0
   hasThrown: 0
   bombPrefab: {fileID: 3945249090648637537, guid: 3c6a90d5ff4cbd44981c1d1b56fc2242,
     type: 3}
@@ -260,7 +261,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0a13596090ea2c34083fa3ce959bffcc, type: 2}
+      objectReference: {fileID: 2100000, guid: b6fc5ae794d2913408475b6845662909, type: 2}
     - target: {fileID: -927199367670048503, guid: a62752b1b028c2947bae4d8a98ac2c56,
         type: 3}
       propertyPath: m_Name

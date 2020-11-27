@@ -17,6 +17,10 @@ public class Projectile : MonoBehaviour
     //The position that the projectile will move to next
     Vector3 nextPos;
     // Start is called before the first frame update
+    public GameObject impact;
+    //particel effect object
+    float particleTimer;
+    //particle effect object lifetime value
     void Start()
     {
         startPos = transform.position;
@@ -41,6 +45,10 @@ public class Projectile : MonoBehaviour
 
         if (goblin.deathTriggered)
             Destroy(gameObject);
+        if (particleTimer >= 1f)
+        {
+            particleTimer -= Time.deltaTime;//countdown particle object life span if active
+        }
     }
 
     public void SetTarget(Transform targetPos)
@@ -50,6 +58,12 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Instantiate(impact,projectileTargetPos); //instantiate particle effect
+        particleTimer = 1f; //set countdown for particle object life span
+        if(particleTimer <= 0f)
+        {
+            Destroy(impact);//destroy particle after 1 second
+        }
         Destroy(gameObject);
         if (collision.gameObject.CompareTag("Player") && !playerHPScript.iSceneEnabled)
         {
