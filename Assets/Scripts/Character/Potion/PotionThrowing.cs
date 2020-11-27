@@ -48,8 +48,6 @@ public class PotionThrowing : MonoBehaviour
             rb.AddForce(throwVec, ForceMode.VelocityChange);
             applyForce = false;
         }
-
-        
     }
 
     void OnCollisionEnter(Collision other)
