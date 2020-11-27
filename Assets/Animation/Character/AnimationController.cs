@@ -28,7 +28,7 @@ public class AnimationController : MonoBehaviour
             {
                 anim.SetBool("isWalking", true); anim.SetFloat("movement", 1f);
             }
-            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)))
             {
                 anim.SetBool("isWalking", false); anim.SetFloat("movement", 0f);
             }
@@ -52,7 +52,7 @@ public class AnimationController : MonoBehaviour
                 anim.SetTrigger("potionLaunched");
             if (playerScript.potionLaunch == false)
                 anim.SetTrigger("regainControl");
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+            if (Input.GetKeyUp(KeyCode.Mouse0) && playerScript.canThrow)
                 anim.SetTrigger("throwPotion");
         }
     }

@@ -555,7 +555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8bc93e74b8d58ca4588741625e5b4758, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7e0b9411e1e2d8146ac320be4f60606a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -8803,6 +8803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectToFollow: {fileID: 781426277}
   cameraSpeed: 2
+  startWaitTime: 1.5
 --- !u!114 &1993042543
 MonoBehaviour:
   m_ObjectHideFlags: 0
