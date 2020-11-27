@@ -48,8 +48,22 @@ public class AirPotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        
-        if(other.gameObject.CompareTag("Goblin"))
+
+        int num = UnityEngine.Random.Range(1, 6);
+        if (num == 1)
+            Instantiate(potionImpact1, transform.position, Quaternion.Euler(0, 90, -5));
+        if (num == 2)
+            Instantiate(potionImpact2, transform.position, Quaternion.Euler(0, 90, -5));
+        if (num == 3)
+            Instantiate(potionImpact3, transform.position, Quaternion.Euler(0, 90, -5));
+        if (num == 4)
+            Instantiate(potionImpact4, transform.position, Quaternion.Euler(0, 90, -5));
+        if (num == 5)
+            Instantiate(potionImpact5, transform.position, Quaternion.Euler(0, 90, -5));
+        if (num == 6)
+            Instantiate(potionImpact6, transform.position, Quaternion.Euler(0, 90, -5));
+
+        if (other.gameObject.CompareTag("Goblin"))
         {
             directHit = true;
             if(transform.position.x < other.transform.position.x)
@@ -98,19 +112,7 @@ public class AirPotion : MonoBehaviour
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             ///Randomly generate one of thr 6 options for explosion animation/sound
-            int num = UnityEngine.Random.Range(1, 6);
-            if(num == 1)
-                Instantiate(potionImpact1, explosionPos, Quaternion.Euler(0, 90, -5));
-            if (num == 2)
-                Instantiate(potionImpact2, explosionPos, Quaternion.Euler(0, 90, -5));
-            if (num == 3)
-                Instantiate(potionImpact3, explosionPos, Quaternion.Euler(0, 90, -5));
-            if (num == 4)
-                Instantiate(potionImpact4, explosionPos, Quaternion.Euler(0, 90, -5));
-            if (num == 5)
-                Instantiate(potionImpact5, explosionPos, Quaternion.Euler(0, 90, -5));
-            if (num == 6)
-                Instantiate(potionImpact6, explosionPos, Quaternion.Euler(0, 90, -5));
+            
             
 
 
